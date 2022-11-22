@@ -11,6 +11,7 @@ public class CoreMechanic : MonoBehaviour
     public TextMeshProUGUI mentalHealth;
     public TextMeshProUGUI academics;
 
+
     //Debug buttons for each resource
     //Money debug buttons
     public Button moneyPlus;
@@ -26,9 +27,13 @@ public class CoreMechanic : MonoBehaviour
 
     //values of each resource
     //this is what gets changed in the script that is then referenced by the TextMeshPro
-    public float moneyValue; 
-    public float mentalHealthValue;
-    public float academicsValue;
+    float moneyValue; 
+    float mentalHealthValue;
+    float academicsValue;
+
+    //max values for mental health and academic
+    float maxMentalHealth = 100;
+    float maxGPA = 4.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -52,12 +57,47 @@ public class CoreMechanic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        checkValues();
+
         //Updates the UI text to reflect the values every frame
         money.text = moneyValue.ToString();
         mentalHealth.text = mentalHealthValue.ToString();
-        academics.text = academicsValue.ToString();
+        academics.text = System.Math.Round(academicsValue, 2).ToString();
+
+        
     }
 
+
+    //checks if the values exceed the max and min values
+    void checkValues()
+    {
+        //checks if the values go below 0
+        if(moneyValue < 0)
+        {
+            moneyValue = 0;
+        }
+
+        if(mentalHealthValue < 0)
+        {
+            mentalHealthValue = 0;
+        }
+
+        if (academicsValue < 0)
+        {
+            academicsValue = 0;
+        }
+
+        //checks if the values go above their respective maxes 
+        if (mentalHealthValue > maxMentalHealth)
+        {
+            mentalHealthValue = maxMentalHealth;
+        }
+
+        if (academicsValue > maxGPA)
+        {
+            academicsValue = maxGPA;
+        }
+    }
 
     //functions used to increase/decrease the value of each resource 
     void increaseMoney()
