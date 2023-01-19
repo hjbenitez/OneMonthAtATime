@@ -6,7 +6,7 @@ using TMPro;
 
 public class DialogueSystem : MonoBehaviour
 {
-    List<string> dialogue = new List<string>();
+    string [] dialogue;
     int index;
 
     public TextMeshProUGUI dialogueBox;
@@ -22,16 +22,17 @@ public class DialogueSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (index == dialogue.Count)
-        {
-            coreMechanic.progressDay();
-            index = 0;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && coreMechanic.getCurrentTime() == "Dialogue")
         {
             changeDialogue(dialogue[index]);
             index++;
+
+            if (index == dialogue.Length)
+            {
+                coreMechanic.progressDay();
+                coreMechanic.nextDialogue();
+                index = 0;
+            }
         }      
     }
 
@@ -40,7 +41,7 @@ public class DialogueSystem : MonoBehaviour
         dialogueBox.text = text;
     }
 
-    public void getDialogue(List<string> chain)
+    public void getDialogue(string[] chain)
     {
         dialogue = chain;
     }

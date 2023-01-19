@@ -19,7 +19,6 @@ public class CoreMechanic : MonoBehaviour
     public Button option1;
     public Button option2;
     public Button option3;
-    public Button goHome;
 
     //values of each resource
     //this is what gets changed in the script that is then referenced by the TextMeshPro
@@ -32,7 +31,8 @@ public class CoreMechanic : MonoBehaviour
     int day = 1;
     bool daySet = false;
     string[] schedule;
-    List<string> conversation;
+    List<string[]> conversations;
+    int dialogueIndex;
     int scheduleIndex;
     public DialogueSystem dialogueSystem;
 
@@ -43,10 +43,10 @@ public class CoreMechanic : MonoBehaviour
         moneyValue = float.Parse(money.text);
         mentalHealthValue = float.Parse(mentalHealth.text);
         academicsValue = float.Parse(academics.text);
-        goHome.onClick.AddListener(goingHome);
         region.SetText("Home");
         day = 1;
 
+        conversations = new List<string[]>();
 
     }
 
@@ -66,9 +66,13 @@ public class CoreMechanic : MonoBehaviour
             {
                 case 1:
                     schedule = new string[7] { "Start", "Dialogue", "School", "Dialogue", "Work", "Dialogue", "End" };
-                    conversation = new List<string>() { "CAN'T YOU SEE I'M BLAZING", "STILL MY HEART IS BLAZING", "IF I LOSE MY WINGS", "I DON'T NEED A NEW WORLD ORDER", "CAN'T FEEL A THING" };
+                    conversations.Add(new string[] { "CAN'T YOU SEE I'M BLAZING", "STILL MY HEART IS BLAZING", "IF I LOSE MY WINGS", "I DON'T NEED A NEW WORLD ORDER", "CAN'T FEEL A THING" });
+                    conversations.Add(new string[] {"THERE WILL BE BLOOD....SHED", "THE MAN IN THE MIRROR NODES HIS HEAD", "THE ONLY ONE...LEFT", "WILL RIDE UPON THE DRAGON'S BACK" });
+                    conversations.Add(new string[] { "AND IT WILL COME", "LIKE A FLODD OF PAIN", "POURING DOWN ON ME", "AND IT WILL NOT LET UP", "UNTIL THE END IS HERE" });
+
                     daySet = true;
                     scheduleIndex = 0;
+                    dialogueIndex = 0;
                     break;
             }
         }
@@ -106,34 +110,24 @@ public class CoreMechanic : MonoBehaviour
             else if (schedule[scheduleIndex] == "Dialogue" )
             {
                 setButtonVisibility(false, false, false);
+                dialogueSystem.getDialogue(conversations[dialogueIndex]);
             }
         }
-
-        /*
-        //At Home
-        if(regionID == 0 && !buttonsSet)
-        {
-            setButtonVisibility(true, false, false);
-            option1.onClick.AddListener(goToSchool);
-            buttonsSet = true;
-        }
-
-        //At School
-        if (regionID == 1 && !buttonsSet)
-        {
-            setButtonVisibility(true, true, true);
-            setSchoolButtons(option1, option2, option3);
-            buttonsSet = true;
-        }
-        */
     }
-    void test()
-    {
-        scheduleIndex++;
-    }
+
     public void progressDay()
     {
         scheduleIndex++;
+    }
+
+    public void nextDialogue()
+    {
+        dialogueIndex++;
+    }
+
+    public string getCurrentTime()
+    {
+        return schedule[scheduleIndex];
     }
 
     //checks if the values exceed the max and min values
@@ -154,14 +148,7 @@ public class CoreMechanic : MonoBehaviour
     //changes the region to school
     void goToSchool()
     {
-        //changeRegion("School", 1);
         scheduleIndex++;
-    }
-
-    //changes the region to home
-    void goingHome()
-    {
-        changeRegion("Home", 0);
     }
 
     //base method to change region
@@ -210,19 +197,19 @@ public class CoreMechanic : MonoBehaviour
     public void PayAttention()
     {
         setValues(2, 2, 2);
-        scheduleIndex++;
+        progressDay();
     }
 
     public void SlackOff()
     {
         setValues(4, 4, 4);
-        scheduleIndex++;
+        progressDay();
     }
 
     public void TakeNotes()
     {
         setValues(4, 4, 4);
-        scheduleIndex++;
+        progressDay();
     }
 
     //Work Methods -------------------------------------------------------------
@@ -240,19 +227,19 @@ public class CoreMechanic : MonoBehaviour
     public void WorkAsUsual()
     {
         setValues(2, 2, 1);
-        scheduleIndex++;
+        progressDay();
     }
 
     public void TakeItEasy()
     {
         setValues(2, 2, 1);
-        scheduleIndex++;
+        progressDay();
     }
 
     public void WorkHard()
     {
         setValues(2, 2, 1);
-        scheduleIndex++;
+        progressDay();
     }
 
     public void setSleepButton()
