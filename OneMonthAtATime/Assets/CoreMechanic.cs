@@ -12,6 +12,8 @@ public class CoreMechanic : MonoBehaviour
     public TextMeshProUGUI mentalHealth;
     public TextMeshProUGUI academics;
 
+    School school;
+
     //region variables
     public TextMeshProUGUI region; //displays region
     int regionID = 0; //tracks what region the player is in
@@ -22,20 +24,8 @@ public class CoreMechanic : MonoBehaviour
 
     public Button option1;
     public Button option2;
+    public Button option3;
     public Button goHome;
-
-    //Debug buttons for each resource ------------------
-    //Money debug buttons
-    public Button moneyPlus;
-    public Button moneyMinus;
-
-    //Mental health debug buttons
-    public Button mentalPlus;
-    public Button mentalMinus;
-
-    //Academic debug buttons
-    public Button academicPlus;
-    public Button academicMinus;
 
     //values of each resource
     //this is what gets changed in the script that is then referenced by the TextMeshPro
@@ -45,8 +35,6 @@ public class CoreMechanic : MonoBehaviour
 
     //toying with variables
     bool buttonsSet = false; //ensures the buttons are set only once
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -58,16 +46,7 @@ public class CoreMechanic : MonoBehaviour
         goHome.onClick.AddListener(goingHome);
         region.SetText("Home");
 
-        /* Un-comment to use for debug
-        moneyPlus.onClick.AddListener(increaseMoney);
-        moneyMinus.onClick.AddListener(decreaseMoney);
-
-        mentalPlus.onClick.AddListener(increaseMental);
-        mentalMinus.onClick.AddListener(decreaseMental);
-
-        academicPlus.onClick.AddListener(increaseGPA);
-        academicMinus.onClick.AddListener(decreaseGPA);
-        */
+        school = ScriptableObject.CreateInstance<School>();
     }
 
     // Update is called once per frame
@@ -95,11 +74,7 @@ public class CoreMechanic : MonoBehaviour
         //At School
         if (regionID == 1 && !buttonsSet)
         {
-            option1.onClick.AddListener(study);
-            option2.onClick.AddListener(takeBreak);
-
-            option1.GetComponentInChildren<TextMeshProUGUI>().SetText("Study");
-            option2.GetComponentInChildren<TextMeshProUGUI>().SetText("Take Break");
+            school.setButtons(option1, option2, option3);
             buttonsSet = true;
         }
 
@@ -114,9 +89,17 @@ public class CoreMechanic : MonoBehaviour
             buttonsSet = true;
         }
 
+        //At Store
+        if (regionID == 2 && !buttonsSet)
+        {
+            option1.onClick.AddListener(waitTables);
+            option2.onClick.AddListener(takeBreak);
 
+            option1.GetComponentInChildren<TextMeshProUGUI>().SetText("Wait Tables");
+            option2.GetComponentInChildren<TextMeshProUGUI>().SetText("Take Break");
+            buttonsSet = true;
+        }
     }
-
 
     //checks if the values exceed the max and min values
     void checkValues()
@@ -204,37 +187,10 @@ public class CoreMechanic : MonoBehaviour
         buttonsSet = false;
     }
 
-
-    //DEBUGGING METHODS ----------------------------------------------------
-    /*functions used to increase/decrease the value of each resource 
-    void increaseMoney()
+    public void setValues(float money, float mentalHealth, float academics)
     {
-        moneyValue += 20;
+        moneyValue += money;
+        mentalHealthValue += mentalHealth;
+        academicsValue += academics;
     }
-
-    void decreaseMoney()
-    {
-        moneyValue -= 20;
-    }
-
-    void increaseMental()
-    {
-        mentalHealthValue += 5;
-    }
-
-    void decreaseMental()
-    {
-        mentalHealthValue -= 5;
-    }
-
-    void increaseGPA()
-    {
-        academicsValue += 0.2f;
-    }
-
-    void decreaseGPA()
-    {
-        academicsValue -= 0.2f;
-    }
-    */
 }
