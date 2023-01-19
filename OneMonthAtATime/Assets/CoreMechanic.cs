@@ -12,15 +12,9 @@ public class CoreMechanic : MonoBehaviour
     public TextMeshProUGUI mentalHealth;
     public TextMeshProUGUI academics;
 
-    School school;
-
     //region variables
     public TextMeshProUGUI region; //displays region
     int regionID = 0; //tracks what region the player is in
-
-    //max values for mental health and academic
-    float maxMentalHealth = 100;
-    float maxGPA = 4.0f;
 
     public Button option1;
     public Button option2;
@@ -29,12 +23,18 @@ public class CoreMechanic : MonoBehaviour
 
     //values of each resource
     //this is what gets changed in the script that is then referenced by the TextMeshPro
-    float moneyValue; 
+    float moneyValue;
     float mentalHealthValue;
     float academicsValue;
 
     //toying with variables
     bool buttonsSet = false; //ensures the buttons are set only once
+    int day = 1;
+    bool daySet = false;
+    string[] schedule;
+    List<string> conversation;
+    int scheduleIndex;
+    public DialogueSystem dialogueSystem;
 
     // Start is called before the first frame update
     void Start()
@@ -45,8 +45,9 @@ public class CoreMechanic : MonoBehaviour
         academicsValue = float.Parse(academics.text);
         goHome.onClick.AddListener(goingHome);
         region.SetText("Home");
+        day = 1;
 
-        school = ScriptableObject.CreateInstance<School>();
+
     }
 
     // Update is called once per frame
@@ -59,77 +60,88 @@ public class CoreMechanic : MonoBehaviour
 
         //makes sure the values don't exceed the max or min values
         checkValues();
+        if (!daySet)
+        {
+            switch (day)
+            {
+                case 1:
+                    schedule = new string[7] { "Start", "Dialogue", "School", "Dialogue", "Work", "Dialogue", "End" };
+                    conversation = new List<string>() { "CAN'T YOU SEE I'M BLAZING", "STILL MY HEART IS BLAZING", "IF I LOSE MY WINGS", "I DON'T NEED A NEW WORLD ORDER", "CAN'T FEEL A THING" };
+                    daySet = true;
+                    scheduleIndex = 0;
+                    break;
+            }
+        }
 
+        else
+        {
+            if (schedule[scheduleIndex] == "Start" && !buttonsSet)
+            {
+                setButtonVisibility(true, false, false);
+                setStartButton();
+                buttonsSet = true;
+            }
+
+            else if (schedule[scheduleIndex] == "School" && !buttonsSet)
+            {
+                setButtonVisibility(true, true, true);
+                setSchoolButtons();
+                buttonsSet = true;
+            }
+
+            else if (schedule[scheduleIndex] == "Work" && !buttonsSet)
+            {
+                setButtonVisibility(true, true, true);
+                setWorkButtons();
+                buttonsSet = true;
+            }
+
+            else if (schedule[scheduleIndex] == "End" && !buttonsSet)
+            {
+                setButtonVisibility(true, false, false);
+                setSleepButton();
+                buttonsSet = true;
+            }
+
+            else if (schedule[scheduleIndex] == "Dialogue" )
+            {
+                setButtonVisibility(false, false, false);
+            }
+        }
+
+        /*
         //At Home
         if(regionID == 0 && !buttonsSet)
         {
+            setButtonVisibility(true, false, false);
             option1.onClick.AddListener(goToSchool);
-            option2.onClick.AddListener(goToWork);
-
-            option1.GetComponentInChildren<TextMeshProUGUI>().SetText("Go to School");
-            option2.GetComponentInChildren<TextMeshProUGUI>().SetText("Go to Work");
             buttonsSet = true;
         }
 
         //At School
         if (regionID == 1 && !buttonsSet)
         {
-            school.setButtons(option1, option2, option3);
+            setButtonVisibility(true, true, true);
+            setSchoolButtons(option1, option2, option3);
             buttonsSet = true;
         }
-
-        //At Work
-        if (regionID == 2 && !buttonsSet)
-        {
-            option1.onClick.AddListener(waitTables);
-            option2.onClick.AddListener(takeBreak);
-
-            option1.GetComponentInChildren<TextMeshProUGUI>().SetText("Wait Tables");
-            option2.GetComponentInChildren<TextMeshProUGUI>().SetText("Take Break");
-            buttonsSet = true;
-        }
-
-        //At Store
-        if (regionID == 2 && !buttonsSet)
-        {
-            option1.onClick.AddListener(waitTables);
-            option2.onClick.AddListener(takeBreak);
-
-            option1.GetComponentInChildren<TextMeshProUGUI>().SetText("Wait Tables");
-            option2.GetComponentInChildren<TextMeshProUGUI>().SetText("Take Break");
-            buttonsSet = true;
-        }
+        */
+    }
+    void test()
+    {
+        scheduleIndex++;
+    }
+    public void progressDay()
+    {
+        scheduleIndex++;
     }
 
     //checks if the values exceed the max and min values
     void checkValues()
     {
-        //checks if the values go below 0
-        if(moneyValue < 0)
-        {
-            moneyValue = 0;
-        }
-
-        if(mentalHealthValue < 0)
-        {
-            mentalHealthValue = 0;
-        }
-
-        if (academicsValue < 0)
-        {
-            academicsValue = 0;
-        }
-
-        //checks if the values go above their respective maxes 
-        if (mentalHealthValue > maxMentalHealth)
-        {
-            mentalHealthValue = maxMentalHealth;
-        }
-
-        if (academicsValue > maxGPA)
-        {
-            academicsValue = maxGPA;
-        }
+        moneyValue = Mathf.Clamp(moneyValue, 0, 999999);
+        mentalHealthValue = Mathf.Clamp(mentalHealthValue, 0, 100);
+        academicsValue = Mathf.Clamp(academicsValue, 0, 4);
     }
 
     //Methods used to change the regions
@@ -142,34 +154,14 @@ public class CoreMechanic : MonoBehaviour
     //changes the region to school
     void goToSchool()
     {
-        changeRegion("School", 1);
+        //changeRegion("School", 1);
+        scheduleIndex++;
     }
 
     //changes the region to home
     void goingHome()
     {
         changeRegion("Home", 0);
-    }
-
-    //Victoria waits tables to make money
-    void waitTables()
-    {
-        moneyValue += 10;
-        mentalHealthValue -= 2;
-        academicsValue -= 0.05f;
-    }
-
-    //Victoria studies to get better grades
-    void study()
-    {
-        mentalHealthValue -= 4;
-        academicsValue += 0.1f;
-    }
-
-    //Victoria takes a break to restore her mental fortitude
-    void takeBreak()
-    {
-        mentalHealthValue += 5;
     }
 
     //base method to change region
@@ -184,6 +176,7 @@ public class CoreMechanic : MonoBehaviour
     {
         option1.onClick.RemoveAllListeners();
         option2.onClick.RemoveAllListeners();
+        option3.onClick.RemoveAllListeners();
         buttonsSet = false;
     }
 
@@ -193,4 +186,92 @@ public class CoreMechanic : MonoBehaviour
         mentalHealthValue += mentalHealth;
         academicsValue += academics;
     }
+
+    public void setButtonVisibility(bool but1, bool but2, bool but3)
+    {
+        option1.gameObject.SetActive(but1);
+        option2.gameObject.SetActive(but2);
+        option3.gameObject.SetActive(but3);
+    }
+
+    //School Methods -----------------------------------------------------------
+    public void setSchoolButtons()
+    {
+        option1.onClick.AddListener(PayAttention);
+        option2.onClick.AddListener(SlackOff);
+        option3.onClick.AddListener(TakeNotes);
+
+
+        option1.GetComponentInChildren<TextMeshProUGUI>().SetText("Pay Attention");
+        option2.GetComponentInChildren<TextMeshProUGUI>().SetText("Slack Off");
+        option3.GetComponentInChildren<TextMeshProUGUI>().SetText("Take Notes");
+    }
+
+    public void PayAttention()
+    {
+        setValues(2, 2, 2);
+        scheduleIndex++;
+    }
+
+    public void SlackOff()
+    {
+        setValues(4, 4, 4);
+        scheduleIndex++;
+    }
+
+    public void TakeNotes()
+    {
+        setValues(4, 4, 4);
+        scheduleIndex++;
+    }
+
+    //Work Methods -------------------------------------------------------------
+    public void setWorkButtons()
+    {
+        option1.onClick.AddListener(WorkAsUsual);
+        option2.onClick.AddListener(TakeItEasy);
+        option3.onClick.AddListener(WorkHard); 
+
+        option1.GetComponentInChildren<TextMeshProUGUI>().SetText("Business as Usual");
+        option2.GetComponentInChildren<TextMeshProUGUI>().SetText("Take it Easy");
+        option3.GetComponentInChildren<TextMeshProUGUI>().SetText("Work Hard");
+    }
+
+    public void WorkAsUsual()
+    {
+        setValues(2, 2, 1);
+        scheduleIndex++;
+    }
+
+    public void TakeItEasy()
+    {
+        setValues(2, 2, 1);
+        scheduleIndex++;
+    }
+
+    public void WorkHard()
+    {
+        setValues(2, 2, 1);
+        scheduleIndex++;
+    }
+
+    public void setSleepButton()
+    {
+        option1.onClick.AddListener(sleep);
+
+        option1.GetComponentInChildren<TextMeshProUGUI>().SetText("Get Some Rest");
+    }
+
+    public void sleep()
+    {
+        Application.Quit();
+    }
+
+    public void setStartButton()
+    {
+        option1.onClick.AddListener(goToSchool);
+
+        option1.GetComponentInChildren<TextMeshProUGUI>().SetText("Go to School");
+    }
+
 }
