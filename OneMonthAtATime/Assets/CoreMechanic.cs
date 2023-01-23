@@ -20,6 +20,8 @@ public class CoreMechanic : MonoBehaviour
     public Button option2;
     public Button option3;
 
+    public Image energyBar;
+
     //values of each resource
     //this is what gets changed in the script that is then referenced by the TextMeshPro
     float moneyValue;
@@ -35,6 +37,12 @@ public class CoreMechanic : MonoBehaviour
     int dialogueIndex;
     int scheduleIndex;
     public DialogueSystem dialogueSystem;
+    float energy = 1f;
+
+    float takeNotesEnergy = -0.6f;
+    float payAttentionEnergy = -0.1f;
+    float workAsUsualEnergy = -0.2f;
+    float workHardEnergy = -0.6f;
 
     // Start is called before the first frame update
     void Start()
@@ -57,6 +65,7 @@ public class CoreMechanic : MonoBehaviour
         money.text = moneyValue.ToString();
         mentalHealth.text = mentalHealthValue.ToString();
         academics.text = System.Math.Round(academicsValue, 2).ToString();
+        energyBar.fillAmount = energy;
 
         //makes sure the values don't exceed the max or min values
         checkValues();
@@ -164,14 +173,19 @@ public class CoreMechanic : MonoBehaviour
         option1.onClick.RemoveAllListeners();
         option2.onClick.RemoveAllListeners();
         option3.onClick.RemoveAllListeners();
+
+        option1.interactable = true;
+        option2.interactable = true;
+        option3.interactable = true;
         buttonsSet = false;
     }
 
-    public void setValues(float money, float mentalHealth, float academics)
+    public void setValues(float money, float mentalHealth, float academics, float energyUse)
     {
         moneyValue += money;
         mentalHealthValue += mentalHealth;
         academicsValue += academics;
+        energy += energyUse;
     }
 
     public void setButtonVisibility(bool but1, bool but2, bool but3)
@@ -184,61 +198,96 @@ public class CoreMechanic : MonoBehaviour
     //School Methods -----------------------------------------------------------
     public void setSchoolButtons()
     {
-        option1.onClick.AddListener(PayAttention);
-        option2.onClick.AddListener(SlackOff);
-        option3.onClick.AddListener(TakeNotes);
+        option1.onClick.AddListener(SlackOff);
 
+        if (energy > Mathf.Abs(payAttentionEnergy))
+        {
+            option2.onClick.AddListener(PayAttention);
+        }
 
-        option1.GetComponentInChildren<TextMeshProUGUI>().SetText("Pay Attention");
-        option2.GetComponentInChildren<TextMeshProUGUI>().SetText("Slack Off");
+        else
+        {
+            option2.interactable = false;
+        }
+
+        if(energy > Mathf.Abs(takeNotesEnergy))
+        {
+            option3.onClick.AddListener(TakeNotes);
+        }
+
+        else
+        {
+            option3.interactable = false;
+        }
+
+        option1.GetComponentInChildren<TextMeshProUGUI>().SetText("Slack Off");
         option3.GetComponentInChildren<TextMeshProUGUI>().SetText("Take Notes");
+        option2.GetComponentInChildren<TextMeshProUGUI>().SetText("Pay Attention");
     }
-
+    //EDIT THESE VALUES
     public void PayAttention()
     {
-        setValues(2, 2, 2);
+        setValues(0, -2, 0.02f, payAttentionEnergy);
         progressDay();
     }
 
     public void SlackOff()
     {
-        setValues(4, 4, 4);
+        setValues(0, 4, 0.04f, 0f);
         progressDay();
     }
 
     public void TakeNotes()
     {
-        setValues(4, 4, 4);
+        setValues(0, -6, 0.1f, takeNotesEnergy);
         progressDay();
     }
 
     //Work Methods -------------------------------------------------------------
     public void setWorkButtons()
     {
-        option1.onClick.AddListener(WorkAsUsual);
-        option2.onClick.AddListener(TakeItEasy);
-        option3.onClick.AddListener(WorkHard); 
+        option1.onClick.AddListener(TakeItEasy);
 
-        option1.GetComponentInChildren<TextMeshProUGUI>().SetText("Business as Usual");
-        option2.GetComponentInChildren<TextMeshProUGUI>().SetText("Take it Easy");
+        if(energy > Mathf.Abs(workAsUsualEnergy))
+        {
+            option2.onClick.AddListener(WorkAsUsual);
+        }
+
+        else
+        {
+            option2.interactable = false;
+        }
+
+        if(energy > Mathf.Abs(workHardEnergy))
+        {
+            option3.onClick.AddListener(WorkHard);
+        }
+
+        else
+        {
+            option3.interactable = false;
+        }
+
+        option1.GetComponentInChildren<TextMeshProUGUI>().SetText("Take it Easy");
+        option2.GetComponentInChildren<TextMeshProUGUI>().SetText("Business as Usual");
         option3.GetComponentInChildren<TextMeshProUGUI>().SetText("Work Hard");
     }
-
+    //EDIT THESE VALUES
     public void WorkAsUsual()
     {
-        setValues(2, 2, 1);
+        setValues(200, -5, 0, workAsUsualEnergy);
         progressDay();
     }
 
     public void TakeItEasy()
     {
-        setValues(2, 2, 1);
+        setValues(120, 5, 0, 0);
         progressDay();
     }
 
     public void WorkHard()
     {
-        setValues(2, 2, 1);
+        setValues(350, -15, 0, workHardEnergy);
         progressDay();
     }
 
