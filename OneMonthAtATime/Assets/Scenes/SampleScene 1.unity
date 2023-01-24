@@ -3450,8 +3450,8 @@ MonoBehaviour:
   option3: {fileID: 743289252}
   energyBar: {fileID: 495142896}
   moneyIcon: {fileID: 0}
-  healthIcon: {fileID: 0}
-  academicIcon: {fileID: 0}
+  healthIcon: {fileID: 842711344}
+  academicIcon: {fileID: 1283200167}
   dialogueSystem: {fileID: 1375876014}
   victoria:
   - {fileID: 21300000, guid: 88e60b9d61ec1994e83d499257ac6eb6, type: 3}
@@ -3461,6 +3461,17 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 43f34479b18709d46911c55ebbfa0c6d, type: 3}
   - {fileID: 21300000, guid: aec61359e488a3e408c082d2c4c03525, type: 3}
   - {fileID: 21300000, guid: fdf30e971ad4b5c43ba274f88840bbc4, type: 3}
+  - {fileID: 21300000, guid: 714d82b436b056a4aa3de71b241d35ad, type: 3}
+  - {fileID: 21300000, guid: 0def45b2cea982a40b44ccf0fc2c6a9a, type: 3}
+  - {fileID: 21300000, guid: c0dbd053703603f438093411d0f61261, type: 3}
+  ashley:
+  - {fileID: 21300000, guid: e43152656e4873d4fa4da7d939ff6d7d, type: 3}
+  - {fileID: 21300000, guid: e43152656e4873d4fa4da7d939ff6d7d, type: 3}
+  - {fileID: 21300000, guid: e43152656e4873d4fa4da7d939ff6d7d, type: 3}
+  - {fileID: 21300000, guid: e43152656e4873d4fa4da7d939ff6d7d, type: 3}
+  - {fileID: 21300000, guid: e43152656e4873d4fa4da7d939ff6d7d, type: 3}
+  - {fileID: 21300000, guid: e43152656e4873d4fa4da7d939ff6d7d, type: 3}
+  - {fileID: 21300000, guid: e43152656e4873d4fa4da7d939ff6d7d, type: 3}
 --- !u!4 &1375876013
 Transform:
   m_ObjectHideFlags: 0

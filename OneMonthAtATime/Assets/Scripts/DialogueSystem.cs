@@ -14,6 +14,9 @@ public class DialogueSystem : MonoBehaviour
     *4 = sad
     *5 = sighing
     *6 = tired
+    *7 = fear
+    *8 = disgust
+    *9 = surpirse
     */
     string [] dialogue;
     int index;
@@ -23,6 +26,7 @@ public class DialogueSystem : MonoBehaviour
     public CoreMechanic coreMechanic;
 
     int pfpIndex;
+    int charIndex;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,10 +38,10 @@ public class DialogueSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        setProfilePic(pfpIndex);
-        if (Input.GetKeyDown(KeyCode.Space) && coreMechanic.getCurrentTime() == "Dialogue")
+        setCharacter(charIndex, pfpIndex);
+        if (Input.GetKeyDown(KeyCode.Space) && coreMechanic.getCurrentTime() == "Dialogue" || coreMechanic.getCurrentTime() == "EventDialogue")
         {
-            pfpIndex = getProfilePic(dialogue[index]);
+            getCharacter(dialogue[index]);
             setDialogue(dialogue[index]);
             index++;
 
@@ -52,7 +56,7 @@ public class DialogueSystem : MonoBehaviour
 
     void setDialogue(string text)
     {
-        text = text.Remove(0, 1);
+        text = text.Remove(0, 2);
         dialogueBox.text = text;
     }
 
@@ -61,14 +65,22 @@ public class DialogueSystem : MonoBehaviour
         dialogue = chain;
     }
 
-    void setProfilePic(int i)
+    void setCharacter(int character, int pfp)
     {
-        profilePic.sprite = coreMechanic.victoria[i];
+        if(character == 0)
+        {
+            profilePic.sprite = coreMechanic.victoria[pfp];
+        }
+
+        if(character == 1)
+        {
+            profilePic.sprite = coreMechanic.ashley[pfp];
+        }
     }
 
-    int getProfilePic(string dialogue)
+    void getCharacter(string dialogue)
     {
-        int pfp = int.Parse(dialogue.Substring(0, 1));
-        return pfp;
+        charIndex = int.Parse(dialogue.Substring(0, 1));
+        pfpIndex = int.Parse(dialogue.Substring(1, 1));
     }
 }

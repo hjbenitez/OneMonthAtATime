@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.Events;
+using System.Linq;
 
 public class CoreMechanic : MonoBehaviour
 {
@@ -34,7 +34,7 @@ public class CoreMechanic : MonoBehaviour
     bool buttonsSet = false; //ensures the buttons are set only once
     int day = 1;
     bool daySet = false;
-    string[] schedule;
+    List<string> schedule;
     List<string[]> conversations;
     int dialogueIndex;
     int scheduleIndex;
@@ -47,6 +47,10 @@ public class CoreMechanic : MonoBehaviour
     float workHardEnergy = -0.6f;
 
     public Sprite[] victoria;
+    public Sprite[] ashley;
+
+    Events events;
+    Event chosenEvent;
 
     // Start is called before the first frame update
     void Start()
@@ -58,6 +62,7 @@ public class CoreMechanic : MonoBehaviour
         day = 1;
 
         conversations = new List<string[]>();
+        events = new Events();
     }
 
     // Update is called once per frame
@@ -79,7 +84,7 @@ public class CoreMechanic : MonoBehaviour
             {
                 //DAY 1
                 case 1:
-                    schedule = new string[7] { "Start", "Dialogue", "School", "Dialogue", "Work", "Dialogue", "End" };
+                    schedule = new string[8] { "Start", "Dialogue", "School", "Event", "Dialogue", "Work", "Dialogue", "End" }.ToList();
                     /*conversations.Add(new string[] { "2CAN'T YOU SEE I'M BLAZING", "1STILL MY HEART IS BLAZING", "4IF I LOSE MY WINGS", "5I DON'T NEED A NEW WORLD ORDER", "6CAN'T FEEL A THING" });
                     conversations.Add(new string[] {"4THERE WILL BE BLOOD....SHED", "2THE MAN IN THE MIRROR NODES HIS HEAD", "1THE ONLY ONE...LEFT", "1WILL RIDE UPON THE DRAGON'S BACK" });
                     conversations.Add(new string[] { "3AND IT WILL COME", "3LIKE A FLODD OF PAIN", "6POURING DOWN ON ME", "2AND IT WILL NOT LET UP", "3UNTIL THE END IS HERE" });
@@ -128,6 +133,32 @@ public class CoreMechanic : MonoBehaviour
             {
                 setButtonVisibility(false, false, false);
                 dialogueSystem.getDialogue(conversations[dialogueIndex]);
+            }
+
+            else if (schedule[scheduleIndex] == "Event")
+            {
+                chosenEvent = events.getEvent(0);
+                schedule.Insert(scheduleIndex + 1, "EventEnd");
+                schedule.Insert(scheduleIndex + 1, "EventChoice");
+                schedule.Insert(scheduleIndex + 1, "EventDialogue");
+                progressDay();
+
+            }
+
+            else if (schedule[scheduleIndex] == "EventEnd")
+            {
+                progressDay();
+            }
+
+            else if (schedule[scheduleIndex] == "EventChoice")
+            {
+                progressDay();
+            }
+
+            else if (schedule[scheduleIndex] == "EventDialogue")
+            {
+                setButtonVisibility(false, false, false);
+                dialogueSystem.getDialogue(chosenEvent.dialogue); 
             }
         }
     }
