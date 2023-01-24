@@ -39,16 +39,22 @@ public class DialogueSystem : MonoBehaviour
     void Update()
     {
         setCharacter(charIndex, pfpIndex);
-        if (Input.GetKeyDown(KeyCode.Space) && coreMechanic.getCurrentTime() == "Dialogue" || coreMechanic.getCurrentTime() == "EventDialogue")
+        if (Input.GetKeyDown(KeyCode.Space) && (coreMechanic.getCurrentTime() == "Dialogue" || coreMechanic.getCurrentTime() == "EventDialogue" || coreMechanic.getCurrentTime() == "EventEnd"))
         {
             getCharacter(dialogue[index]);
             setDialogue(dialogue[index]);
             index++;
 
-            if (index == dialogue.Length)
+            if (index == dialogue.Length && coreMechanic.getCurrentTime() == "Dialogue")
             {
                 coreMechanic.progressDay();
                 coreMechanic.nextDialogue();
+                index = 0;
+            }
+
+            else if (index == dialogue.Length && (coreMechanic.getCurrentTime() == "EventDialogue" || coreMechanic.getCurrentTime() == "EventEnd"))
+            {
+                coreMechanic.progressDay();
                 index = 0;
             }
         }      
@@ -75,6 +81,11 @@ public class DialogueSystem : MonoBehaviour
         if(character == 1)
         {
             profilePic.sprite = coreMechanic.ashley[pfp];
+        }
+
+        if (character == 9)
+        {
+            profilePic.sprite = null;
         }
     }
 

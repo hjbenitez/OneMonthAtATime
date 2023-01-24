@@ -12,9 +12,9 @@ public class Events
 
         //School Event - Classmate asks for help
         events.Add(new Event(
-            new Option("Help them", 0, 5f, 0.02f, -0.1f, "05Well, glad they figured it out, and I feel good about helping. Unfortunately, I also lost all the extra time I had. Guess I’m eating lunch in a hurry again or I’ll be late for the meeting for my group project."), 
-            new Option("Sorry, I don't have tme, ask the prof", 0f, 0f, 0f, 0.1f, "03I don’t want to be rude but I’m way too tired, the prof is literally right there to help and will probably give better advice than I could. I just really need some time to myself to collect my thoughts."), 
-            new Option("Open something...anything...then say you're busy", 0, 5f, 0.02f, -0.1f, "04Funny how that works, by pretending to work on something for half an hour I was actually pretty productive. I do feel kinda bad though… just a little."),
+            new Option("Help them", 0, 5f, 0.02f, -0.1f, new string[1] { "05Well, glad they figured it out, and I feel good about helping. Unfortunately, I also lost all the extra time I had. Guess I’m eating lunch in a hurry again or I’ll be late for the meeting for my group project." }),
+            new Option("Sorry, I don't have tme, ask the prof", 0f, 0f, 0f, 0.1f, new string[1] {"03I don’t want to be rude but I’m way too tired, the prof is literally right there to help and will probably give better advice than I could. I just really need some time to myself to collect my thoughts."}), 
+            new Option("Open something...anything...then say you're busy", 0, 5f, 0.02f, -0.1f, new string[1] {"04Funny how that works, by pretending to work on something for half an hour I was actually pretty productive. I do feel kinda bad though… just a little."}),
             new string[6] { "90…Ok does everyone understand the exercise? Great. I’ll be in class for another half hour if anyone needs help.", "05*Yawns*", "02Glad the exercise is something I already know, I can get it done in 5 minutes and leave class early. It would be nice to get a longer lunch break for once-",
             "90Um, excuse me?", "01Huh? Sorry, whats up?", "90I’m a little confused by the exercise, could you help me out quickly?"}));
     }
@@ -34,10 +34,10 @@ public struct Option
     public float valueMoney;
     public float valueAcademic;
     public float energy;
-    public string response;
+    public string[] response;
 
     //Constructor for the options that stores all the relevant stats
-    public Option(string optionText, float valueMentalHealth, float valueMoney, float valueAcademic, float energy, string response)
+    public Option(string optionText, float valueMentalHealth, float valueMoney, float valueAcademic, float energy, string[] response)
     {
         this.optionText = optionText;
         this.valueAcademic = valueAcademic;

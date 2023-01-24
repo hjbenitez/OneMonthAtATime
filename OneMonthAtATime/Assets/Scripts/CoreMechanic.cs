@@ -51,6 +51,7 @@ public class CoreMechanic : MonoBehaviour
 
     Events events;
     Event chosenEvent;
+    int eventEnd;
 
     // Start is called before the first frame update
     void Start()
@@ -68,6 +69,7 @@ public class CoreMechanic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(scheduleIndex);
         //Updates the UI text to reflect the values every frame
         money.text = moneyValue.ToString();
         mentalHealth.text = mentalHealthValue.ToString();
@@ -85,10 +87,7 @@ public class CoreMechanic : MonoBehaviour
                 //DAY 1
                 case 1:
                     schedule = new string[8] { "Start", "Dialogue", "School", "Event", "Dialogue", "Work", "Dialogue", "End" }.ToList();
-                    /*conversations.Add(new string[] { "2CAN'T YOU SEE I'M BLAZING", "1STILL MY HEART IS BLAZING", "4IF I LOSE MY WINGS", "5I DON'T NEED A NEW WORLD ORDER", "6CAN'T FEEL A THING" });
-                    conversations.Add(new string[] {"4THERE WILL BE BLOOD....SHED", "2THE MAN IN THE MIRROR NODES HIS HEAD", "1THE ONLY ONE...LEFT", "1WILL RIDE UPON THE DRAGON'S BACK" });
-                    conversations.Add(new string[] { "3AND IT WILL COME", "3LIKE A FLODD OF PAIN", "6POURING DOWN ON ME", "2AND IT WILL NOT LET UP", "3UNTIL THE END IS HERE" });
-                    */
+
                     Day1 day1 = new Day1();
                     conversations = day1.getDialogue();
                     daySet = true;
@@ -147,12 +146,14 @@ public class CoreMechanic : MonoBehaviour
 
             else if (schedule[scheduleIndex] == "EventEnd")
             {
-                progressDay();
+                setButtonVisibility(false, false, false);
             }
 
-            else if (schedule[scheduleIndex] == "EventChoice")
+            else if (schedule[scheduleIndex] == "EventChoice" && !buttonsSet)
             {
-                progressDay();
+                setButtonVisibility(true, true, true);
+                setEventButtons(chosenEvent.option1, chosenEvent.option2, chosenEvent.option3);
+                buttonsSet = true;
             }
 
             else if (schedule[scheduleIndex] == "EventDialogue")
@@ -161,6 +162,37 @@ public class CoreMechanic : MonoBehaviour
                 dialogueSystem.getDialogue(chosenEvent.dialogue); 
             }
         }
+    }
+
+    public void setEventButtons(Option op1, Option op2, Option op3)
+    {
+        option1.onClick.AddListener(() => {
+            mentalHealthValue += op1.valueMentalHealth;
+            moneyValue += op1.valueMoney;
+            academicsValue += op1.valueAcademic;
+            dialogueSystem.getDialogue(op1.response);
+            progressDay();
+        });
+
+        option2.onClick.AddListener(() => {
+            mentalHealthValue += op2.valueMentalHealth;
+            moneyValue += op2.valueMoney;
+            academicsValue += op2.valueAcademic;
+            dialogueSystem.getDialogue(op2.response);
+            progressDay();
+        });
+
+        option3.onClick.AddListener(() => {
+            mentalHealthValue += op3.valueMentalHealth;
+            moneyValue += op3.valueMoney;
+            academicsValue += op3.valueAcademic;
+            dialogueSystem.getDialogue(op3.response);
+            progressDay();
+        });
+
+        option1.GetComponentInChildren<TextMeshProUGUI>().SetText(op1.optionText);
+        option3.GetComponentInChildren<TextMeshProUGUI>().SetText(op2.optionText);
+        option2.GetComponentInChildren<TextMeshProUGUI>().SetText(op3.optionText);
     }
 
     public void progressDay()
