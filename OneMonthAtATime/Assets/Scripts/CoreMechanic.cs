@@ -136,11 +136,21 @@ public class CoreMechanic : MonoBehaviour
 
             else if (schedule[scheduleIndex] == "Event")
             {
-                chosenEvent = events.getEvent(0);
-                schedule.Insert(scheduleIndex + 1, "EventEnd");
-                schedule.Insert(scheduleIndex + 1, "EventChoice");
-                schedule.Insert(scheduleIndex + 1, "EventDialogue");
-                progressDay();
+                chosenEvent = events.getEvent(1);
+
+                if(chosenEvent.options)
+                {
+                    schedule.Insert(scheduleIndex + 1, "EventEnd");
+                    schedule.Insert(scheduleIndex + 1, "EventChoice");
+                    schedule.Insert(scheduleIndex + 1, "EventDialogue");
+                    progressDay();
+                }
+
+                else
+                {
+                    schedule.Insert(scheduleIndex + 1, "EventDialogue");
+                    progressDay();
+                }
 
             }
 
