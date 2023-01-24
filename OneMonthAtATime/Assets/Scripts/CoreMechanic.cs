@@ -14,13 +14,15 @@ public class CoreMechanic : MonoBehaviour
 
     //region variables
     public TextMeshProUGUI region; //displays region
-    int regionID = 0; //tracks what region the player is in
 
     public Button option1;
     public Button option2;
     public Button option3;
 
     public Image energyBar;
+    public Image moneyIcon;
+    public Image healthIcon;
+    public Image academicIcon;
 
     //values of each resource
     //this is what gets changed in the script that is then referenced by the TextMeshPro
@@ -53,7 +55,6 @@ public class CoreMechanic : MonoBehaviour
         moneyValue = float.Parse(money.text);
         mentalHealthValue = float.Parse(mentalHealth.text);
         academicsValue = float.Parse(academics.text);
-        region.SetText("Home");
         day = 1;
 
         conversations = new List<string[]>();
@@ -70,6 +71,8 @@ public class CoreMechanic : MonoBehaviour
 
         //makes sure the values don't exceed the max or min values
         checkValues();
+        updateIcons();
+
         if (!daySet)
         {
             switch (day)
@@ -77,10 +80,12 @@ public class CoreMechanic : MonoBehaviour
                 //DAY 1
                 case 1:
                     schedule = new string[7] { "Start", "Dialogue", "School", "Dialogue", "Work", "Dialogue", "End" };
-                    conversations.Add(new string[] { "2CAN'T YOU SEE I'M BLAZING", "1STILL MY HEART IS BLAZING", "4IF I LOSE MY WINGS", "5I DON'T NEED A NEW WORLD ORDER", "6CAN'T FEEL A THING" });
+                    /*conversations.Add(new string[] { "2CAN'T YOU SEE I'M BLAZING", "1STILL MY HEART IS BLAZING", "4IF I LOSE MY WINGS", "5I DON'T NEED A NEW WORLD ORDER", "6CAN'T FEEL A THING" });
                     conversations.Add(new string[] {"4THERE WILL BE BLOOD....SHED", "2THE MAN IN THE MIRROR NODES HIS HEAD", "1THE ONLY ONE...LEFT", "1WILL RIDE UPON THE DRAGON'S BACK" });
                     conversations.Add(new string[] { "3AND IT WILL COME", "3LIKE A FLODD OF PAIN", "6POURING DOWN ON ME", "2AND IT WILL NOT LET UP", "3UNTIL THE END IS HERE" });
-
+                    */
+                    Day1 day1 = new Day1();
+                    conversations = day1.getDialogue();
                     daySet = true;
                     scheduleIndex = 0;
                     dialogueIndex = 0;
@@ -148,6 +153,12 @@ public class CoreMechanic : MonoBehaviour
         moneyValue = Mathf.Clamp(moneyValue, 0, 999999);
         mentalHealthValue = Mathf.Clamp(mentalHealthValue, 0, 100);
         academicsValue = Mathf.Clamp(academicsValue, 0, 4);
+    }
+
+    void updateIcons()
+    {
+        healthIcon.fillAmount = mentalHealthValue / 100f;
+        academicIcon.fillAmount = academicsValue / 4f;
     }
 
     //changes the region to school
