@@ -44,6 +44,8 @@ public class CoreMechanic : MonoBehaviour
     float workAsUsualEnergy = -0.2f;
     float workHardEnergy = -0.6f;
 
+    public Sprite[] victoria;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,7 +57,6 @@ public class CoreMechanic : MonoBehaviour
         day = 1;
 
         conversations = new List<string[]>();
-
     }
 
     // Update is called once per frame
@@ -73,16 +74,18 @@ public class CoreMechanic : MonoBehaviour
         {
             switch (day)
             {
+                //DAY 1
                 case 1:
                     schedule = new string[7] { "Start", "Dialogue", "School", "Dialogue", "Work", "Dialogue", "End" };
-                    conversations.Add(new string[] { "CAN'T YOU SEE I'M BLAZING", "STILL MY HEART IS BLAZING", "IF I LOSE MY WINGS", "I DON'T NEED A NEW WORLD ORDER", "CAN'T FEEL A THING" });
-                    conversations.Add(new string[] {"THERE WILL BE BLOOD....SHED", "THE MAN IN THE MIRROR NODES HIS HEAD", "THE ONLY ONE...LEFT", "WILL RIDE UPON THE DRAGON'S BACK" });
-                    conversations.Add(new string[] { "AND IT WILL COME", "LIKE A FLODD OF PAIN", "POURING DOWN ON ME", "AND IT WILL NOT LET UP", "UNTIL THE END IS HERE" });
+                    conversations.Add(new string[] { "2CAN'T YOU SEE I'M BLAZING", "1STILL MY HEART IS BLAZING", "4IF I LOSE MY WINGS", "5I DON'T NEED A NEW WORLD ORDER", "6CAN'T FEEL A THING" });
+                    conversations.Add(new string[] {"4THERE WILL BE BLOOD....SHED", "2THE MAN IN THE MIRROR NODES HIS HEAD", "1THE ONLY ONE...LEFT", "1WILL RIDE UPON THE DRAGON'S BACK" });
+                    conversations.Add(new string[] { "3AND IT WILL COME", "3LIKE A FLODD OF PAIN", "6POURING DOWN ON ME", "2AND IT WILL NOT LET UP", "3UNTIL THE END IS HERE" });
 
                     daySet = true;
                     scheduleIndex = 0;
                     dialogueIndex = 0;
-                    break;
+                    break; 
+                    // DAY 1 END ------------------------------------------------------
             }
         }
 
@@ -147,24 +150,10 @@ public class CoreMechanic : MonoBehaviour
         academicsValue = Mathf.Clamp(academicsValue, 0, 4);
     }
 
-    //Methods used to change the regions
-    //changes the region to work
-    void goToWork()
-    {
-        changeRegion("Work", 2);
-    }
-
     //changes the region to school
     void goToSchool()
     {
         scheduleIndex++;
-    }
-
-    //base method to change region
-    void changeRegion(string name, int id)
-    {
-        region.SetText(name);
-        regionID = id;
     }
 
     //resets buttons to blanks when clicked

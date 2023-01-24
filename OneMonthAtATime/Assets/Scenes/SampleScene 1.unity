@@ -2544,7 +2544,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 745d7b5b9d4bb8145b46344ceb35caca, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 865c89d603adef44f8e12d993447b3f6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3219,6 +3219,14 @@ MonoBehaviour:
   option3: {fileID: 743289252}
   energyBar: {fileID: 495142896}
   dialogueSystem: {fileID: 1375876014}
+  victoria:
+  - {fileID: 21300000, guid: 88e60b9d61ec1994e83d499257ac6eb6, type: 3}
+  - {fileID: 21300000, guid: d60b0583cb0149242beefdf169a5545f, type: 3}
+  - {fileID: 21300000, guid: 865c89d603adef44f8e12d993447b3f6, type: 3}
+  - {fileID: 21300000, guid: a95f031515342a045aadf53efe3d903a, type: 3}
+  - {fileID: 21300000, guid: 43f34479b18709d46911c55ebbfa0c6d, type: 3}
+  - {fileID: 21300000, guid: aec61359e488a3e408c082d2c4c03525, type: 3}
+  - {fileID: 21300000, guid: fdf30e971ad4b5c43ba274f88840bbc4, type: 3}
 --- !u!4 &1375876013
 Transform:
   m_ObjectHideFlags: 0
