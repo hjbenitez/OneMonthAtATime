@@ -86,7 +86,7 @@ public class CoreMechanic : MonoBehaviour
             {
                 //DAY 1
                 case 1:
-                    schedule = new string[8] { "Start", "Dialogue", "School", "Event", "Dialogue", "Work", "Dialogue", "End" }.ToList();
+                    schedule = new string[8] {"Dialogue", "Start", "School", "Event", "Dialogue", "Work", "Dialogue", "End" }.ToList();
 
                     Day1 day1 = new Day1();
                     conversations = day1.getDialogue();
