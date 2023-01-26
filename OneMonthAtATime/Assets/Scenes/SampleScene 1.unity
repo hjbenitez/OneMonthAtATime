@@ -687,6 +687,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1375876012}
+        m_TargetAssemblyTypeName: CoreMechanic, Assembly-CSharp
+        m_MethodName: optionSelected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &132796887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2170,6 +2182,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1375876012}
+        m_TargetAssemblyTypeName: CoreMechanic, Assembly-CSharp
+        m_MethodName: optionSelected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &766475552
 GameObject:
   m_ObjectHideFlags: 0
@@ -3452,6 +3476,7 @@ MonoBehaviour:
   moneyIcon: {fileID: 0}
   healthIcon: {fileID: 842711344}
   academicIcon: {fileID: 1283200167}
+  day: 1
   dialogueSystem: {fileID: 1375876014}
   victoria:
   - {fileID: 21300000, guid: 88e60b9d61ec1994e83d499257ac6eb6, type: 3}
@@ -3465,13 +3490,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0def45b2cea982a40b44ccf0fc2c6a9a, type: 3}
   - {fileID: 21300000, guid: c0dbd053703603f438093411d0f61261, type: 3}
   ashley:
-  - {fileID: 21300000, guid: e43152656e4873d4fa4da7d939ff6d7d, type: 3}
-  - {fileID: 21300000, guid: e43152656e4873d4fa4da7d939ff6d7d, type: 3}
-  - {fileID: 21300000, guid: e43152656e4873d4fa4da7d939ff6d7d, type: 3}
-  - {fileID: 21300000, guid: e43152656e4873d4fa4da7d939ff6d7d, type: 3}
-  - {fileID: 21300000, guid: e43152656e4873d4fa4da7d939ff6d7d, type: 3}
-  - {fileID: 21300000, guid: e43152656e4873d4fa4da7d939ff6d7d, type: 3}
-  - {fileID: 21300000, guid: e43152656e4873d4fa4da7d939ff6d7d, type: 3}
+  - {fileID: 21300000, guid: ea548435bf0d0094ca4894ef70514aa6, type: 3}
+  - {fileID: 21300000, guid: 3bfcc303ac3855748bcdfa76029d7738, type: 3}
+  - {fileID: 21300000, guid: 3bfcc303ac3855748bcdfa76029d7738, type: 3}
+  - {fileID: 21300000, guid: 3bfcc303ac3855748bcdfa76029d7738, type: 3}
+  playerChose: 0
+  dialogueSet: 0
 --- !u!4 &1375876013
 Transform:
   m_ObjectHideFlags: 0
@@ -4351,6 +4375,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1375876012}
         m_TargetAssemblyTypeName: CoreMechanic, Assembly-CSharp
         m_MethodName: removeAllListners
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1375876012}
+        m_TargetAssemblyTypeName: CoreMechanic, Assembly-CSharp
+        m_MethodName: optionSelected
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -18,8 +18,10 @@ public class DialogueSystem : MonoBehaviour
     *8 = disgust
     *9 = surpirse
     */
-    string [] dialogue;
+    string[] dialogue;
     int index;
+    int day;
+
 
     public TextMeshProUGUI dialogueBox;
     public Image profilePic;
@@ -30,39 +32,49 @@ public class DialogueSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        dialogueBox.text = "Hello There!";
-        index = 0;
         pfpIndex = 0;
+        day = coreMechanic.getDay();
     }
 
     // Update is called once per frame
     void Update()
     {
         setCharacter(charIndex, pfpIndex);
-        if (Input.GetKeyDown(KeyCode.Space) && (coreMechanic.getCurrentTime() == "Dialogue" || coreMechanic.getCurrentTime() == "EventDialogue" || coreMechanic.getCurrentTime() == "EventEnd"))
+
+        //Debug.Log(index + " " + dialogue.Length);
+        Debug.Log(dialogue[index]);
+
+        if ((Input.GetKeyDown(KeyCode.Space) || coreMechanic.playerChose) && coreMechanic.getCurrentTime() == "Dialogue" && coreMechanic.dialogueSet)
         {
-            getCharacter(dialogue[index]);
             setDialogue(dialogue[index]);
             index++;
 
-            if (index == dialogue.Length && coreMechanic.getCurrentTime() == "Dialogue")
+            if (index == dialogue.Length)
             {
                 coreMechanic.progressDay();
                 coreMechanic.nextDialogue();
                 index = 0;
+                coreMechanic.dialogueSet = false;
             }
 
-            else if (index == dialogue.Length && (coreMechanic.getCurrentTime() == "EventDialogue" || coreMechanic.getCurrentTime() == "EventEnd"))
+            if (coreMechanic.playerChose)
             {
-                coreMechanic.progressDay();
-                index = 0;
+                coreMechanic.playerChose = false;
             }
-        }      
+        }
+
+        
+
     }
 
     void setDialogue(string text)
     {
-        text = text.Remove(0, 2);
+        getCharacter(text);
+
+        if (text != null || text != "")
+        {
+            text = text.Remove(0, 2);
+        }
         dialogueBox.text = text;
     }
 
@@ -73,12 +85,12 @@ public class DialogueSystem : MonoBehaviour
 
     void setCharacter(int character, int pfp)
     {
-        if(character == 0)
+        if (character == 0)
         {
             profilePic.sprite = coreMechanic.victoria[pfp];
         }
 
-        if(character == 1)
+        if (character == 1)
         {
             profilePic.sprite = coreMechanic.ashley[pfp];
         }

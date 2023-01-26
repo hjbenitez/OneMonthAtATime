@@ -32,7 +32,7 @@ public class CoreMechanic : MonoBehaviour
 
     //toying with variables
     bool buttonsSet = false; //ensures the buttons are set only once
-    int day = 1;
+    public int day = 1;
     bool daySet = false;
     List<string> schedule;
     List<string[]> conversations;
@@ -51,7 +51,8 @@ public class CoreMechanic : MonoBehaviour
 
     Events events;
     Event chosenEvent;
-    int eventEnd;
+    public bool playerChose = false;
+    public bool dialogueSet = false;
 
     // Start is called before the first frame update
     void Start()
@@ -60,7 +61,7 @@ public class CoreMechanic : MonoBehaviour
         moneyValue = float.Parse(money.text);
         mentalHealthValue = float.Parse(mentalHealth.text);
         academicsValue = float.Parse(academics.text);
-        day = 1;
+        //day = 1;
 
         conversations = new List<string[]>();
         events = new Events();
@@ -68,8 +69,7 @@ public class CoreMechanic : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        Debug.Log(scheduleIndex);
+    {           
         //Updates the UI text to reflect the values every frame
         money.text = moneyValue.ToString();
         mentalHealth.text = mentalHealthValue.ToString();
@@ -86,20 +86,37 @@ public class CoreMechanic : MonoBehaviour
             {
                 //DAY 1
                 case 1:
-                    schedule = new string[8] {"Dialogue", "Start", "School", "Event", "Dialogue", "Work", "Dialogue", "End" }.ToList();
+                    schedule = new string[] {"Dialogue", "School", "Dialogue", "Work", "EventWork", "Dialogue", "End" }.ToList();
 
                     Day1 day1 = new Day1();
                     conversations = day1.getDialogue();
                     daySet = true;
                     scheduleIndex = 0;
                     dialogueIndex = 0;
-                    break; 
-                    // DAY 1 END ------------------------------------------------------
+                    break;
+                // DAY 1 END ------------------------------------------------------
+
+                case 2:
+                    schedule = new string[] {"Dialogue", "School", "EventSchool", "Dialogue", "Freetime", "School", "Dialogue", "End"}.ToList();
+                    Day2 day2 = new Day2();
+                    conversations = day2.getDialogue();
+                    daySet = true;
+                    energy += 0.5f;
+                    scheduleIndex = 0;
+                    dialogueIndex = 0;
+                    break;
+
+                case 3:
+                    Debug.Log("LOL");
+                    break;
+
             }
         }
 
         else
         {
+            Debug.Log("Event: " + getCurrentTime() + " Dialogue: " + dialogueIndex + conversations.Count);
+
             if (schedule[scheduleIndex] == "Start" && !buttonsSet)
             {
                 setButtonVisibility(true, false, false);
@@ -132,31 +149,62 @@ public class CoreMechanic : MonoBehaviour
             {
                 setButtonVisibility(false, false, false);
                 dialogueSystem.getDialogue(conversations[dialogueIndex]);
+                dialogueSet = true;
             }
 
-            else if (schedule[scheduleIndex] == "Event")
+            else if(schedule[scheduleIndex] == "Freetime" && !buttonsSet)
+            {
+                setButtonVisibility(true, true, true);
+                setFreetimeButtons("Go to Work", "Go home and study with Olivia", "Go home and play the new game");
+                buttonsSet = true;
+            }
+
+            //WORK EVENTS --------------------------------------------------
+            else if (schedule[scheduleIndex] == "EventWork")
             {
                 chosenEvent = events.getEvent(1);
 
                 if(chosenEvent.options)
                 {
-                    schedule.Insert(scheduleIndex + 1, "EventEnd");
+                    schedule.Insert(scheduleIndex + 1, "Dialogue");
                     schedule.Insert(scheduleIndex + 1, "EventChoice");
-                    schedule.Insert(scheduleIndex + 1, "EventDialogue");
+
+                    schedule.Insert(scheduleIndex + 1, "Dialogue");
+                    conversations.Insert(dialogueIndex, chosenEvent.dialogue);
                     progressDay();
                 }
 
                 else
                 {
-                    schedule.Insert(scheduleIndex + 1, "EventDialogue");
+                    schedule.Insert(scheduleIndex + 1, "Dialogue");
+                    conversations.Insert(dialogueIndex, chosenEvent.dialogue);
                     progressDay();
                 }
 
             }
 
-            else if (schedule[scheduleIndex] == "EventEnd")
+            //SCHOOL EVENTS ------------------------------------------------------------
+            else if (schedule[scheduleIndex] == "EventSchool")
             {
-                setButtonVisibility(false, false, false);
+                chosenEvent = events.getEvent(0);
+
+                if (chosenEvent.options)
+                {
+                    schedule.Insert(scheduleIndex + 1, "Dialogue"); //after event
+                    schedule.Insert(scheduleIndex + 1, "EventChoice"); //event
+
+                    schedule.Insert(scheduleIndex+1, "Dialogue"); //before even
+                    conversations.Insert(dialogueIndex, chosenEvent.dialogue);
+                    progressDay();
+                }
+
+                else
+                {
+                    schedule.Insert(scheduleIndex + 1, "Dialogue");
+                    conversations.Insert(dialogueIndex, chosenEvent.dialogue);
+                    progressDay();
+                }
+
             }
 
             else if (schedule[scheduleIndex] == "EventChoice" && !buttonsSet)
@@ -164,12 +212,6 @@ public class CoreMechanic : MonoBehaviour
                 setButtonVisibility(true, true, true);
                 setEventButtons(chosenEvent.option1, chosenEvent.option2, chosenEvent.option3);
                 buttonsSet = true;
-            }
-
-            else if (schedule[scheduleIndex] == "EventDialogue")
-            {
-                setButtonVisibility(false, false, false);
-                dialogueSystem.getDialogue(chosenEvent.dialogue); 
             }
         }
     }
@@ -180,7 +222,7 @@ public class CoreMechanic : MonoBehaviour
             mentalHealthValue += op1.valueMentalHealth;
             moneyValue += op1.valueMoney;
             academicsValue += op1.valueAcademic;
-            dialogueSystem.getDialogue(op1.response);
+            conversations.Insert(dialogueIndex, op1.response);
             progressDay();
         });
 
@@ -188,7 +230,7 @@ public class CoreMechanic : MonoBehaviour
             mentalHealthValue += op2.valueMentalHealth;
             moneyValue += op2.valueMoney;
             academicsValue += op2.valueAcademic;
-            dialogueSystem.getDialogue(op2.response);
+            conversations.Insert(dialogueIndex, op2.response);
             progressDay();
         });
 
@@ -196,13 +238,24 @@ public class CoreMechanic : MonoBehaviour
             mentalHealthValue += op3.valueMentalHealth;
             moneyValue += op3.valueMoney;
             academicsValue += op3.valueAcademic;
-            dialogueSystem.getDialogue(op3.response);
+            conversations.Insert(dialogueIndex, op3.response);
             progressDay();
         });
 
         option1.GetComponentInChildren<TextMeshProUGUI>().SetText(op1.optionText);
-        option3.GetComponentInChildren<TextMeshProUGUI>().SetText(op2.optionText);
-        option2.GetComponentInChildren<TextMeshProUGUI>().SetText(op3.optionText);
+        option2.GetComponentInChildren<TextMeshProUGUI>().SetText(op2.optionText);
+        option3.GetComponentInChildren<TextMeshProUGUI>().SetText(op3.optionText);
+    }
+
+    void setFreetimeButtons(string op1, string op2, string op3)
+    {
+        option1.onClick.AddListener(goToWork);
+        option2.onClick.AddListener(studyWithOlivia);
+        option3.onClick.AddListener(playGames);
+
+        option1.GetComponentInChildren<TextMeshProUGUI>().SetText(op1);
+        option2.GetComponentInChildren<TextMeshProUGUI>().SetText(op2);
+        option3.GetComponentInChildren<TextMeshProUGUI>().SetText(op3);
     }
 
     public void progressDay()
@@ -235,8 +288,33 @@ public class CoreMechanic : MonoBehaviour
     }
 
     //changes the region to school
-    void goToSchool()
+    void studyWithOlivia()
     {
+        setValues(0f, 0, 0.05f, 0f);
+        schedule.Insert(scheduleIndex + 1, "Dialogue");
+        conversations.Insert(dialogueIndex, new Day2().getStudyDialogue(0));
+        scheduleIndex++;
+    }
+
+    void playGames()
+    {
+        setValues(0f, 10f, 0f, 0.25f);
+
+        schedule.Insert(scheduleIndex + 1, "Dialogue");
+        conversations.Insert(dialogueIndex, new Day2().getGameDialogue(0));
+        scheduleIndex++;
+    }
+
+    void goToWork()
+    {
+        schedule.Insert(scheduleIndex + 1, "Dialogue"); //dialogue after work
+        conversations.Insert(dialogueIndex, new Day2().getWorkDialogue(1));
+
+        schedule.Insert(scheduleIndex + 1, "Work"); //working
+
+        schedule.Insert(scheduleIndex + 1, "Dialogue"); //dialogue before work       
+        conversations.Insert(dialogueIndex, new Day2().getWorkDialogue(0));
+
         scheduleIndex++;
     }
 
@@ -373,14 +451,29 @@ public class CoreMechanic : MonoBehaviour
 
     public void sleep()
     {
-        Application.Quit();
+        daySet = false;
+        day++;
     }
 
     public void setStartButton()
     {
-        option1.onClick.AddListener(goToSchool);
+        //option1.onClick.AddListener(goToSchool);
 
-        option1.GetComponentInChildren<TextMeshProUGUI>().SetText("Go to School");
+        //option1.GetComponentInChildren<TextMeshProUGUI>().SetText("Go to School");
     }
 
+    public void optionSelected()
+    {
+        playerChose = true;
+    }
+
+    public string nextEvent()
+    {
+        return schedule[scheduleIndex + 1];
+    }
+
+    public int getDay()
+    {
+        return day;
+    }
 }
