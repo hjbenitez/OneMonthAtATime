@@ -41,9 +41,6 @@ public class DialogueSystem : MonoBehaviour
     {
         setCharacter(charIndex, pfpIndex);
 
-        //Debug.Log(index + " " + dialogue.Length);
-        Debug.Log(dialogue[index]);
-
         if ((Input.GetKeyDown(KeyCode.Space) || coreMechanic.playerChose) && coreMechanic.getCurrentTime() == "Dialogue" && coreMechanic.dialogueSet)
         {
             setDialogue(dialogue[index]);
