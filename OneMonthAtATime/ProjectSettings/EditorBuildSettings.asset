@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 8c5f52445320fd3469df73a87ffa9d10
+  - enabled: 1
+    path: Assets/Scenes/HousingSelection.unity
+    guid: e3f7cd791ffe8954b9f286e716150034
+  - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: edcd7b3976edd594280a59f17b9d533f
   m_configObjects: {}
