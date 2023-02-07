@@ -857,12 +857,12 @@ GameObject:
   - component: {fileID: 332997828}
   - component: {fileID: 332997827}
   m_Layer: 5
-  m_Name: Image
+  m_Name: NPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &332997826
 RectTransform:
   m_ObjectHideFlags: 0
@@ -903,7 +903,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 46f3495ed48416441bd91f0807fef91a, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2462,9 +2462,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c0dbd053703603f438093411d0f61261, type: 3}
   ashley:
   - {fileID: 21300000, guid: ea548435bf0d0094ca4894ef70514aa6, type: 3}
+  - {fileID: 21300000, guid: 46f3495ed48416441bd91f0807fef91a, type: 3}
   - {fileID: 21300000, guid: 3bfcc303ac3855748bcdfa76029d7738, type: 3}
-  - {fileID: 21300000, guid: 3bfcc303ac3855748bcdfa76029d7738, type: 3}
-  - {fileID: 21300000, guid: 3bfcc303ac3855748bcdfa76029d7738, type: 3}
+  - {fileID: 21300000, guid: 46f3495ed48416441bd91f0807fef91a, type: 3}
   playerChose: 0
   dialogueSet: 0
 --- !u!4 &1375876013
@@ -2495,7 +2495,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueBox: {fileID: 730863982}
-  profilePic: {fileID: 2022474821}
+  speakerName: {fileID: 625874271}
+  victoriaPic: {fileID: 2022474821}
+  npcPic: {fileID: 332997827}
   coreMechanic: {fileID: 1375876012}
   dialoguePrompt: {fileID: 1027637252}
 --- !u!1 &1393064209

@@ -19,7 +19,7 @@ public class Day1
         dialogue.Add(new string[] { "02Hey Ashley, sorry I'm late. I had to deal with my impatient landlord. You having a good week?", "12Eh, it's been alright. I’ve been getting as many hours as I can but I’m getting pretty tired already. Dealing with people everyday gives you great social skills, but man does it ever drain your battery.",
         "03Ever consider getting another position that is less taxing? Knowing you, adapting to pretty much anything will be a breeze.", "04Really wish I could, but I have done the calculations and the hours I get here plus the amount of money in tips I am making really makes a difference compared to other jobs around here.",
         "13I also have to stay close. Bussing from my place to here and back is already costly enough, and I live close!", "13Anyways, you know I’m just here until I can save up enough for a 2 year program. As soon as I reach that magic number, I’m getting the hell outta this place!",
-        "13We gotta prep for the dinner rush. Let’s talk more later."});
+        "13We gotta prep for the dinner rush. Let’s talk more later.", "01I should probably start working as well."});
 
         dialogue.Add(new string[] {"06All in all, a pretty tame day minus the ridiculous customer that came in. Tomorrow I have some free time, so I guess I’ll choose what to do based on how the day goes. " });
     }

@@ -108,9 +108,7 @@ public class CoreMechanic : MonoBehaviour
           }
 
           else
-          {
-               Debug.Log("Event: " + getCurrentTime() + " Dialogue: " + dialogueIndex + conversations.Count);
-
+          {           
                if (schedule[scheduleIndex] == "Start" && !buttonsSet)
                {
                     setButtonVisibility(true, false, false);

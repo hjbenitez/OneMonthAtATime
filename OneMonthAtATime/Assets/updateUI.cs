@@ -42,11 +42,6 @@ public class updateUI : MonoBehaviour
           //Update the date as the game progress
           date.SetText("Nov " + coreMechanic.getDay() + ", 2023");
 
-          foreach (int key in keyTracker)
-          {
-               Debug.Log(key);
-          }
-
           //Update important information
           getNextImportantDate();
      }
