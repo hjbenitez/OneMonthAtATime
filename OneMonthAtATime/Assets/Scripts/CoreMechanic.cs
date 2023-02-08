@@ -40,15 +40,10 @@ public class CoreMechanic : MonoBehaviour
      float energy = 1f;
      HousingSelection house;
 
-     float takeNotesEnergy = -0.6f;
-     float payAttentionEnergy = -0.1f;
-     float workAsUsualEnergy = -0.2f;
-     float workHardEnergy = -0.6f;
 
      public Sprite[] victoria;
      public Sprite[] ashley;
 
-     Events events;
      Event chosenEvent;
      public bool playerChose = false;
      public bool dialogueSet = false;
@@ -66,10 +61,9 @@ public class CoreMechanic : MonoBehaviour
           moneyValue = 500;
           academicsValue = 3.0f;
           mentalHealthValue = 80f;
-          //day = 1;
+          day = 1;
 
           conversations = new List<string[]>();
-          events = new Events();
           house = GetComponent<HousingSelection>();
 
           eventIndex = 0;
@@ -93,11 +87,14 @@ public class CoreMechanic : MonoBehaviour
                {
                     //DAY 1
                     case 1:
-                         schedule = new string[] { "Dialogue", "School", "Dialogue", "Work", "EventWork", "Dialogue", "End" }.ToList();
-
                          Day1 day1 = new Day1();
+
+                         schedule = day1.getSchedule().ToList(); ;
                          conversations = day1.getDialogue();
+                         newEvents = day1.getEvents();
+
                          daySet = true;
+                         energy += 0.5f;
                          scheduleIndex = 0;
                          dialogueIndex = 0;
                          break;
@@ -122,7 +119,6 @@ public class CoreMechanic : MonoBehaviour
                          schedule = day3.getSchedule().ToList();
                          conversations = day3.getDialogue();
                          newEvents = day3.getEvents();
-                         freetime = day3.getFreetime();
 
                          daySet = true;
                          energy += 0.5f;
@@ -136,40 +132,20 @@ public class CoreMechanic : MonoBehaviour
           else
           {
 
-               if(schedule[scheduleIndex] == "Event")
+               if (schedule[scheduleIndex] == "Event" && !buttonsSet)
                {
-                    chosenEvent = newEvents[eventIndex] ;
-
-                    if (chosenEvent.options)
-                    {
-                         schedule.Insert(scheduleIndex + 1, "Dialogue"); //after event
-                         schedule.Insert(scheduleIndex + 1, "EventChoice"); //event
-
-                         schedule.Insert(scheduleIndex + 1, "Dialogue"); //before even
-                         conversations.Insert(dialogueIndex, chosenEvent.dialogue);
-
-                         progressDay();
-                         eventIndex++;
-                    }
-
-                    else
-                    {
-                         schedule.Insert(scheduleIndex + 1, "Dialogue");
-                         conversations.Insert(dialogueIndex, chosenEvent.dialogue);
-                         progressDay();
-                    }
-               }
-
-               if(schedule[scheduleIndex] == "newFreetime")
-               {
-                    chosenEvent = freetime;
+                    chosenEvent = newEvents[eventIndex];
 
                     schedule.Insert(scheduleIndex + 1, "Dialogue"); //after event
-                    schedule.Insert(scheduleIndex + 1, "EventChoice"); //event
 
-                    schedule.Insert(scheduleIndex + 1, "Dialogue"); //before even
-                    conversations.Insert(dialogueIndex, chosenEvent.dialogue);
+                    setButtonVisibility(true, true, true);
+                    setEventButtons(chosenEvent.option1, chosenEvent.option2, chosenEvent.option3);
+                    buttonsSet = true;
+               }
 
+               if (schedule[scheduleIndex] == "newFreetime")
+               {
+                    schedule.Insert(scheduleIndex + 1, "Event"); //event
                     progressDay();
                }
 
@@ -180,18 +156,16 @@ public class CoreMechanic : MonoBehaviour
                     buttonsSet = true;
                }
 
-               else if (schedule[scheduleIndex] == "School" && !buttonsSet)
+               else if (schedule[scheduleIndex] == "School")
                {
-                    setButtonVisibility(true, true, true);
-                    setSchoolButtons();
-                    buttonsSet = true;
+                    schedule.Insert(scheduleIndex + 1, "Event"); //event
+                    progressDay();
                }
 
-               else if (schedule[scheduleIndex] == "Work" && !buttonsSet)
+               else if (schedule[scheduleIndex] == "Work")
                {
-                    setButtonVisibility(true, true, true);
-                    setWorkButtons();
-                    buttonsSet = true;
+                    schedule.Insert(scheduleIndex + 1, "Event"); //event
+                    progressDay();
                }
 
                else if (schedule[scheduleIndex] == "End" && !buttonsSet)
@@ -214,92 +188,61 @@ public class CoreMechanic : MonoBehaviour
                     setFreetimeButtons("Go to Work", "Go home and study with Olivia", "Go home and play the new game");
                     buttonsSet = true;
                }
-
-               //WORK EVENTS --------------------------------------------------
-               else if (schedule[scheduleIndex] == "EventWork")
-               {
-                    chosenEvent = events.getEvent(1);
-
-                    if (chosenEvent.options)
-                    {
-                         schedule.Insert(scheduleIndex + 1, "Dialogue");
-                         schedule.Insert(scheduleIndex + 1, "EventChoice");
-
-                         schedule.Insert(scheduleIndex + 1, "Dialogue");
-                         conversations.Insert(dialogueIndex, chosenEvent.dialogue);
-                         progressDay();
-                    }
-
-                    else
-                    {
-                         schedule.Insert(scheduleIndex + 1, "Dialogue");
-                         conversations.Insert(dialogueIndex, chosenEvent.dialogue);
-                         progressDay();
-                    }
-
-               }
-
-               //SCHOOL EVENTS ------------------------------------------------------------
-               else if (schedule[scheduleIndex] == "EventSchool")
-               {
-                    chosenEvent = events.getEvent(0);
-
-                    if (chosenEvent.options)
-                    {
-                         schedule.Insert(scheduleIndex + 1, "Dialogue"); //after event
-                         schedule.Insert(scheduleIndex + 1, "EventChoice"); //event
-
-                         schedule.Insert(scheduleIndex + 1, "Dialogue"); //before even
-                         conversations.Insert(dialogueIndex, chosenEvent.dialogue);
-                         progressDay();
-                    }
-
-                    else
-                    {
-                         schedule.Insert(scheduleIndex + 1, "Dialogue");
-                         conversations.Insert(dialogueIndex, chosenEvent.dialogue);
-                         progressDay();
-                    }
-
-               }
-
-               else if (schedule[scheduleIndex] == "EventChoice" && !buttonsSet)
-               {
-                    setButtonVisibility(true, true, true);
-                    setEventButtons(chosenEvent.option1, chosenEvent.option2, chosenEvent.option3);
-                    buttonsSet = true;
-               }
           }
      }
 
      public void setEventButtons(Option op1, Option op2, Option op3)
      {
-          option1.onClick.AddListener(() =>
+          if ((Mathf.Sign(op1.energy) == -1 && energy >= Mathf.Abs(op1.energy)) || Mathf.Sign(op1.energy) == 1)
           {
-               mentalHealthValue += op1.valueMentalHealth;
-               moneyValue += op1.valueMoney;
-               academicsValue += op1.valueAcademic;
-               conversations.Insert(dialogueIndex, op1.response);
-               progressDay();
-          });
+               option1.onClick.AddListener(() =>
+               {
+                    setValues(op1.valueMoney, op1.valueMentalHealth, op1.valueAcademic, op1.energy);
 
-          option2.onClick.AddListener(() =>
-          {
-               mentalHealthValue += op2.valueMentalHealth;
-               moneyValue += op2.valueMoney;
-               academicsValue += op2.valueAcademic;
-               conversations.Insert(dialogueIndex, op2.response);
-               progressDay();
-          });
+                    conversations.Insert(dialogueIndex, op1.response);
+                    progressDay();
+                    eventIndex++;
+               });
+          }
 
-          option3.onClick.AddListener(() =>
+          else
           {
-               mentalHealthValue += op3.valueMentalHealth;
-               moneyValue += op3.valueMoney;
-               academicsValue += op3.valueAcademic;
-               conversations.Insert(dialogueIndex, op3.response);
-               progressDay();
-          });
+               option1.interactable = false;
+          }
+
+          if ((Mathf.Sign(op2.energy) == -1 && energy >= Mathf.Abs(op2.energy)) || Mathf.Sign(op2.energy) == 1)
+          {
+               option2.onClick.AddListener(() =>
+               {
+                    setValues(op2.valueMoney, op2.valueMentalHealth, op2.valueAcademic, op2.energy);
+
+                    conversations.Insert(dialogueIndex, op2.response);
+                    progressDay();
+                    eventIndex++;
+               });
+          }
+
+          else
+          {
+               option2.interactable = false;
+          }
+
+          if ((Mathf.Sign(op3.energy) == -1 && energy >= Mathf.Abs(op3.energy)) || Mathf.Sign(op3.energy) == 1)
+          {
+               option3.onClick.AddListener(() =>
+               {
+                    setValues(op3.valueMoney, op3.valueMentalHealth, op3.valueAcademic, op3.energy);
+
+                    conversations.Insert(dialogueIndex, op3.response);
+                    progressDay();
+                    eventIndex++;
+               });
+          }
+
+          else
+          {
+               option3.interactable = false;
+          }
 
           option1.GetComponentInChildren<TextMeshProUGUI>().SetText(op1.optionText);
           option2.GetComponentInChildren<TextMeshProUGUI>().SetText(op2.optionText);
@@ -390,12 +333,12 @@ public class CoreMechanic : MonoBehaviour
           buttonsSet = false;
      }
 
-     public void setValues(float money, float mentalHealth, float academics, float energyUse)
+     public void setValues(float money, float mentalHealth, float academics, float energy)
      {
           moneyValue += money;
           mentalHealthValue += mentalHealth;
           academicsValue += academics;
-          energy += energyUse;
+          energy += energy;
      }
 
      public void setButtonVisibility(bool but1, bool but2, bool but3)
@@ -403,102 +346,6 @@ public class CoreMechanic : MonoBehaviour
           option1.gameObject.SetActive(but1);
           option2.gameObject.SetActive(but2);
           option3.gameObject.SetActive(but3);
-     }
-
-     //School Methods -----------------------------------------------------------
-     public void setSchoolButtons()
-     {
-          option1.onClick.AddListener(SlackOff);
-
-          if (energy > Mathf.Abs(payAttentionEnergy))
-          {
-               option2.onClick.AddListener(PayAttention);
-          }
-
-          else
-          {
-               option2.interactable = false;
-          }
-
-          if (energy > Mathf.Abs(takeNotesEnergy))
-          {
-               option3.onClick.AddListener(TakeNotes);
-          }
-
-          else
-          {
-               option3.interactable = false;
-          }
-
-          option1.GetComponentInChildren<TextMeshProUGUI>().SetText("Slack Off");
-          option3.GetComponentInChildren<TextMeshProUGUI>().SetText("Take Notes");
-          option2.GetComponentInChildren<TextMeshProUGUI>().SetText("Pay Attention");
-     }
-     //EDIT THESE VALUES
-     public void PayAttention()
-     {
-          setValues(0, -2, 0.02f, payAttentionEnergy);
-          progressDay();
-     }
-
-     public void SlackOff()
-     {
-          setValues(0, 4, 0.04f, 0f);
-          progressDay();
-     }
-
-     public void TakeNotes()
-     {
-          setValues(0, -6, 0.1f, takeNotesEnergy);
-          progressDay();
-     }
-
-     //Work Methods -------------------------------------------------------------
-     public void setWorkButtons()
-     {
-          option1.onClick.AddListener(TakeItEasy);
-
-          if (energy > Mathf.Abs(workAsUsualEnergy))
-          {
-               option2.onClick.AddListener(WorkAsUsual);
-          }
-
-          else
-          {
-               option2.interactable = false;
-          }
-
-          if (energy > Mathf.Abs(workHardEnergy))
-          {
-               option3.onClick.AddListener(WorkHard);
-          }
-
-          else
-          {
-               option3.interactable = false;
-          }
-
-          option1.GetComponentInChildren<TextMeshProUGUI>().SetText("Take it Easy");
-          option2.GetComponentInChildren<TextMeshProUGUI>().SetText("Business as Usual");
-          option3.GetComponentInChildren<TextMeshProUGUI>().SetText("Work Hard");
-     }
-     //EDIT THESE VALUES
-     public void WorkAsUsual()
-     {
-          setValues(200, -5, 0, workAsUsualEnergy);
-          progressDay();
-     }
-
-     public void TakeItEasy()
-     {
-          setValues(120, 5, 0, 0);
-          progressDay();
-     }
-
-     public void WorkHard()
-     {
-          setValues(350, -15, 0, workHardEnergy);
-          progressDay();
      }
 
      public void setSleepButton()
