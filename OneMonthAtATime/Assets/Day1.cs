@@ -14,7 +14,7 @@ public class Day1
      {
           dialogue = new List<string[]>();
           events = new List<Event>();
-          schedule = new string[] { "Dialogue", "Event", "Dialogue", "Event", "Event", "Dialogue", "End" };
+          schedule = new string[] { "Dialogue", "School", "Dialogue", "Work", "Dialogue", "Dialogue", "End" };
 
           //Opening Dialogue about the playtest
           dialogue.Add(new string[] { "02Welcome fellow playtesters to One Month at a Time, a game where you get to play as me who is a struggling student trying to make ends meet one month at a time.",

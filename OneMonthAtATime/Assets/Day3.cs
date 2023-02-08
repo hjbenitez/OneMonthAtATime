@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Day3
 {
-     
-
      List<string[]> dialogue;
      List<Event> events;
 
