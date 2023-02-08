@@ -53,6 +53,12 @@ public class CoreMechanic : MonoBehaviour
      public bool playerChose = false;
      public bool dialogueSet = false;
 
+     //day3 testing variables
+     List<Event> newEvents;
+     int eventIndex;
+     Day3 day3;
+     Event freetime;
+
      // Start is called before the first frame update
      void Start()
      {
@@ -65,6 +71,8 @@ public class CoreMechanic : MonoBehaviour
           conversations = new List<string[]>();
           events = new Events();
           house = GetComponent<HousingSelection>();
+
+          eventIndex = 0;
      }
 
      // Update is called once per frame
@@ -95,6 +103,7 @@ public class CoreMechanic : MonoBehaviour
                          break;
                     // DAY 1 END ------------------------------------------------------
 
+                    //DAY 2
                     case 2:
                          schedule = new string[] { "Dialogue", "School", "EventSchool", "Dialogue", "Freetime", "School", "Dialogue", "End" }.ToList();
                          Day2 day2 = new Day2();
@@ -104,16 +113,66 @@ public class CoreMechanic : MonoBehaviour
                          scheduleIndex = 0;
                          dialogueIndex = 0;
                          break;
+                    // DAY 2 END ------------------------------------------------------
 
+                    //DAY 3 - TESTING
                     case 3:
-                         Debug.Log("LOL");
-                         break;
+                         day3 = new Day3();
 
+                         schedule = day3.getSchedule().ToList();
+                         conversations = day3.getDialogue();
+                         newEvents = day3.getEvents();
+                         freetime = day3.getFreetime();
+
+                         daySet = true;
+                         energy += 0.5f;
+                         scheduleIndex = 0;
+                         dialogueIndex = 0;
+                         break;
+                         // DAY 3 END ------------------------------------------------------
                }
           }
 
           else
           {
+
+               if(schedule[scheduleIndex] == "Event")
+               {
+                    chosenEvent = newEvents[eventIndex] ;
+
+                    if (chosenEvent.options)
+                    {
+                         schedule.Insert(scheduleIndex + 1, "Dialogue"); //after event
+                         schedule.Insert(scheduleIndex + 1, "EventChoice"); //event
+
+                         schedule.Insert(scheduleIndex + 1, "Dialogue"); //before even
+                         conversations.Insert(dialogueIndex, chosenEvent.dialogue);
+
+                         progressDay();
+                         eventIndex++;
+                    }
+
+                    else
+                    {
+                         schedule.Insert(scheduleIndex + 1, "Dialogue");
+                         conversations.Insert(dialogueIndex, chosenEvent.dialogue);
+                         progressDay();
+                    }
+               }
+
+               if(schedule[scheduleIndex] == "newFreetime")
+               {
+                    chosenEvent = freetime;
+
+                    schedule.Insert(scheduleIndex + 1, "Dialogue"); //after event
+                    schedule.Insert(scheduleIndex + 1, "EventChoice"); //event
+
+                    schedule.Insert(scheduleIndex + 1, "Dialogue"); //before even
+                    conversations.Insert(dialogueIndex, chosenEvent.dialogue);
+
+                    progressDay();
+               }
+
                if (schedule[scheduleIndex] == "Start" && !buttonsSet)
                {
                     setButtonVisibility(true, false, false);

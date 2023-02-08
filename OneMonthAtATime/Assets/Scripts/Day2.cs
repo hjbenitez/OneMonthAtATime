@@ -5,7 +5,10 @@ using UnityEngine;
 public class Day2
 {
     List<string[]> dialogue;
-    List<string[]> workDialogue;
+    string[] schedule;
+
+
+     List<string[]> workDialogue;
     List<string[]> gameDialogue;
     List<string[]> studyDialogue;
 
@@ -38,6 +41,13 @@ public class Day2
     {
         return dialogue;
     }
+
+     public string[] getSchedule()
+     {
+          return schedule;
+     }
+
+ 
 
     public string[] getWorkDialogue(int index)
     {

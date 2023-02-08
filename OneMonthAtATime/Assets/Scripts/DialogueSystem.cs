@@ -70,7 +70,7 @@ public class DialogueSystem : MonoBehaviour
           if ((Input.GetKeyDown(KeyCode.Space) || coreMechanic.playerChose) && coreMechanic.getCurrentTime() == "Dialogue" && coreMechanic.dialogueSet)
           {
                //remove NPC character after conversation
-               if (index > lastNum)
+               if (index >=  lastNum)
                {
                     npcPic.gameObject.SetActive(false);
                }
