@@ -49,9 +49,9 @@ public class Day2 : Day
 
         //Event Freetime
         events.Add(new Event(
-               new Option("Pickup a shift", 0, -2, 0.1f, -0.1f, new string[] { "0 3 00 00 00 I’ve only got half a shift so I doubt I will run into any issues.", "02Shift went by pretty quick and I made some decent money. I call that a pretty productive day. I am getting a little tired though.", "02This class should be pretty entertaining. Afterwards it is straight home and I am hitting the hay." }),
-               new Option("Study with Olivia", 0, -6, 0.1f, -0.5f, new string[] { "0 5 00 00 00 God I hate studying for that class. Always such a snoozefest. I should be in pretty good shape for the next test, though.", "02This class should be pretty entertaining. Afterwards it is straight home and I am hitting the hay." }),
-               new Option("Play that new game", 0, 4, -0.05f, 0f, new string[] { "0 2 00 00 00 Man, that game's narrative is enthralling. It is pretty tough at first but once you get the hang of it, it gets pretty simple. Almost lost track of time and showed up late.", "02This class should be pretty entertaining. Afterwards it is straight home and I am hitting the hay."})));
+               new Option("Pickup a shift", 0, -2, 0.1f, -0.1f, new string[] { "0 3 00 00 00 I’ve only got half a shift so I doubt I will run into any issues.", "0 2 00 00 00 Shift went by pretty quick and I made some decent money. I call that a pretty productive day. I am getting a little tired though.", "0 2 00 00 00 This class should be pretty entertaining. Afterwards it is straight home and I am hitting the hay." }),
+               new Option("Study with Olivia", 0, -6, 0.1f, -0.5f, new string[] { "0 5 00 00 00 God I hate studying for that class. Always such a snoozefest. I should be in pretty good shape for the next test, though.", "0 2 00 00 00 This class should be pretty entertaining. Afterwards it is straight home and I am hitting the hay." }),
+               new Option("Play that new game", 0, 4, -0.05f, 0f, new string[] { "0 2 00 00 00 Man, that game's narrative is enthralling. It is pretty tough at first but once you get the hang of it, it gets pretty simple. Almost lost track of time and showed up late.", "0 2 00 00 00 This class should be pretty entertaining. Afterwards it is straight home and I am hitting the hay." })));
 
         //School Event
         events.Add(new Event(

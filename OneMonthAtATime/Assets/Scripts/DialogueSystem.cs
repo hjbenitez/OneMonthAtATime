@@ -40,6 +40,7 @@ public class DialogueSystem : MonoBehaviour
      *8 = disgust
      *9 = surpirse
      */
+
      Dictionary<int, string> charactersNames;
      int[] npcSlots;
 
@@ -54,17 +55,9 @@ public class DialogueSystem : MonoBehaviour
 
      public CoreMechanic coreMechanic;
      public Image dialoguePrompt;
-
-     int pfpIndex;
-     int charIndex;
-
-     int lastNum;
      // Start is called before the first frame update
      void Start()
      {
-          pfpIndex = 0;
-          lastNum = 0;
-
           npcPics[0].gameObject.SetActive(false);
           npcPics[1].gameObject.SetActive(false);
           npcPics[2].gameObject.SetActive(false);
@@ -84,33 +77,8 @@ public class DialogueSystem : MonoBehaviour
      // Update is called once per frame
      void Update()
      {
-          //setSpeakingCharacter(charIndex, pfpIndex);
-
-          /*find out when the NPC character leaves the conversation
-          if(dialogue != null)
-          {
-               for(int i = 0; i < dialogue.Length; i++)
-               {
-                    int found = int.Parse(dialogue[i].Substring(0, 1));
-
-                    if (found == 1 && i > lastNum)
-                    {
-                         lastNum = i;
-                    }
-               }
-          }
-          */
-
-
           if ((Input.GetKeyDown(KeyCode.Space) || coreMechanic.playerChose) && coreMechanic.getCurrentTime() == "Dialogue" && coreMechanic.dialogueSet)
           {
-               /*remove NPC character after conversation
-               if (index >=  lastNum)
-               {
-                    npcPics[0].gameObject.SetActive(false);
-               }
-               */
-
                setDialogue(dialogue[index]);
                index++;
                dialoguePrompt.gameObject.SetActive(true);
@@ -121,7 +89,6 @@ public class DialogueSystem : MonoBehaviour
                     coreMechanic.progressDay();
                     coreMechanic.nextDialogue();
                     index = 0;
-                    lastNum = 0;
                     coreMechanic.dialogueSet = false;
                     dialoguePrompt.gameObject.SetActive(false);
                }
@@ -139,7 +106,7 @@ public class DialogueSystem : MonoBehaviour
 
           if (text != null || text != "")
           {
-               text = text.Remove(0, 12);
+               text = text.Remove(0, 13);
           }
           dialogueBox.text = text;
      }
@@ -147,41 +114,6 @@ public class DialogueSystem : MonoBehaviour
      public void getDialogue(string[] chain)
      {
           dialogue = chain;
-     }
-
-     void setSpeakingCharacter(int character, int pfp)
-     {
-          if (character == 0)
-          {
-               victoriaPic.sprite = coreMechanic.victoria[pfp];               
-               speakerName.SetText("Victoria");
-
-               victoriaPic.color = Color.white;
-               npcPics[0].color = Color.gray;
-          }
-
-          else if (character == 1)
-          {
-               npcPics[0].sprite = coreMechanic.ashley[pfp];
-               speakerName.SetText("Ashley");
-               npcPics[0].gameObject.SetActive(true);
-
-               victoriaPic.color = Color.gray;
-               npcPics[0].color = Color.white;
-          }
-
-          else
-          {
-               speakerName.SetText("One Off");
-               victoriaPic.color = Color.gray;
-               npcPics[0].color = Color.gray;
-          }
-     }
-
-     void getCharacter(string dialogue)
-     {
-          charIndex = int.Parse(dialogue.Substring(0, 1));
-          pfpIndex = int.Parse(dialogue.Substring(1, 1));
      }
 
      void setCharacters(string dialogue)

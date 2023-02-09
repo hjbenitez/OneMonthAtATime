@@ -40,7 +40,7 @@ public class CoreMechanic : MonoBehaviour
      float energy = 1f;
      HousingSelection house;
 
-     [Header ("Characters")]
+     [Header("Characters")]
      public Sprite[] victoria; //1
      public Sprite[] ashley;   //2
      public Sprite[] jackson;  //3 
@@ -177,16 +177,11 @@ public class CoreMechanic : MonoBehaviour
                     buttonsSet = true;
                }
 
-               else if (schedule[scheduleIndex] == "School")
+               else if (schedule[scheduleIndex] == "Dialogue")
                {
-                    schedule.Insert(scheduleIndex + 1, "Event"); //event
-                    progressDay();
-               }
-
-               else if (schedule[scheduleIndex] == "Work")
-               {
-                    schedule.Insert(scheduleIndex + 1, "Event"); //event
-                    progressDay();
+                    setButtonVisibility(false, false, false);
+                    dialogueSystem.getDialogue(conversations[dialogueIndex]);
+                    dialogueSet = true;
                }
 
                else if (schedule[scheduleIndex] == "End" && !buttonsSet)
@@ -196,18 +191,13 @@ public class CoreMechanic : MonoBehaviour
                     buttonsSet = true;
                }
 
-               else if (schedule[scheduleIndex] == "Dialogue")
-               {
-                    setButtonVisibility(false, false, false);
-                    dialogueSystem.getDialogue(conversations[dialogueIndex]);
-                    dialogueSet = true;
-               }
-
-               else if (schedule[scheduleIndex] == "Freetime")
+               else
                {
                     schedule.Insert(scheduleIndex + 1, "Event"); //event
                     progressDay();
+
                }
+
           }
      }
 
