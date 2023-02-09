@@ -7,7 +7,6 @@ public class Day2 : Day
     List<string[]> dialogue;
     List<Event> events;
 
-    Event freetime;
     string[] schedule;
 
     public Day2()
@@ -70,10 +69,5 @@ public class Day2 : Day
     public override List<Event> getEvents()
     {
         return events;
-    }
-
-    public override Event getFreetime()
-    {
-        return freetime;
     }
 }

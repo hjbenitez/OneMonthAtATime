@@ -86,52 +86,71 @@ public class CoreMechanic : MonoBehaviour
             {
                 //DAY 1
                 case 1:
-                    Day day1 = new Day1();
-
-                    schedule = day1.getSchedule().ToList(); ;
-                    conversations = day1.getDialogue();
-                    newEvents = day1.getEvents();
-
-                    daySet = true;
-                    energy += 0.5f;
-                    scheduleIndex = 0;
-                    dialogueIndex = 0;
-                    eventIndex = 0;
+                    currentDay = new Day1();
                     break;
-                // DAY 1 END ------------------------------------------------------
-
                 //DAY 2
                 case 2:
-                    Day2 day2 = new Day2();
-
-                    schedule = day2.getSchedule().ToList();
-                    conversations = day2.getDialogue();
-                    newEvents = day2.getEvents();
-
-                    daySet = true;
-                    energy += 0.5f;
-                    scheduleIndex = 0;
-                    dialogueIndex = 0;
-                    eventIndex = 0;
+                    currentDay = new Day2();
                     break;
-                // DAY 2 END ------------------------------------------------------
-
-                //DAY 3 - TESTING
+                //DAY 3
                 case 3:
-                    Day3 day3 = new Day3();
-
-                    schedule = day3.getSchedule().ToList();
-                    conversations = day3.getDialogue();
-                    newEvents = day3.getEvents();
-
-                    daySet = true;
-                    energy += 0.5f;
-                    scheduleIndex = 0;
-                    dialogueIndex = 0;
-                    eventIndex = 0;
+                    currentDay = new Day3();
                     break;
-                // DAY 3 END ------------------------------------------------------
+                //DAY 4
+                case 4:
+                    currentDay = new Day4();
+                    break;
+                //DAY 5
+                case 5:
+                    currentDay = new Day5();
+                    break;
+                //DAY 6
+                case 6:
+                    currentDay = new Day6();
+                    break;
+                //DAY 7
+                case 7:
+                    currentDay = new Day7();
+                    break;
+                //DAY 8
+                case 8:
+                    currentDay = new Day8();
+                    break;
+                //DAY 9
+                case 9:
+                    currentDay = new Day9();
+                    break;
+                //DAY 10
+                case 10:
+                    currentDay = new Day10();
+                    break;
+                //DAY 11
+                case 11:
+                    currentDay = new Day11();
+                    break;
+                //DAY 12
+                case 12:
+                    currentDay = new Day12();
+                    break;
+                //DAY 13
+                case 13:
+                    currentDay = new Day13();
+                    break;
+                //DAY 14
+                case 14:
+                    currentDay = new Day14();
+                    break;
             }
+
+            schedule = currentDay.getSchedule().ToList(); ;
+            conversations = currentDay.getDialogue();
+            newEvents = currentDay.getEvents();
+
+            daySet = true;
+            energy += 0.5f;
+            scheduleIndex = 0;
+            dialogueIndex = 0;
+            eventIndex = 0;
         }
 
         else
