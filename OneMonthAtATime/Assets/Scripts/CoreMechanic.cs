@@ -51,8 +51,7 @@ public class CoreMechanic : MonoBehaviour
     //day3 testing variables
     List<Event> newEvents;
     int eventIndex;
-    Day3 day3;
-    Event freetime;
+    Day currentDay;
 
     // Start is called before the first frame update
     void Start()
@@ -87,7 +86,7 @@ public class CoreMechanic : MonoBehaviour
             {
                 //DAY 1
                 case 1:
-                    Day1 day1 = new Day1();
+                    Day day1 = new Day1();
 
                     schedule = day1.getSchedule().ToList(); ;
                     conversations = day1.getDialogue();
@@ -119,7 +118,7 @@ public class CoreMechanic : MonoBehaviour
 
                 //DAY 3 - TESTING
                 case 3:
-                    day3 = new Day3();
+                    Day3 day3 = new Day3();
 
                     schedule = day3.getSchedule().ToList();
                     conversations = day3.getDialogue();

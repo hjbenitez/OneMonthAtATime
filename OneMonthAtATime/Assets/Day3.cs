@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Day3
+public class Day3 : Day
 {
      List<string[]> dialogue;
      List<Event> events;
@@ -77,22 +77,22 @@ public class Day3
 
      }
 
-     public List<string[]> getDialogue()
+     public override List<string[]> getDialogue()
      {
           return dialogue;
      }
 
-     public string[] getSchedule()
+     public override string[] getSchedule()
      {
           return schedule;
      }
 
-     public List<Event> getEvents()
+     public override List<Event> getEvents()
      {
           return events;
      }
 
-     public Event getFreetime()
+     public override Event getFreetime()
      {
           return freetime;
      }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Day2
+public class Day2 : Day
 {
     List<string[]> dialogue;
     List<Event> events;
@@ -10,20 +10,11 @@ public class Day2
     Event freetime;
     string[] schedule;
 
-
-    List<string[]> workDialogue;
-    List<string[]> gameDialogue;
-    List<string[]> studyDialogue;
-
     public Day2()
     {
         dialogue = new List<string[]>();
         events = new List<Event>();
         schedule = new string[] { "Dialogue", "School", "Dialogue", "Event", "Dialogue", "Freetime", "School", "Dialogue", "End" };
-
-        workDialogue = new List<string[]>();
-        gameDialogue = new List<string[]>();
-        studyDialogue = new List<string[]>();
 
         //Dialogue 1
         dialogue.Add(new string[] {"06Dude, another 10am lecture? I really shouldn’t have spent those extra hours binging that show I love. It’s so hard to turn off when you really get into it though, so I can’t blame myself. ",
@@ -66,22 +57,22 @@ public class Day2
         dialogue.Add(new string[] { "02That’s all we have so far for this playtest folks. Hope you enjoyed playing and please let us know what we could potentially be doing better. This has been One Month at a Time, signing off." });
     }
 
-    public List<string[]> getDialogue()
+    public override List<string[]> getDialogue()
     {
         return dialogue;
     }
 
-    public string[] getSchedule()
+    public override string[] getSchedule()
     {
         return schedule;
     }
 
-    public List<Event> getEvents()
+    public override List<Event> getEvents()
     {
         return events;
     }
 
-    public Event getFreetime()
+    public override Event getFreetime()
     {
         return freetime;
     }

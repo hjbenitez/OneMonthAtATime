@@ -20,8 +20,6 @@ public class DialogueSystem : MonoBehaviour
      */
      string[] dialogue;
      int index;
-     int day;
-
 
      public TextMeshProUGUI dialogueBox;
      public TextMeshProUGUI speakerName;
@@ -40,7 +38,6 @@ public class DialogueSystem : MonoBehaviour
      void Start()
      {
           pfpIndex = 0;
-          day = coreMechanic.getDay();
           npcPic.gameObject.SetActive(false);
 
           lastNum = 0;
