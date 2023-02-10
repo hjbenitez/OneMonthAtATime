@@ -2463,7 +2463,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: fdf30e971ad4b5c43ba274f88840bbc4, type: 3}
   - {fileID: 21300000, guid: 714d82b436b056a4aa3de71b241d35ad, type: 3}
   - {fileID: 21300000, guid: 0def45b2cea982a40b44ccf0fc2c6a9a, type: 3}
-  - {fileID: 21300000, guid: c0dbd053703603f438093411d0f61261, type: 3}
+  - {fileID: 21300000, guid: 5f354ef243f806c4c81c3a4e7bcafa98, type: 3}
   ashley:
   - {fileID: 21300000, guid: ea548435bf0d0094ca4894ef70514aa6, type: 3}
   - {fileID: 21300000, guid: 46f3495ed48416441bd91f0807fef91a, type: 3}
@@ -3856,7 +3856,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 32e80186355b7b448926d177a9d23291, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a95f031515342a045aadf53efe3d903a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
