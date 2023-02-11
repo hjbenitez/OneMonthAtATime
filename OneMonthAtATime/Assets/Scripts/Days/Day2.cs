@@ -13,7 +13,7 @@ public class Day2 : Day
     {
         dialogue = new List<string[]>();
         events = new List<Event>();
-        schedule = new string[] { "Dialogue", "School", "Dialogue", "Event", "Dialogue", "Freetime", "School", "Dialogue", "End" };
+        schedule = new string[] { "1Dialogue", "1School", "1Dialogue", "1Event", "1Dialogue", "1Freetime", "1School", "0Dialogue", "0End" };
 
         //Dialogue 1
         dialogue.Add(new string[] {

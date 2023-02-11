@@ -2473,6 +2473,13 @@ MonoBehaviour:
   olivia: []
   chris: []
   harry: []
+  currentLocation: {fileID: 0}
+  locations:
+  - {fileID: 21300000, guid: 3335ca3360e234540aba433ddbd01a9d, type: 3}
+  - {fileID: 21300000, guid: 740eab71b8296974f868bf4c477455b2, type: 3}
+  - {fileID: 21300000, guid: 3a2ba056933e46444b1ae6fc13ff2ed0, type: 3}
+  - {fileID: 21300000, guid: d8aaa1e012fb43e4ab223f12c08bced5, type: 3}
+  - {fileID: 21300000, guid: 158021d99633ee147afd9dd30900d33a, type: 3}
   playerChose: 0
   dialogueSet: 0
 --- !u!4 &1375876013

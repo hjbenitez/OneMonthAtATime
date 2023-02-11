@@ -17,7 +17,7 @@ public class Day3 : Day
           dialogue = new List<string[]>();
           events = new List<Event>();
 
-          schedule = new string[] { "Dialogue", "Dialogue", "Work", "Dialogue", "Event", "Dialogue", "School", "Dialogue", "Event", "Dialogue", "Freetime", "Dialogue", "Dialogue", "End" };
+          schedule = new string[] { "0Dialogue", "2Dialogue", "2Work", "1Dialogue", "1Event", "1Dialogue", "1School", "3Dialogue", "3Event", "4Dialogue", "0Freetime", "0Dialogue", "0Dialogue", "0End" };
 
           //Dialogue 1
           dialogue.Add(new string[] { "0 0 00 00 00 Hola", "0 1 00 00 00 Soy Victoria", "0 3 00 00 00 Donde esta la bibliotecha?" });

@@ -13,7 +13,7 @@ public class Day1 : Day
      {
           dialogue = new List<string[]>();
           events = new List<Event>();
-          schedule = new string[] { "Dialogue", "School", "Dialogue", "Work", "Dialogue", "Dialogue", "End" };
+          schedule = new string[] { "0Dialogue", "1School", "2Dialogue", "2Work", "2Dialogue", "0Dialogue", "0End" };
 
           //Opening Dialogue about the playtest
           dialogue.Add(new string[] { "0 2 00 00 00 Welcome fellow playtesters to One Month at a Time, a game where you get to play as me who is a struggling student trying to make ends meet one month at a time.",

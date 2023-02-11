@@ -22,6 +22,7 @@ public class CoreMechanic : MonoBehaviour
      public Image healthIcon;
      public Image academicIcon;
 
+
      //values of each resource
      //this is what gets changed in the script that is then referenced by the TextMeshPro
      float moneyValue;
@@ -48,6 +49,20 @@ public class CoreMechanic : MonoBehaviour
      public Sprite[] chris;    //5
      public Sprite[] harry;    //6
 
+     [Header("Locations")]
+     public Image currentLocation;
+     public Sprite[] locations;
+     int locationIndex;
+     bool locationGrabbed;
+
+     /*Location Index
+      * 0 = Home
+      * 1 = School
+      * 2 = Work
+      * 3 = Parent's House
+      * 4 = Grocery Store
+      */
+
      Event chosenEvent;
      public bool playerChose = false;
      public bool dialogueSet = false;
@@ -70,6 +85,7 @@ public class CoreMechanic : MonoBehaviour
           house = GetComponent<HousingSelection>();
 
           eventIndex = 0;
+          locationGrabbed = false;
      }
 
      // Update is called once per frame
@@ -155,15 +171,24 @@ public class CoreMechanic : MonoBehaviour
                scheduleIndex = 0;
                dialogueIndex = 0;
                eventIndex = 0;
+               locationIndex = 0;
           }
 
           else
           {
+               if(!locationGrabbed)
+               {
+                    locationIndex = int.Parse(schedule[scheduleIndex].Substring(0, 1));
+                    currentLocation.sprite = locations[locationIndex];
+                    schedule[scheduleIndex] = schedule[scheduleIndex].Remove(0, 1);
+                    locationGrabbed = true;
+               }
+
                if (schedule[scheduleIndex] == "Event" && !buttonsSet)
                {
                     chosenEvent = newEvents[eventIndex];
 
-                    schedule.Insert(scheduleIndex + 1, "Dialogue"); //after event
+                    schedule.Insert(scheduleIndex + 1, new string(locationIndex + "Dialogue")); //after event
 
                     setButtonVisibility(true, true, true);
                     setEventButtons(chosenEvent.option1, chosenEvent.option2, chosenEvent.option3);
@@ -193,7 +218,7 @@ public class CoreMechanic : MonoBehaviour
 
                else
                {
-                    schedule.Insert(scheduleIndex + 1, "Event"); //event
+                    schedule.Insert(scheduleIndex + 1, new string( locationIndex + "Event")); //event
                     progressDay();
 
                }
@@ -262,6 +287,7 @@ public class CoreMechanic : MonoBehaviour
      public void progressDay()
      {
           scheduleIndex++;
+          locationGrabbed = false;
      }
 
      public void nextDialogue()
