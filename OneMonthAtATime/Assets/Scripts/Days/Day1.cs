@@ -7,6 +7,8 @@ public class Day1 : Day
      List<string[]> dialogue;
      List<Event> events;
 
+     Event work;
+     int hours = 5;
      string[] schedule;
 
      public Day1()
@@ -27,9 +29,9 @@ public class Day1 : Day
 
           //Event - School
           events.Add(new Event(
-               new Option("Pay Attention", 0, -2, 0.1f, -0.1f, new string[] { "0 1 00 00 00 Dark patterns huh?" }),
-               new Option("Take Notes", 0, -6, 0.1f, -0.5f, new string[] { "0 2 00 00 00 Always good to get a head start on the assignment!" }),
-               new Option("Slack Off", 0, 4, -0.05f, 0f, new string[] { "0 4 00 00 00 Man I hope this Nintendo Direct shows Metriod Prime 4" })));
+               new Option("Pay Attention", -5, 0, 0.1f, -0.1f, new string[] { "0 1 00 00 00 Dark patterns huh?" }),
+               new Option("Take Notes", -20, 0, 0.1f, -0.5f, new string[] { "0 2 00 00 00 Always good to get a head start on the assignment!" }),
+               new Option("Slack Off", 10, 0, -0.05f, 0f, new string[] { "0 4 00 00 00 Man I hope this Nintendo Direct shows Metriod Prime 4" })));
 
           //Dialogue with Ashley before Victoria's shift
           dialogue.Add(new string[] { "0 2 00 00 00 Hey Ashley, sorry I'm late. I had to deal with my impatient landlord. You having a good week?",
@@ -41,12 +43,12 @@ public class Day1 : Day
                "1 4 13 00 00 We gotta prep for the dinner rush. Let’s talk more later.",
                "0 1 00 00 00 I should probably start working as well."});
 
-          //Event - Work
-          events.Add(new Event(
-              new Option("Work as Usual", 200, -5, 0, -0.25f, new string[] { "0 2 00 00 00 That table is always nice" }),
-              new Option("Take it Easy", 120, 5, 0, 0, new string[] { "0 2 00 00 00 hmhm hmhm hm hm hmmmmmmm hmhm hmhm hm hm hmmmmmmm" }),
-              new Option("Bust Yo' ASS", 350, -15, 0, -0.6f, new string[] { "0 2 00 00 00 Made a lot of tips so far!" })));
-
+          /*Work
+          work = new Event(
+              new Option("Work as Usual", -5, 5 * 15.5f * 1.25f, 0, -0.25f, new string[] { "0 2 00 00 00 That table is always nice" }),
+              new Option("Take it Easy", 5, 5 * 15.5f, 0, 0, new string[] { "0 2 00 00 00 hmhm hmhm hm hm hmmmmmmm hmhm hmhm hm hm hmmmmmmm" }),
+              new Option("Bust Yo' ASS", -15, 5 * 15.5f * 1.4f, 0, -0.6f, new string[] { "0 2 00 00 00 Made a lot of tips so far!" }));
+          */
           //Event - Rude Customer with Ashley 
           dialogue.Add(
             new string[] {
@@ -96,4 +98,10 @@ public class Day1 : Day
      {
           return events;
      }
+
+     public override int getHours()
+     {
+          return hours;
+     }
+
 }

@@ -26,8 +26,9 @@ public class CoreMechanic : MonoBehaviour
      //values of each resource
      //this is what gets changed in the script that is then referenced by the TextMeshPro
      float moneyValue;
-     float mentalHealthValue;
+     public float mentalHealthValue;
      float academicsValue;
+     float energyValue = 1f;
 
      //toying with variables
      bool buttonsSet = false; //ensures the buttons are set only once
@@ -38,7 +39,6 @@ public class CoreMechanic : MonoBehaviour
      int dialogueIndex;
      int scheduleIndex;
      public DialogueSystem dialogueSystem;
-     float energy = 1f;
      HousingSelection house;
 
      [Header("Characters")]
@@ -67,10 +67,13 @@ public class CoreMechanic : MonoBehaviour
      public bool playerChose = false;
      public bool dialogueSet = false;
 
-     //day3 testing variables
+     //testing variables
      List<Event> newEvents;
      int eventIndex;
+     float wage = 15.5f;
      Day currentDay;
+     public int maxMentalHealth;
+     Dictionary<int, string> scheduleKey;
 
      // Start is called before the first frame update
      void Start()
@@ -78,14 +81,20 @@ public class CoreMechanic : MonoBehaviour
           //grabs the current values of each resource at the start
           moneyValue = 500;
           academicsValue = 3.0f;
-          mentalHealthValue = 80f;
-          day = 1;
+          //mentalHealthValue = 80f;
+          //day = 1;
 
           conversations = new List<string[]>();
           house = GetComponent<HousingSelection>();
 
           eventIndex = 0;
+          maxMentalHealth = 100;
           locationGrabbed = false;
+
+          scheduleKey = new Dictionary<int, string>();
+          scheduleKey.Add(1, "1School");
+          scheduleKey.Add(2, "2Work");
+
      }
 
      // Update is called once per frame
@@ -94,11 +103,12 @@ public class CoreMechanic : MonoBehaviour
           Debug.Log(house.getSelection());
           //Updates the UI text to reflect the values every frame
           money.text = moneyValue.ToString();
-          energyBar.fillAmount = energy;
+          healthIcon.fillAmount = mentalHealthValue / 100f;
+          academicIcon.fillAmount = academicsValue / 4f;
+          energyBar.fillAmount = energyValue;
 
           //makes sure the values don't exceed the max or min values
           checkValues();
-          updateIcons();
 
           if (!daySet)
           {
@@ -166,8 +176,10 @@ public class CoreMechanic : MonoBehaviour
                conversations = currentDay.getDialogue();
                newEvents = currentDay.getEvents();
 
+               //checkDebuffs();
+
                daySet = true;
-               energy += 0.5f;
+               energyValue += 0.5f;
                scheduleIndex = 0;
                dialogueIndex = 0;
                eventIndex = 0;
@@ -176,7 +188,8 @@ public class CoreMechanic : MonoBehaviour
 
           else
           {
-               if(!locationGrabbed)
+               Debug.Log(eventIndex + " " + newEvents.Count);
+               if (!locationGrabbed)
                {
                     locationIndex = int.Parse(schedule[scheduleIndex].Substring(0, 1));
                     currentLocation.sprite = locations[locationIndex];
@@ -192,6 +205,13 @@ public class CoreMechanic : MonoBehaviour
 
                     setButtonVisibility(true, true, true);
                     setEventButtons(chosenEvent.option1, chosenEvent.option2, chosenEvent.option3);
+                    buttonsSet = true;
+               }
+
+               else if (schedule[scheduleIndex] == "Work" && !buttonsSet)
+               {
+                    setButtonVisibility(true, true, true);
+                    setWorkButtons(currentDay.getHours()); ;
                     buttonsSet = true;
                }
 
@@ -218,7 +238,7 @@ public class CoreMechanic : MonoBehaviour
 
                else
                {
-                    schedule.Insert(scheduleIndex + 1, new string( locationIndex + "Event")); //event
+                    schedule.Insert(scheduleIndex + 1, new string(locationIndex + "Event")); //event
                     progressDay();
 
                }
@@ -228,15 +248,114 @@ public class CoreMechanic : MonoBehaviour
 
      public void setEventButtons(Option op1, Option op2, Option op3)
      {
-          if ((Mathf.Sign(op1.energy) == -1 && energy >= Mathf.Abs(op1.energy)) || Mathf.Sign(op1.energy) == 1)
+          if(op1.toEvent == 0 )
+          {
+               if ((Mathf.Sign(op1.energy) == -1 && energyValue >= Mathf.Abs(op1.energy)) || Mathf.Sign(op1.energy) == 1)
+               {
+                    option1.onClick.AddListener(() =>
+                    {
+                         setValues(op1.valueMoney, op1.valueMentalHealth, op1.valueAcademic, op1.energy);
+
+                         conversations.Insert(dialogueIndex, op1.response);
+                         progressDay();
+                         eventIndex++;
+                    });
+               }
+
+               else
+               {
+                    option1.interactable = false;
+               }
+          }
+
+          else
           {
                option1.onClick.AddListener(() =>
                {
-                    setValues(op1.valueMoney, op1.valueMentalHealth, op1.valueAcademic, op1.energy);
-
+                    schedule.Insert(scheduleIndex + 1, scheduleKey[op1.toEvent]);
+                    schedule.Insert(scheduleIndex + 1, locationIndex + "Dialogue");
                     conversations.Insert(dialogueIndex, op1.response);
                     progressDay();
                     eventIndex++;
+               });
+          }
+
+          if(op2.toEvent == 0)
+          {
+               if ((Mathf.Sign(op2.energy) == -1 && energyValue >= Mathf.Abs(op2.energy)) || Mathf.Sign(op2.energy) == 1)
+               {
+                    option2.onClick.AddListener(() =>
+                    {
+                         setValues(op2.valueMoney, op2.valueMentalHealth, op2.valueAcademic, op2.energy);
+
+                         conversations.Insert(dialogueIndex, op2.response);
+                         progressDay();
+                         eventIndex++;
+                    });
+               }
+
+               else
+               {
+                    option2.interactable = false;
+               }
+          }
+
+          else
+          {
+               option2.onClick.AddListener(() =>
+               {
+                    schedule.Insert(scheduleIndex + 1, scheduleKey[op2.toEvent]);
+                    schedule.Insert(scheduleIndex + 1, "Dialogue");
+                    conversations.Insert(dialogueIndex, op2.response);
+                    progressDay();
+                    eventIndex++;
+               });
+          }
+
+          if (op3.toEvent == 0)
+          {
+               if ((Mathf.Sign(op3.energy) == -1 && energyValue >= Mathf.Abs(op3.energy)) || Mathf.Sign(op3.energy) == 1)
+               {
+                    option3.onClick.AddListener(() =>
+                    {
+                         setValues(op3.valueMoney, op3.valueMentalHealth, op3.valueAcademic, op3.energy);
+
+                         conversations.Insert(dialogueIndex, op3.response);
+                         progressDay();
+                         eventIndex++;
+                    });
+               }
+
+               else
+               {
+                    option3.interactable = false;
+               }
+          }
+
+          else
+          {
+               option3.onClick.AddListener(() =>
+               {
+                    schedule.Insert(scheduleIndex + 1, scheduleKey[op3.toEvent]);
+                    conversations.Insert(dialogueIndex, op3.response);
+                    progressDay();
+                    eventIndex++;
+               });
+          }
+
+          option1.GetComponentInChildren<TextMeshProUGUI>().SetText(op1.optionText);
+          option2.GetComponentInChildren<TextMeshProUGUI>().SetText(op2.optionText);
+          option3.GetComponentInChildren<TextMeshProUGUI>().SetText(op3.optionText);
+     }
+     
+     public void setWorkButtons(int hours)
+     {
+          if(energyValue >= 0.25)
+          {
+               option1.onClick.AddListener(() =>
+               {
+                    setValues(Mathf.Round(hours * wage * 1.25f), -10, 0, -0.25f);
+                    progressDay();
                });
           }
 
@@ -245,32 +364,18 @@ public class CoreMechanic : MonoBehaviour
                option1.interactable = false;
           }
 
-          if ((Mathf.Sign(op2.energy) == -1 && energy >= Mathf.Abs(op2.energy)) || Mathf.Sign(op2.energy) == 1)
+          option2.onClick.AddListener(() =>
           {
-               option2.onClick.AddListener(() =>
-               {
-                    setValues(op2.valueMoney, op2.valueMentalHealth, op2.valueAcademic, op2.energy);
+               setValues(Mathf.Round(hours * wage), 0, 0, 0);
+               progressDay();
+          });
 
-                    conversations.Insert(dialogueIndex, op2.response);
-                    progressDay();
-                    eventIndex++;
-               });
-          }
-
-          else
-          {
-               option2.interactable = false;
-          }
-
-          if ((Mathf.Sign(op3.energy) == -1 && energy >= Mathf.Abs(op3.energy)) || Mathf.Sign(op3.energy) == 1)
+          if(energyValue >= 0.6f)
           {
                option3.onClick.AddListener(() =>
                {
-                    setValues(op3.valueMoney, op3.valueMentalHealth, op3.valueAcademic, op3.energy);
-
-                    conversations.Insert(dialogueIndex, op3.response);
+                    setValues(Mathf.Round(hours * wage * 1.4f), -20, 0, -0.6f);
                     progressDay();
-                    eventIndex++;
                });
           }
 
@@ -279,9 +384,9 @@ public class CoreMechanic : MonoBehaviour
                option3.interactable = false;
           }
 
-          option1.GetComponentInChildren<TextMeshProUGUI>().SetText(op1.optionText);
-          option2.GetComponentInChildren<TextMeshProUGUI>().SetText(op2.optionText);
-          option3.GetComponentInChildren<TextMeshProUGUI>().SetText(op3.optionText);
+          option1.GetComponentInChildren<TextMeshProUGUI>().SetText("Business as Usual");
+          option2.GetComponentInChildren<TextMeshProUGUI>().SetText("Slack Off");
+          option3.GetComponentInChildren<TextMeshProUGUI>().SetText("Hard Work");
      }
 
      public void progressDay()
@@ -304,14 +409,9 @@ public class CoreMechanic : MonoBehaviour
      void checkValues()
      {
           moneyValue = Mathf.Clamp(moneyValue, 0, 999999);
-          mentalHealthValue = Mathf.Clamp(mentalHealthValue, 0, 100);
+          mentalHealthValue = Mathf.Clamp(mentalHealthValue, 0, maxMentalHealth);
           academicsValue = Mathf.Clamp(academicsValue, 0, 4);
-     }
-
-     void updateIcons()
-     {
-          healthIcon.fillAmount = mentalHealthValue / 100f;
-          academicIcon.fillAmount = academicsValue / 4f;
+          energyValue = Mathf.Clamp(energyValue, 0, 1);
      }
 
      //resets buttons to blanks when clicked
@@ -332,7 +432,7 @@ public class CoreMechanic : MonoBehaviour
           moneyValue += money;
           mentalHealthValue += mentalHealth;
           academicsValue += academics;
-          energy += energy;
+          energyValue += energy;
      }
 
      public void setButtonVisibility(bool but1, bool but2, bool but3)
@@ -375,5 +475,20 @@ public class CoreMechanic : MonoBehaviour
      public int getDay()
      {
           return day;
+     }
+
+     void checkDebuffs()
+     {
+          if (day == 1)
+          {
+               mentalHealthValue -= 40;
+               maxMentalHealth -= 40;
+          }
+
+          if (day == 2)
+          {
+               maxMentalHealth += 40;
+               mentalHealthValue += 40;
+          }
      }
 }

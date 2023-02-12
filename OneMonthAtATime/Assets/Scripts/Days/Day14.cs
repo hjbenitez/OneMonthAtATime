@@ -29,4 +29,9 @@ public class Day14 : Day
     {
         throw new System.NotImplementedException();
     }
+
+     public override int getHours()
+     {
+          throw new System.NotImplementedException();
+     }
 }

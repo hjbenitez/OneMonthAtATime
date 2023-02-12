@@ -8,7 +8,7 @@ public class Day3 : Day
      List<Event> events;
 
      string[] schedule;
-     
+     int hours = 5;
      public Day3()
      {
           //THIS IS WHERE YOU AFFECT HOW THE DAY PLAYS OUT
@@ -25,11 +25,12 @@ public class Day3 : Day
           //Dialogue 2
           dialogue.Add(new string[] { "0 4 00 00 00 Just making sure this works", "0 5 00 00 00 Because it's good to double check code you know?", "1 6 10 00 00 Yea I feel you" });
 
-          //Work
+          /*Work
           events.Add(new Event(
               new Option("Work as Usual", 200, -5, 0, -0.25f, new string[] { "0 2 00 00 00 Nothing out of the ordinary" }),
               new Option("Take it Easy", 120, 5, 0, 0, new string[] { "0 2 00 00 00 Easy day today" }),
               new Option("Bust Yo' ASS", 350, -15, 0, -0.6f, new string[] { "0 2 00 00 00 That was hard work!" })));
+          */
 
           //Dialogue 3
           dialogue.Add(new string[] { "0 4 00 00 00 What should I wish for?" });
@@ -65,7 +66,7 @@ public class Day3 : Day
           //Freetime
           events.Add(new Event(
                new Option("I should study", -10f, 0.25f, 0f, -0.25f, new string[] { "0 4 00 00 00 Man i'm tired." }),
-               new Option("I'll pick up another shift", -20f, -0f, 200f, -0.25f, new string[] { "0 3 00 00 00 That shift was exhausting..." }),
+               new Option("I'll pick up another shift", 2, new string[] { "0 3 00 00 00 That shift was exhausting..." }),
                new Option("Metroid Prime is 'Echoing' for me", 25, 0f, 0f, -0.25f, new string[] { "0 4 00 00 00 I love this franchise." })));
 
           //Dialogue 7
@@ -89,5 +90,10 @@ public class Day3 : Day
      public override List<Event> getEvents()
      {
           return events;
+     }
+
+     public override int getHours()
+     {
+          return hours;
      }
 }
