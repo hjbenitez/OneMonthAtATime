@@ -2452,7 +2452,7 @@ MonoBehaviour:
   healthIcon: {fileID: 842711344}
   academicIcon: {fileID: 1283200167}
   mentalHealthValue: 98
-  day: 2
+  day: 1
   dialogueSystem: {fileID: 1375876014}
   victoria:
   - {fileID: 21300000, guid: 88e60b9d61ec1994e83d499257ac6eb6, type: 3}
@@ -2470,15 +2470,20 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 46f3495ed48416441bd91f0807fef91a, type: 3}
   - {fileID: 21300000, guid: 3bfcc303ac3855748bcdfa76029d7738, type: 3}
   - {fileID: 21300000, guid: 46f3495ed48416441bd91f0807fef91a, type: 3}
-  jackson: []
-  olivia: []
-  chris: []
-  harry: []
+  jackson:
+  - {fileID: 21300000, guid: 97a83c54067a80c4f8dd9cfc63d20877, type: 3}
+  olivia:
+  - {fileID: 21300000, guid: 6d9c352662888dc4080ced5d709aebb4, type: 3}
+  chris:
+  - {fileID: 21300000, guid: 895b241101a99a34eb71a5bf734907b2, type: 3}
+  harry:
+  - {fileID: 21300000, guid: f040c2658102af344874d476569f7318, type: 3}
   currentLocation: {fileID: 1435254833}
   locations:
-  - {fileID: 21300000, guid: 3335ca3360e234540aba433ddbd01a9d, type: 3}
-  - {fileID: 21300000, guid: 740eab71b8296974f868bf4c477455b2, type: 3}
-  - {fileID: 21300000, guid: 3a2ba056933e46444b1ae6fc13ff2ed0, type: 3}
+  - {fileID: 21300000, guid: 64a282cb0281bec4b838bdc04cbe54fe, type: 3}
+  - {fileID: 21300000, guid: 3047f20af16a26d48a4003fe8af7935d, type: 3}
+  - {fileID: 21300000, guid: 82db7c97b516c7b4e8b9da48ec01985a, type: 3}
+  - {fileID: 21300000, guid: 564d29e1da85a194cb7c0c2440014ad8, type: 3}
   - {fileID: 21300000, guid: d8aaa1e012fb43e4ab223f12c08bced5, type: 3}
   - {fileID: 21300000, guid: 158021d99633ee147afd9dd30900d33a, type: 3}
   playerChose: 0
