@@ -37,10 +37,10 @@ public class Day2 : Day
 
           //School Event 
           events.Add(new Event(
-               new Option("Pay Attention", -5, 0, 0.1f, -0.1f, new string[] {
-                   "4 3 40 00 00 1 Oi Veronica what’s cookin?" }),
                new Option("Take Notes", -20, 0, 0.1f, -0.5f, new string[] { 
                    "4 3 40 00 00 1 Oi Veronica what’s cookin? " }),
+               new Option("Pay Attention", -5, 0, 0.1f, -0.1f, new string[] {
+                   "4 3 40 00 00 1 Oi Veronica what’s cookin?" }),
                new Option("Slack Off", 10, 0, -0.05f, 0f, new string[] { 
                    "4 3 40 00 00 1 Oi Veronica what’s cookin? " })));
 
@@ -64,19 +64,20 @@ public class Day2 : Day
 
            //School Event
           events.Add(new Event(
+               new Option("Take Notes", -20, 0, 0.1f, -0.5f, new string[] { 
+                   "3 3 00 40 30 2 Guess that went well enough…", 
+                   "4 3 00 40 30 2 See? I knew you had it in you!", 
+                   "0 0 00 40 30 2 I believe I remember a certain jackass describing her as “broken”. ", 
+                   "4 0 00 40 30 2 I believe that “jackass” was the only saving grace we had in that presentation. Anyways I know we all have nothing else on the agenda today, so why don’t we grab some drinks at the shitty bar across the street? Even though it’s overpriced as hell, I think we could all use it after today. ", 
+                   "4 0 00 40 30 2 And Veronica before you even think about picking up another shift or going home to be a loner, you’re coming with. If you don’t do fun things with people and watch your mental state, it will eat at you and eventually sap your energy bank. ",
+                   "4 0 00 40 30 2 Let’s go get merry and force Olivia to sing some karaoke. ", 
+                   "3 5 30 00 00 2 Why am I getting caught in the crossfire…" }),
                new Option("Pay Attention", -5, 0, 0.1f, -0.1f, new string[] { 
                    "3 3 00 40 30 2 Guess that went well enough…", 
                    "4 3 00 40 30 2 See? I knew you had it in you!", 
                    "0 0 00 40 30 2 I believe I remember a certain jackass describing her as “broken”. ", 
                    "4 0 00 40 30 2 I believe that “jackass” was the only saving grace we had in that presentation. Anyways I know we all have nothing else on the agenda today, so why don’t we grab some drinks at the shitty bar across the street? Even though it’s overpriced as hell, I think we could all use it after today. ", 
                    "4 0 00 40 30 2 And Veronica before you even think about picking up another shift or going home to be a loner, you’re coming with. If you don’t do fun things with people and watch your mental state, it will eat at you and eventually sap your energy bank. ", 
-                   "4 0 00 40 30 2 Let’s go get merry and force Olivia to sing some karaoke. ", 
-                   "3 5 30 00 00 2 Why am I getting caught in the crossfire…" }),
-               new Option("Take Notes", -20, 0, 0.1f, -0.5f, new string[] { 
-                   "3 3 00 40 30 2 Guess that went well enough…", "4 3 00 40 30 See? I knew you had it in you!", 
-                   "0 0 00 40 30 2 I believe I remember a certain jackass describing her as “broken”. ", 
-                   "4 0 00 40 30 2 I believe that “jackass” was the only saving grace we had in that presentation. Anyways I know we all have nothing else on the agenda today, so why don’t we grab some drinks at the shitty bar across the street? Even though it’s overpriced as hell, I think we could all use it after today. ", 
-                   "4 0 00 40 30 2 And Veronica before you even think about picking up another shift or going home to be a loner, you’re coming with. If you don’t do fun things with people and watch your mental state, it will eat at you and eventually sap your energy bank. ",
                    "4 0 00 40 30 2 Let’s go get merry and force Olivia to sing some karaoke. ", 
                    "3 5 30 00 00 2 Why am I getting caught in the crossfire…" }),
                new Option("Slack Off", 10, 0, -0.05f, 0f, new string[] { 

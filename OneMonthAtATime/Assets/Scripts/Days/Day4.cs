@@ -32,10 +32,12 @@ public class Day4 : Day
                new Option("Hangout with the gang", 15, 0, 0, -0.1f, new string[] { 
                    "3 3 00 40 30 0 I would like t-to hang out while everyone’s here.",
                    "4 3 00 40 30 0 Olivia to the rescue! Guess she is warming up to me after all. Time to show my gaming prowess! I’m not a nice enough guy to hold off against you guys, so be prepared to be demolished. ", 
-                   "0 7 00 40 30 0 Chris not being a gentleman? Who would have thought.", "4 7 00 40 30 Simmer down there Veronica." }),
+                   "0 7 00 40 30 0 Chris not being a gentleman? Who would have thought.", 
+                   "4 7 00 40 30 0 Simmer down there Veronica." }),
                new Option("Continue working on the assignment", 0, 0, 0.1f, -0.5f, new string[] { 
                    "0 3 00 40 30 0 We should probably crunch down on some more work since we are all here. Hanging out would probably be the fun thing to do, but getting ahead is more important.", 
-                   "3 3 00 40 30 0 I-I would have to agree.", "4 3 00 40 30 Aye-aye captain!" }),
+                   "3 3 00 40 30 0 I-I would have to agree.", 
+                   "4 3 00 40 30 0 Aye-aye captain!" }),
                new Option("Give Chris the boot", -10, 0, 0f, 0f, new string[] { 
                    "0 0 00 40 30 0 Nah, I’m still pissed from earlier. You’re getting the boot.", 
                    "4 0 00 40 30 0 If it’s from you I will be happy to oblige.", 

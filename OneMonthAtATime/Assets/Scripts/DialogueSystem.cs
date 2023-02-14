@@ -73,7 +73,7 @@ public class DialogueSystem : MonoBehaviour
         charactersNames.Add(4, "Chris");
         charactersNames.Add(5, "Harry");
         charactersNames.Add(7, "Mom");
-        charactersNames.Add(8, "Stupid Customer A");
+        charactersNames.Add(8, "Customer");
     }
 
     // Update is called once per frame
@@ -109,7 +109,7 @@ public class DialogueSystem : MonoBehaviour
 
         if (text != null || text != "")
         {
-            text = text.Remove(0, 14);
+            text = text.Remove(0, 15);
         }
         dialogueBox.text = text;
     }
