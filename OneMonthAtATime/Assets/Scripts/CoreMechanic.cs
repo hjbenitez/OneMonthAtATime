@@ -252,6 +252,8 @@ public class CoreMechanic : MonoBehaviour
                     progressDay();
                     eventIndex++;
                 });
+
+                option1.GetComponent<ButtonScript>().setValue((int) op1.valueMoney, (int) op1.valueMentalHealth,  op1.valueAcademic,  op1.energy);
             }
 
             else
@@ -272,6 +274,7 @@ public class CoreMechanic : MonoBehaviour
             });
         }
 
+        //checks if button doesn't lead to an event
         if (op2.toEvent == 0)
         {
             if ((Mathf.Sign(op2.energy) == -1 && energyValue >= Mathf.Abs(op2.energy)) || Mathf.Sign(op2.energy) == 1)
@@ -284,6 +287,8 @@ public class CoreMechanic : MonoBehaviour
                     progressDay();
                     eventIndex++;
                 });
+
+                option2.GetComponent<ButtonScript>().setValue((int)op2.valueMoney, (int)op2.valueMentalHealth, op2.valueAcademic, op2.energy);
             }
 
             else
@@ -304,6 +309,7 @@ public class CoreMechanic : MonoBehaviour
             });
         }
 
+        //checks if button doesn't lead to an event
         if (op3.toEvent == 0)
         {
             if ((Mathf.Sign(op3.energy) == -1 && energyValue >= Mathf.Abs(op3.energy)) || Mathf.Sign(op3.energy) == 1)
@@ -316,6 +322,8 @@ public class CoreMechanic : MonoBehaviour
                     progressDay();
                     eventIndex++;
                 });
+
+                option3.GetComponent<ButtonScript>().setValue((int)op3.valueMoney, (int)op3.valueMentalHealth, op3.valueAcademic, op3.energy);
             }
 
             else
@@ -420,6 +428,11 @@ public class CoreMechanic : MonoBehaviour
         option1.interactable = true;
         option2.interactable = true;
         option3.interactable = true;
+
+        option1.GetComponent<ButtonScript>().setValue(0, 0, 0, 0);
+        option2.GetComponent<ButtonScript>().setValue(0, 0, 0, 0);
+        option3.GetComponent<ButtonScript>().setValue(0, 0, 0, 0);
+
         buttonsSet = false;
     }
 
