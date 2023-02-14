@@ -19,14 +19,16 @@ public class Day1 : Day
 
         //Intro - Meeting Harry and Olivia
         dialogue.Add(new string[] {
-               "5 3 50 00 00 0 Welcome to your new place. I’m gonna get straight to the point. I’m your landlord, Harry and I have a few ground rules you ladies need to follow while you stay here.",
-               "5 3 50 00 00 0 I am well aware that you are college students, so if I hear a rave or party of any kind I will not be happy. Be aware that you are living in an APARTMENT, not a frat house. ",
-               "5 3 50 00 00 0 I am letting you live here for a reasonable amount, and because of this I am responsible for your actions. I will not accept you tarnishing my great reputation by being arrogant and careless college brats. ",
-               "5 3 50 00 00 0 I am not your friend, and as long as you don’t cause problems our relationship will work. I don’t want to hear complaining about rent costs or how the building is managed. Rent will be paid at the end of the month, and NO later. If you don’t pay up by the last day of every month, I will kick you to the curb without hesitation. Have I made myself clear? ",
-               "0 5 50 00 00 0 Crystal.",
+               "5 3 00 50 30 0 Welcome to your new place. I’m gonna get straight to the point. I’m your landlord, Harry and I have a few ground rules you ladies need to follow while you stay here.",
+               "5 3 00 50 30 0 I am well aware that you are college students, so if I hear a rave or party of any kind I will not be happy. Be aware that you are living in an APARTMENT, not a frat house. ",
+               "5 3 00 50 30 0 I am letting you live here for a reasonable amount, and because of this I am responsible for your actions. I will not accept you tarnishing my great reputation by being arrogant and careless college brats. ",
+               "5 3 00 50 30 0 I am not your friend, and as long as you don’t cause problems our relationship will work. I don’t want to hear complaining about rent costs or how the building is managed.",
+               "5 3 00 50 30 0 Rent will be paid at the end of the month, and NO later. If you don’t pay up by the last day of every month, I will kick you to the curb without hesitation. Have I made myself clear? ",
+               "0 5 00 50 30 0 Crystal.",
                "3 3 00 50 30 0 ye….yes sir. ",
                "5 3 00 50 30 0 Tell your friend to speak up, she sounds like a stuttering buffoon.",
                "0 0 30 00 00 0 What a lovely fellow. If anyone’s a buffoon it's the one drenched in that cheap ass cologne. You ok, Olivia?",
+               "3 3 30 00 00 0 I know your financial situation is…..complicated. How are you managing?",
                "3 3 30 00 00 0 They are but they are always so cheery and outgoing, the complete opposite of me. They do their best to accommodate my shy personality, but I can see how it just drains them. I don’t want to be a burden to them, so now I'm your problem.",
                "3 3 30 00 00 0 I know your financial situation is…..complicated. How are you managing?",
                "0 3 30 00 00 0 My parents live about 3 hours away, and busing that distance for a regular commute would literally be impossible. My parents couldn’t afford to get me a place out here so I am working hard at the restaurant down the street to make ends meet one month at a time. ",

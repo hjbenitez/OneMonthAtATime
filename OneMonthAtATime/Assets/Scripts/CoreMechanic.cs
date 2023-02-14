@@ -81,7 +81,7 @@ public class CoreMechanic : MonoBehaviour
         //grabs the current values of each resource at the start
         moneyValue = 500;
         academicsValue = 3.0f;
-        //mentalHealthValue = 80f;
+        mentalHealthValue = 80f;
         //day = 1;
 
         conversations = new List<string[]>();

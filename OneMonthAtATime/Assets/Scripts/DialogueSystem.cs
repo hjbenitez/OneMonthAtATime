@@ -6,8 +6,8 @@ using TMPro;
 
 public class DialogueSystem : MonoBehaviour
 {
-    //0 0 00 00 00 
-    //Speaker Victoria NPC1 NPC2 NPC3
+    //0 0 00 00 00 0
+    //Speaker Victoria NPC1 NPC2 NPC3 Location
     //Character - Emotion
 
     /*Speaker Index
@@ -40,6 +40,13 @@ public class DialogueSystem : MonoBehaviour
     *8 = disgust
     *9 = surpirse
     */
+
+    /*Location INDEX
+     * 0 = Home
+     * 1 = Classroom 1
+     * 2 = Classroom 2
+     * 3 = Work
+     */
 
     Dictionary<int, string> charactersNames;
     int[] npcSlots;
@@ -74,6 +81,9 @@ public class DialogueSystem : MonoBehaviour
         charactersNames.Add(5, "Harry");
         charactersNames.Add(7, "Mom");
         charactersNames.Add(8, "Customer");
+
+        //Start dialogue
+        dialogueBox.text = "Press Space to start!";
     }
 
     // Update is called once per frame
