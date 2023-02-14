@@ -15,68 +15,76 @@ public class Day1 : Day
      {
           dialogue = new List<string[]>();
           events = new List<Event>();
-          schedule = new string[] { "0Dialogue", "1Dialogue", "1School", "1Dialogue", "1Freetime", "2Dialogue", "2School", "0Dialogue", "0End"  };
+          schedule = new string[] { "Dialogue", "Dialogue", "School", "Dialogue", "Freetime", "Dialogue", "School", "Dialogue", "End"  };
 
           //Intro - Meeting Harry and Olivia
           dialogue.Add(new string[] {
-               "5 3 50 00 00 Welcome to your new place. I’m gonna get straight to the point. I’m your landlord, Harry and I have a few ground rules you ladies need to follow while you stay here.",
-               "5 3 50 00 00 I am well aware that you are college students, so if I hear a rave or party of any kind I will not be happy. Be aware that you are living in an APARTMENT, not a frat house. ",
-               "5 3 50 00 00 I am letting you live here for a reasonable amount, and because of this I am responsible for your actions. I will not accept you tarnishing my great reputation by being arrogant and careless college brats. ",
-               "5 3 50 00 00 I am not your friend, and as long as you don’t cause problems our relationship will work. I don’t want to hear complaining about rent costs or how the building is managed. Rent will be paid at the end of the month, and NO later. If you don’t pay up by the last day of every month, I will kick you to the curb without hesitation. Have I made myself clear? ",
-               "0 5 50 00 00 Crystal.",
-               "3 3 00 50 30 ye….yes sir. ",
-               "5 3 00 50 30 Tell your friend to speak up, she sounds like a stuttering buffoon.",
-               "0 0 30 00 00 What a lovely fellow. If anyone’s a buffoon it's the one drenched in that cheap ass cologne. You ok, Olivia?",
-               "3 3 30 00 00 They are but they are always so cheery and outgoing, the complete opposite of me. They do their best to accommodate my shy personality, but I can see how it just drains them. I don’t want to be a burden to them, so now I'm your problem.",
-               "3 3 30 00 00 I know your financial situation is…..complicated. How are you managing?",
-               "0 3 30 00 00 My parents live about 3 hours away, and busing that distance for a regular commute would literally be impossible. My parents couldn’t afford to get me a place out here so I am working hard at the restaurant down the street to make ends meet one month at a time. ",
-               "0 4 30 00 00 Thankfully, I qualify for student loans so I can actually attend our program. I know I will be pretty much screwed once I get into the real world, though. ",
-               "0 9 30 00 00 9 Shit, look at the time! We gotta haul ass to get to campus on time for class. Let’s settle into the place later."
+               "5 3 50 00 00 0 Welcome to your new place. I’m gonna get straight to the point. I’m your landlord, Harry and I have a few ground rules you ladies need to follow while you stay here.",
+               "5 3 50 00 00 0 I am well aware that you are college students, so if I hear a rave or party of any kind I will not be happy. Be aware that you are living in an APARTMENT, not a frat house. ",
+               "5 3 50 00 00 0 I am letting you live here for a reasonable amount, and because of this I am responsible for your actions. I will not accept you tarnishing my great reputation by being arrogant and careless college brats. ",
+               "5 3 50 00 00 0 I am not your friend, and as long as you don’t cause problems our relationship will work. I don’t want to hear complaining about rent costs or how the building is managed. Rent will be paid at the end of the month, and NO later. If you don’t pay up by the last day of every month, I will kick you to the curb without hesitation. Have I made myself clear? ",
+               "0 5 50 00 00 0 Crystal.",
+               "3 3 00 50 30 0 ye….yes sir. ",
+               "5 3 00 50 30 0 Tell your friend to speak up, she sounds like a stuttering buffoon.",
+               "0 0 30 00 00 0 What a lovely fellow. If anyone’s a buffoon it's the one drenched in that cheap ass cologne. You ok, Olivia?",
+               "3 3 30 00 00 0 They are but they are always so cheery and outgoing, the complete opposite of me. They do their best to accommodate my shy personality, but I can see how it just drains them. I don’t want to be a burden to them, so now I'm your problem.",
+               "3 3 30 00 00 0 I know your financial situation is…..complicated. How are you managing?",
+               "0 3 30 00 00 0 My parents live about 3 hours away, and busing that distance for a regular commute would literally be impossible. My parents couldn’t afford to get me a place out here so I am working hard at the restaurant down the street to make ends meet one month at a time. ",
+               "0 4 30 00 00 0 Thankfully, I qualify for student loans so I can actually attend our program. I know I will be pretty much screwed once I get into the real world, though. ",
+               "0 9 30 00 00 0 Shit, look at the time! We gotta haul ass to get to campus on time for class. Let’s settle into the place later."
           });
 
           //At School with Olivia
           dialogue.Add(new string[] {
-               "3 3 30 00 00 Made it……just in……time. Good lord am I out of shape.",
-               "0 6 30 00 00 You and me both! We would have had more time if poppa smurf didn’t lecture us about basic living standards.",
-               "0 3 30 00 00 Let’s see what we are going to learn today. I’m not too tired so I could try my best, but that takes effort, and who likes that. I have a long day today, so I could slack off but I’ll probably miss a bunch of important stuff. Hmmm."
+               "3 3 30 00 00 1 Made it……just in……time. Good lord am I out of shape.",
+               "0 6 30 00 00 1 You and me both! We would have had more time if poppa smurf didn’t lecture us about basic living standards.",
+               "0 3 30 00 00 1 Let’s see what we are going to learn today. I’m not too tired so I could try my best, but that takes effort, and who likes that. I have a long day today, so I could slack off but I’ll probably miss a bunch of important stuff. Hmmm."
           });
 
           //School Choice 
           events.Add(new Event(
-               new Option("Pay Attention", -5, 0, 0.1f, -0.1f, new string[] { "0 2 30 00 00 One class down, one to go. Hey Olivia, what are you getting up to? ?" }),
-               new Option("Take Notes", -20, 0, 0.1f, -0.5f, new string[] { "0 2 30 00 00 One class down, one to go. Hey Olivia, what are you getting up to? " }),
-               new Option("Slack Off", 10, 0, -0.05f, 0f, new string[] { "0 2 30 00 00 One class down, one to go. Hey Olivia, what are you getting up to? " })));
+               new Option("Pay Attention", -5, 0, 0.1f, -0.1f, new string[] { 
+                   "0 2 30 00 00 1 One class down, one to go. Hey Olivia, what are you getting up to? ?" }),
+               new Option("Take Notes", -20, 0, 0.1f, -0.5f, new string[] { 
+                   "0 2 30 00 00 1 One class down, one to go. Hey Olivia, what are you getting up to? " }),
+               new Option("Slack Off", 10, 0, -0.05f, 0f, new string[] { 
+                   "0 2 30 00 00 1 One class down, one to go. Hey Olivia, what are you getting up to? " })));
 
           //Post Class with Olivia
           dialogue.Add(new string[] {
-               "3 3 30 00 00 I have to catch up on some menial work for tomorrow’s class, so I'll probably hang back here at the school.",
-               "0 5 30 00 00 Figures, you friggin studyholic.  ",
-               "0 1 00 00 00 (Olivia is really smart, and I could use her help with some schoolwork. I also really need to start making some money so I can afford rent this month. I’m sure Ashley wouldn’t mind having an extra hand for some of the dinner rush.)",
-               "0 1 00 00 00 (Then again, I totally need to catch up with that new show. I’m a couple weeks behind and if I see any spoilers I'm gonna be pissed.)",
-               "0 3 00 00 00 Let’s see…"
+               "3 3 30 00 00 1 I have to catch up on some menial work for tomorrow’s class, so I'll probably hang back here at the school.",
+               "0 5 30 00 00 1 Figures, you friggin studyholic.  ",
+               "0 1 00 00 00 1 (Olivia is really smart, and I could use her help with some schoolwork. I also really need to start making some money so I can afford rent this month. I’m sure Ashley wouldn’t mind having an extra hand for some of the dinner rush.)",
+               "0 1 00 00 00 1 (Then again, I totally need to catch up with that new show. I’m a couple weeks behind and if I see any spoilers I'm gonna be pissed.)",
+               "0 3 00 00 00 1 Let’s see…"
           });
 
           //Freetime
           events.Add(new Event(
-                 new Option("Grab a shift at the restaurant ", 3, new string[] { "0 3 00 00 00 I’m gonna get some extra hours at the restaurant to get a jump start on this month. See you in a bit." }),
-                 new Option("Study with Olivia", 0, 0, 0.5f, -0.5f, new string[] { "0 3 00 00 00 Hey O, mind if I tag along? I’ve been putting off that exercise for too damn long and I could use some help understanding what to do.", "3 3 30 00 00 Yea, that one was pretty annoying. Working together will make time fly. " }),
-                 new Option("Go home and bing", 0, 10, 0f, -0.2f, new string[] { "0 2 30 00 00 I’m gonna head back to our place to grab some grub and catch up on that show we have been watching. I’m a little behind.", "3 3 30 00 00 Oh yea the newest episode is awesome! Your favorite character gets….", "0 0 30 00 00 Not another word." })));
+                 new Option("Grab a shift at the restaurant ", 3, new string[] { 
+                     "0 3 00 00 00 1 I’m gonna get some extra hours at the restaurant to get a jump start on this month. See you in a bit." }),
+                 new Option("Study with Olivia", 0, 0, 0.5f, -0.5f, new string[] { 
+                     "0 3 00 00 00 1 Hey O, mind if I tag along? I’ve been putting off that exercise for too damn long and I could use some help understanding what to do.", "3 3 30 00 00 Yea, that one was pretty annoying. Working together will make time fly. " }),
+                 new Option("Go home and bing", 0, 10, 0f, -0.2f, new string[] { 
+                     "0 2 30 00 00 1 I’m gonna head back to our place to grab some grub and catch up on that show we have been watching. I’m a little behind.", 
+                     "3 3 30 00 00 1 Oh yea the newest episode is awesome! Your favorite character gets….", 
+                     "0 0 30 00 00 1 Not another word." })));
 
           //After Freetiime, going to school
           dialogue.Add(new string[] {
-               "0 6 00 00 00 (One more class till I can go home and relax. MAAAAN it’s been a long day. Let’s see if I have enough energy left in the tank to really pay attention.)"
+               "0 6 00 00 00 2 (One more class till I can go home and relax. MAAAAN it’s been a long day. Let’s see if I have enough energy left in the tank to really pay attention.)"
           });
 
           //School Event
           events.Add(new Event(
-               new Option("Pay Attention", -5, 0, 0.1f, -0.1f, new string[] { "0 5 00 00 00 ..." }),
-               new Option("Take Notes", -20, 0, 0.1f, -0.5f, new string[] { "0 5 00 00 00 ..." }),
-               new Option("Slack Off", 10, 0, -0.05f, 0f, new string[] { "0 5 00 00 00 ..." })));
+               new Option("Pay Attention", -5, 0, 0.1f, -0.1f, new string[] { "0 5 00 00 00 0 ..." }),
+               new Option("Take Notes", -20, 0, 0.1f, -0.5f, new string[] { "0 5 00 00 00 0 ..." }),
+               new Option("Slack Off", 10, 0, -0.05f, 0f, new string[] { "0 5 00 00 00 0 ..." })));
 
           dialogue.Add(new string[] {
-               "3 3 30 00 00 Being at school all day really takes it out of me. I am completely worn out. Time to hit the sack and prepare for tomorrow. See you in the morning.",
-               "0 6 00 00 00 ‘Night Olivia.",
-               "0 6 00 00 00  (Alright that is enough work for one day. I should get some rest considering we have two classes again tomorrow. The grind begins.)"
+               "3 3 30 00 00 0 Being at school all day really takes it out of me. I am completely worn out. Time to hit the sack and prepare for tomorrow. See you in the morning.",
+               "0 6 00 00 00 0 ‘Night Olivia.",
+               "0 6 00 00 00 0 (Alright that is enough work for one day. I should get some rest considering we have two classes again tomorrow. The grind begins.)"
           });
 
           /*
