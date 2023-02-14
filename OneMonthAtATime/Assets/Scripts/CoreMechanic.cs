@@ -351,13 +351,15 @@ public class CoreMechanic : MonoBehaviour
 
     public void setWorkButtons(int hours)
     {
-        if (energyValue >= 0.25)
+        if (energyValue >= 0.6f)
         {
             option1.onClick.AddListener(() =>
             {
-                setValues(Mathf.Round(hours * wage * 1.25f), -10, 0, -0.25f);
+                setValues(Mathf.Round(hours * wage * 1.4f), -20, 0, -0.6f);
                 progressDay();
             });
+
+            option1.GetComponent<ButtonScript>().setValue(1, -1, 0, -1);
         }
 
         else
@@ -365,29 +367,34 @@ public class CoreMechanic : MonoBehaviour
             option1.interactable = false;
         }
 
-        option2.onClick.AddListener(() =>
+        if (energyValue >= 0.25)
+        {
+            option2.onClick.AddListener(() =>
+            {
+                setValues(Mathf.Round(hours * wage * 1.25f), -10, 0, -0.25f);
+                progressDay();
+            });
+
+            option2.GetComponent<ButtonScript>().setValue(1, -1, 0, -1);
+        }
+
+        else
+        {
+            option2.interactable = false;
+        }
+
+        option3.onClick.AddListener(() =>
         {
             setValues(Mathf.Round(hours * wage), 0, 0, 0);
             progressDay();
         });
 
-        if (energyValue >= 0.6f)
-        {
-            option3.onClick.AddListener(() =>
-            {
-                setValues(Mathf.Round(hours * wage * 1.4f), -20, 0, -0.6f);
-                progressDay();
-            });
-        }
+        option3.GetComponent<ButtonScript>().setValue(1, 0, 0, 0);
 
-        else
-        {
-            option3.interactable = false;
-        }
 
-        option1.GetComponentInChildren<TextMeshProUGUI>().SetText("Business as Usual");
-        option2.GetComponentInChildren<TextMeshProUGUI>().SetText("Slack Off");
-        option3.GetComponentInChildren<TextMeshProUGUI>().SetText("Hard Work");
+        option1.GetComponentInChildren<TextMeshProUGUI>().SetText("Hard Work");
+        option2.GetComponentInChildren<TextMeshProUGUI>().SetText("Business as Usual");
+        option3.GetComponentInChildren<TextMeshProUGUI>().SetText("Slack Off");
     }
 
     public void progressDay()
