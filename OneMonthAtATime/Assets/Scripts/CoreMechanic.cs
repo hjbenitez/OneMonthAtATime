@@ -410,6 +410,9 @@ public class CoreMechanic : MonoBehaviour
     //resets buttons to blanks when clicked
     public void removeAllListners()
     {
+        GameObject myEventSystem = GameObject.Find("EventSystem");
+        myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
+
         option1.onClick.RemoveAllListeners();
         option2.onClick.RemoveAllListeners();
         option3.onClick.RemoveAllListeners();
