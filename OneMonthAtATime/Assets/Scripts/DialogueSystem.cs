@@ -89,7 +89,6 @@ public class DialogueSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(locationIndex);
         if ((Input.GetKeyDown(KeyCode.Space) || coreMechanic.playerChose) && coreMechanic.getCurrentTime() == "Dialogue" && coreMechanic.dialogueSet)
         {
             setDialogue(dialogue[index]);
