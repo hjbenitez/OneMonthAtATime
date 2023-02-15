@@ -45,11 +45,11 @@ public class Day1 : Day
 
         //School Choice 
         events.Add(new Event(
-             new Option("Take Notes", -20, 0, 0.1f, -0.5f, new string[] {
+             new Option("Take Notes", -20, 0, 20, -50, new string[] {
                    "0 2 30 00 00 1 One class down, one to go. Hey Olivia, what are you getting up to? " }),
-             new Option("Pay Attention", -5, 0, 0.1f, -0.1f, new string[] {
+             new Option("Pay Attention", -5, 0, 10, -10, new string[] {
                    "0 2 30 00 00 1 One class down, one to go. Hey Olivia, what are you getting up to? ?" }),
-             new Option("Slack Off", 10, 0, -0.05f, 0f, new string[] {
+             new Option("Slack Off", 10, 0, -10, 0, new string[] {
                    "0 2 30 00 00 1 One class down, one to go. Hey Olivia, what are you getting up to? " })));
 
         //Post Class with Olivia
@@ -66,10 +66,10 @@ public class Day1 : Day
                new Option("Grab a shift at the restaurant ", 3, new string[] {
                      "0 3 00 00 00 1 I’m gonna get some extra hours at the restaurant to get a jump start on this month. See you in a bit.",
                      "0 3 00 00 00 3 Let's see..."}),
-               new Option("Study with Olivia", 0, 0, 0.5f, -0.5f, new string[] {
+               new Option("Study with Olivia", 0, 0, 25, -50, new string[] {
                      "0 3 00 00 00 1 Hey O, mind if I tag along? I’ve been putting off that exercise for too damn long and I could use some help understanding what to do.",
                      "3 3 30 00 00 1 Yea, that one was pretty annoying. Working together will make time fly. " }),
-               new Option("Go home and bing", 10, 0, 0f, -0.2f, new string[] {
+               new Option("Go home and bing", 10, 0, 0, -20, new string[] {
                      "0 2 30 00 00 1 I’m gonna head back to our place to grab some grub and catch up on that show we have been watching. I’m a little behind.",
                      "3 3 30 00 00 1 Oh yea the newest episode is awesome! Your favorite character gets….",
                      "0 0 30 00 00 1 Not another word." })));
@@ -81,9 +81,9 @@ public class Day1 : Day
 
         //School Event
         events.Add(new Event(
-             new Option("Take Notes", -20, 0, 0.1f, -0.5f, new string[] { "0 5 00 00 00 0 ..." }),
-             new Option("Pay Attention", -5, 0, 0.1f, -0.1f, new string[] { "0 5 00 00 00 0 ..." }),
-             new Option("Slack Off", 10, 0, -0.05f, 0f, new string[] { "0 5 00 00 00 0 ..." })));
+             new Option("Take Notes", -20, 0, 20, -50, new string[] { "0 5 00 00 00 0 ..." }),
+             new Option("Pay Attention", -5, 0, 10, -10, new string[] { "0 5 00 00 00 0 ..." }),
+             new Option("Slack Off", 10, 0, -10, 0, new string[] { "0 5 00 00 00 0 ..." })));
 
         dialogue.Add(new string[] {
                "3 3 30 00 00 0 Being at school all day really takes it out of me. I am completely worn out. Time to hit the sack and prepare for tomorrow. See you in the morning.",

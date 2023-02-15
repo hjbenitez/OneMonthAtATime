@@ -31,6 +31,7 @@ public class updateUI : MonoBehaviour
           importantDates.Add(21, "Groceries3");
           importantDates.Add(28, "Groceries"); 
           importantDates.Add(30, "Rent");
+          importantDates.Add(99999, "$&%(#(");
 
           keyTracker = new List<int>(importantDates.Keys);
 

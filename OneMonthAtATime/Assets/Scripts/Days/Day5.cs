@@ -40,7 +40,7 @@ public class Day5 : Day
             });
 
         events.Add(new Event(
-               new Option("Take a rest day", 20, 0, 0f, 0.4f, new string[] { 
+               new Option("Take a rest day", 20, 0, 0, 40f, new string[] { 
                    "0 2 00 00 00 0 I think I’ll use the day to check out more of the town. I still have to get my bearings around here. Oi Olivia, wanna join me?", 
                    "3 2 30 00 00 0 Eh?", "0 2 30 00 00  I’m gonna make a ruckus around town, you in?", 
                    "3 2 30 00 00 0 Oh I’m in, as long as we don’t have to talk to too many peeps." }),
@@ -49,7 +49,7 @@ public class Day5 : Day
                    "0 5 11 00 00 3 Nope, and I need the cash. I’ll be here till close. ", 
                    "1 5 11 00 00 3 Awesome, we could use the extra hand. Dress yourself, woman." , 
                    "0 2 11 00 00 3 Sounds good, chief" }),
-               new Option("Jumpstart on homework", 10, 0, -0.05f, 0f, new string[] { 
+               new Option("Jumpstart on homework", 10, 0, 5, 0, new string[] { 
                    "0 5 00 00 00 0 Time to bury myself in some books. This is going to be bo-ring. Hey O, you here for the day?", 
                    "3 5 30 00 00 0 Yea, why what’s up?", 
                    "0 3 30 00 00 0 Gonna be doing some studying today. You wanna join?", 

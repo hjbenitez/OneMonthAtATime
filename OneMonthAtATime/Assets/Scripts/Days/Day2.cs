@@ -37,11 +37,11 @@ public class Day2 : Day
 
           //School Event 
           events.Add(new Event(
-               new Option("Take Notes", -20, 0, 0.1f, -0.5f, new string[] { 
+               new Option("Take Notes", -20, 0, 20, -50, new string[] { 
                    "4 3 40 00 00 1 Oi Veronica what’s cookin? " }),
-               new Option("Pay Attention", -5, 0, 0.1f, -0.1f, new string[] {
+               new Option("Pay Attention", -5, 0, 10, -10, new string[] {
                    "4 3 40 00 00 1 Oi Veronica what’s cookin?" }),
-               new Option("Slack Off", 10, 0, -0.05f, 0f, new string[] { 
+               new Option("Slack Off", 10, 0, -10, 0, new string[] { 
                    "4 3 40 00 00 1 Oi Veronica what’s cookin? " })));
 
           //Enter Chris
@@ -64,7 +64,7 @@ public class Day2 : Day
 
            //School Event
           events.Add(new Event(
-               new Option("Take Notes", -20, 0, 0.1f, -0.5f, new string[] { 
+               new Option("Take Notes", -20, 0, 20, -50, new string[] { 
                    "3 3 00 40 30 2 Guess that went well enough…", 
                    "4 3 00 40 30 2 See? I knew you had it in you!", 
                    "0 0 00 40 30 2 I believe I remember a certain jackass describing her as “broken”. ", 
@@ -72,7 +72,7 @@ public class Day2 : Day
                    "4 0 00 40 30 2 And Veronica before you even think about picking up another shift or going home to be a loner, you’re coming with. If you don’t do fun things with people and watch your mental state, it will eat at you and eventually sap your energy bank. ",
                    "4 0 00 40 30 2 Let’s go get merry and force Olivia to sing some karaoke. ", 
                    "3 5 30 00 00 2 Why am I getting caught in the crossfire…" }),
-               new Option("Pay Attention", -5, 0, 0.1f, -0.1f, new string[] { 
+               new Option("Pay Attention", -5, 0, 10, -10, new string[] { 
                    "3 3 00 40 30 2 Guess that went well enough…", 
                    "4 3 00 40 30 2 See? I knew you had it in you!", 
                    "0 0 00 40 30 2 I believe I remember a certain jackass describing her as “broken”. ", 
@@ -80,7 +80,7 @@ public class Day2 : Day
                    "4 0 00 40 30 2 And Veronica before you even think about picking up another shift or going home to be a loner, you’re coming with. If you don’t do fun things with people and watch your mental state, it will eat at you and eventually sap your energy bank. ", 
                    "4 0 00 40 30 2 Let’s go get merry and force Olivia to sing some karaoke. ", 
                    "3 5 30 00 00 2 Why am I getting caught in the crossfire…" }),
-               new Option("Slack Off", 10, 0, -0.05f, 0f, new string[] { 
+               new Option("Slack Off", 10, 0, -10, 0, new string[] { 
                    "0 5 00 00 00 2 ..." })));
 
           dialogue.Add(new string[] {
