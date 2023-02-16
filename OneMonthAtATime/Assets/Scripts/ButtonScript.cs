@@ -45,7 +45,6 @@ public class ButtonScript : MonoBehaviour
      // Update is called once per frame
      void Update()
      {
-          Debug.Log(Time.time);
           if (hovering)
           {
                flashTime += Time.deltaTime;

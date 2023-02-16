@@ -32,7 +32,7 @@ public class Day3 : Day
         events.Add(new Event(
              new Option("Study", -10, 0, 10, -15, new string[] { 
                  "0 3 00 00 00 0 Hey Ashley, it’s good to see you." }),
-             new Option("Game", 10, 0f, 0, 0, new string[] { 
+             new Option("Game", 10, 0, 0, 0, new string[] { 
                  "0 3 00 00 00 0 Hey Ashley, it’s good to see you." })));
 
         dialogue.Add(new string[] {
@@ -164,4 +164,14 @@ public class Day3 : Day
     {
         return hours;
     }
+
+     public override List<string> getUniqueEvent(string[] updatedSchedule, int mental, int money, int academic, int energy)
+     {
+          throw new System.NotImplementedException();
+     }
+
+     public override void addChoice(int choice)
+     {
+          throw new System.NotImplementedException();
+     }
 }

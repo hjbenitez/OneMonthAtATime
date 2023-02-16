@@ -79,4 +79,14 @@ public class Day4 : Day
     {
         return hours;
     }
+
+     public override List<string> getUniqueEvent(string[] updatedSchedule, int mental, int money, int academic, int energy)
+     {
+          throw new System.NotImplementedException();
+     }
+
+     public override void addChoice(int choice)
+     {
+          throw new System.NotImplementedException();
+     }
 }

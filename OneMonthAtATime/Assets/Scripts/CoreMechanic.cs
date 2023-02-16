@@ -25,10 +25,10 @@ public class CoreMechanic : MonoBehaviour
 
      //values of each resource
      //this is what gets changed in the script that is then referenced by the TextMeshPro
-     float moneyValue;
-     public float mentalHealthValue;
-     float academicsValue;
-     float energyValue = 1f;
+     int moneyValue;
+     public int mentalHealthValue;
+     int academicsValue;
+     int energyValue = 1;
 
      //toying with variables
      bool buttonsSet = false; //ensures the buttons are set only once
@@ -134,15 +134,7 @@ public class CoreMechanic : MonoBehaviour
                     case 5:
                          currentDay = new Day5();
                          break;
-                    //DAY 6
-                    case 6:
-                         currentDay = new Day6();
-                         break;
-                    //DAY 7
-                    case 7:
-                         currentDay = new Day7();
-                         break;
-                    //DEBUG DAYS
+                    //DEBUG DAY
                     case 31:
                          currentDay = new Day31();
                          break;
@@ -239,6 +231,13 @@ public class CoreMechanic : MonoBehaviour
                     progressDay();
                }
 
+               else if(schedule[scheduleIndex] == "Check")
+               {
+                    schedule.Insert(scheduleIndex + 1, "Dialogue");
+                    conversations.Insert(dialogueIndex, currentDay.getUniqueEvent(schedule.ToArray(), mentalHealthValue, moneyValue, academicsValue, energyValue).ToArray());
+                    progressDay();
+               }
+
           }
      }
 
@@ -256,6 +255,8 @@ public class CoreMechanic : MonoBehaviour
                          conversations.Insert(dialogueIndex, op1.response);
                          progressDay();
                          eventIndex++;
+
+                         currentDay.addChoice(1);
                     });
 
                     option1.GetComponent<ButtonScript>().setValue((int)op1.valueMoney, (int)op1.valueMentalHealth, op1.valueAcademic, op1.energy);
@@ -276,6 +277,8 @@ public class CoreMechanic : MonoBehaviour
                     conversations.Insert(dialogueIndex, op1.response);
                     progressDay();
                     eventIndex++;
+
+                    currentDay.addChoice(1);
                });
           }
 
@@ -291,6 +294,8 @@ public class CoreMechanic : MonoBehaviour
                          conversations.Insert(dialogueIndex, op2.response);
                          progressDay();
                          eventIndex++;
+
+                         currentDay.addChoice(2);
                     });
 
                     option2.GetComponent<ButtonScript>().setValue((int)op2.valueMoney, (int)op2.valueMentalHealth, op2.valueAcademic, op2.energy);
@@ -311,6 +316,8 @@ public class CoreMechanic : MonoBehaviour
                     conversations.Insert(dialogueIndex, op2.response); //inserst the response into the game
                     progressDay();
                     eventIndex++;
+
+                    currentDay.addChoice(2);
                });
           }
 
@@ -326,6 +333,8 @@ public class CoreMechanic : MonoBehaviour
                          conversations.Insert(dialogueIndex, op3.response);
                          progressDay();
                          eventIndex++;
+
+                         currentDay.addChoice(3);
                     });
 
                     option3.GetComponent<ButtonScript>().setValue((int)op3.valueMoney, (int)op3.valueMentalHealth, op3.valueAcademic, op3.energy);
@@ -346,6 +355,8 @@ public class CoreMechanic : MonoBehaviour
                     conversations.Insert(dialogueIndex, op3.response);
                     progressDay();
                     eventIndex++;
+
+                    currentDay.addChoice(3);
                });
           }
 
@@ -360,7 +371,7 @@ public class CoreMechanic : MonoBehaviour
           {
                option1.onClick.AddListener(() =>
                {
-                    setValues(Mathf.Round(hours * wage * 1.4f), -20, 0, -60);
+                    setValues((int)Mathf.Round(hours * wage * 1.4f), -20, 0, -60);
                     progressDay();
                });
 
@@ -376,7 +387,7 @@ public class CoreMechanic : MonoBehaviour
           {
                option2.onClick.AddListener(() =>
                {
-                    setValues(Mathf.Round(hours * wage * 1.25f), -10, 0, -25);
+                    setValues((int)Mathf.Round(hours * wage * 1.25f), -10, 0, -25);
                     progressDay();
                });
 
@@ -390,7 +401,7 @@ public class CoreMechanic : MonoBehaviour
 
           option3.onClick.AddListener(() =>
           {
-               setValues(Mathf.Round(hours * wage), 0, 0, 0);
+               setValues((int)Mathf.Round(hours * wage), 0, 0, 0);
                progressDay();
           });
 
@@ -448,7 +459,7 @@ public class CoreMechanic : MonoBehaviour
           buttonsSet = false;
      }
 
-     public void setValues(float money, float mentalHealth, float academics, float energy)
+     public void setValues(int money, int mentalHealth, int academics, int energy)
      {
           moneyValue += money;
           mentalHealthValue += mentalHealth;

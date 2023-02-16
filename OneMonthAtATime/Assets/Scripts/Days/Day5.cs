@@ -40,9 +40,10 @@ public class Day5 : Day
             });
 
         events.Add(new Event(
-               new Option("Take a rest day", 20, 0, 0, 40f, new string[] { 
+               new Option("Take a rest day", 20, 0, 0, 40, new string[] { 
                    "0 2 00 00 00 0 I think I値l use the day to check out more of the town. I still have to get my bearings around here. Oi Olivia, wanna join me?", 
-                   "3 2 30 00 00 0 Eh?", "0 2 30 00 00  I知 gonna make a ruckus around town, you in?", 
+                   "3 2 30 00 00 0 Eh?", 
+                   "0 2 30 00 00 0 I知 gonna make a ruckus around town, you in?", 
                    "3 2 30 00 00 0 Oh I知 in, as long as we don稚 have to talk to too many peeps." }),
                new Option("Pickup a shift at work", 3, new string[] { 
                    "1 3 11 00 00 3 Nothing better to do, eh?", 
@@ -80,4 +81,14 @@ public class Day5 : Day
     {
         return hours;
     }
+
+     public override List<string> getUniqueEvent(string[] updatedSchedule, int mental, int money, int academic, int energy)
+     {
+          throw new System.NotImplementedException();
+     }
+
+     public override void addChoice(int choice)
+     {
+          throw new System.NotImplementedException();
+     }
 }

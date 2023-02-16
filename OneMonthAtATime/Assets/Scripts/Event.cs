@@ -39,15 +39,15 @@ public struct Event
 public struct Option
 {
     public string optionText;
-    public float valueMentalHealth;
-    public float valueMoney;
-    public float valueAcademic;
-    public float energy;
+    public int valueMentalHealth;
+    public int valueMoney;
+    public int valueAcademic;
+    public int energy;
     public string[] response;
     public int toEvent;
 
     //Constructor for the options that stores all the relevant stats
-    public Option(string optionText, float valueMentalHealth, float valueMoney, float valueAcademic, float energy, string[] response)
+    public Option(string optionText, int valueMentalHealth, int valueMoney, int valueAcademic, int energy, string[] response)
     {
         this.optionText = optionText;
         this.valueAcademic = valueAcademic;
