@@ -7,14 +7,16 @@ public class Day1 : Day
      List<string[]> dialogue;
      List<Event> events;
 
-     Event work;
      int hours = 5;
      string[] schedule;
+     List<int> choices;
+     int choiceOrder = 0;
 
      public Day1()
      {
           dialogue = new List<string[]>();
           events = new List<Event>();
+          choices = new List<int>();
           schedule = new string[] { "Dialogue", "Dialogue", "School", "Dialogue", "Freetime", "Dialogue", "School", "Dialogue", "End" };
 
           //Intro - Meeting Harry and Olivia
@@ -189,6 +191,6 @@ public class Day1 : Day
 
      public override void addChoice(int choice)
      {
-          throw new System.NotImplementedException();
+          choices.Add(choice);
      }
 }

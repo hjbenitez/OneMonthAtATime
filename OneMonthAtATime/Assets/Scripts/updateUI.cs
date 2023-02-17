@@ -26,11 +26,11 @@ public class updateUI : MonoBehaviour
           lastBill = false;
 
           importantDates = new Dictionary<int, string>();
-          importantDates.Add(7, "Groceries1");
-          importantDates.Add(14, "Groceries2");
-          importantDates.Add(21, "Groceries3");
-          importantDates.Add(28, "Groceries"); 
-          importantDates.Add(30, "Rent");
+          importantDates.Add(7, "Groceries");
+          importantDates.Add(14,"Groceries");
+          importantDates.Add(21,"Groceries");
+          importantDates.Add(28,"Groceries"); 
+          importantDates.Add(30,"Rent");
           importantDates.Add(99999, "$&%(#(");
 
           keyTracker = new List<int>(importantDates.Keys);

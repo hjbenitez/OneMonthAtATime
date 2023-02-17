@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
@@ -22,17 +23,22 @@ public class CoreMechanic : MonoBehaviour
      public Image healthIcon;
      public Image academicIcon;
 
-
      //values of each resource
      //this is what gets changed in the script that is then referenced by the TextMeshPro
-     int moneyValue;
-     public int mentalHealthValue;
-     int academicsValue;
-     int energyValue = 1;
+     static int moneyValue = 500;
+     static public int mentalHealthValue = 80;
+     static int academicsValue = 80;
+     static int energyValue = 100;
+     static int day = 1;
+
+     //transition variables
+     bool transitioningStart = false;
+     bool transitioningEnd = false;
+     float transitionTime = 0;
+     public Image transitionScreen;
 
      //toying with variables
      bool buttonsSet = false; //ensures the buttons are set only once
-     public int day = 1;
      bool daySet = false;
      List<string> schedule;
      List<string[]> conversations;
@@ -78,12 +84,7 @@ public class CoreMechanic : MonoBehaviour
      // Start is called before the first frame update
      void Start()
      {
-          //grabs the current values of each resource at the start
-          moneyValue = 500;
-          academicsValue = 75;
-          mentalHealthValue = 80;
-          //day = 1;
-
+          setButtonVisibility(0);
           conversations = new List<string[]>();
           house = GetComponent<HousingSelection>();
 
@@ -95,86 +96,101 @@ public class CoreMechanic : MonoBehaviour
           scheduleKey.Add(1, "1School");
           scheduleKey.Add(2, "2School");
           scheduleKey.Add(3, "Work");
+
+          //Day Transition Handling
+          transitioningStart = true;
+          transitioningEnd = false;
+          transitionTime = 0;
+          transitionScreen.color = new Color(0, 0, 0, 1);
+          transitionScreen.gameObject.SetActive(true);
+
+          switch (day)
+          {
+               //DAY 1
+               case 1:
+                    currentDay = new Day1();
+                    break;
+               //DAY 2
+               case 2:
+                    currentDay = new Day2();
+                    break;
+               //DAY 3
+               case 3:
+                    currentDay = new Day3();
+                    break;
+               //DAY 4
+               case 4:
+                    currentDay = new Day4();
+                    break;
+               //DAY 5
+               case 5:
+                    currentDay = new Day5();
+                    break;
+               //DEBUG DAY
+               case 31:
+                    currentDay = new Day31();
+                    break;
+          }
+
+          schedule = currentDay.getSchedule().ToList(); ;
+          conversations = currentDay.getDialogue();
+          newEvents = currentDay.getEvents();
+          //checkDebuffs();
+
+          daySet = true;
+          energyValue += 50;
+          scheduleIndex = 0;
+          dialogueIndex = 0;
+          eventIndex = 0;
+          locationIndex = 0;
+          dialogueSystem.setLocationIndex(0);
+          locationGrabbed = false;
      }
 
      // Update is called once per frame
      void Update()
      {
-          Debug.Log(locationIndex);
+          if (transitioningStart)
+          {
+               transitionTime += Time.deltaTime;
+               transitionScreen.color = Color.Lerp(new Color(0, 0, 0, 1), new Color(0, 0, 0, 0), Mathf.PingPong(transitionTime / 2, 1));
+
+               if (transitionTime >= 2)
+               {
+                    transitionScreen.gameObject.SetActive(false);
+                    transitioningStart = false;
+               }
+          }
+
+          if (transitioningEnd)
+          {
+               transitionTime += Time.deltaTime;
+               transitionScreen.color = Color.Lerp(new Color(0, 0, 0, 0), new Color(0, 0, 0, 1), Mathf.PingPong(transitionTime / 2, 1));
+
+               if (transitionTime >= 2)
+               {
+                    day++;
+                    SceneManager.LoadScene("DayEndScreen");
+               }
+          }
+
           //Updates the UI text to reflect the values every frame
           money.text = moneyValue.ToString();
           healthIcon.fillAmount = mentalHealthValue / 100f;
           academicIcon.fillAmount = academicsValue / 100f;
-          energyBar.fillAmount = energyValue/100;
-
+          energyBar.fillAmount = energyValue / 100f;
           //makes sure the values don't exceed the max or min values
           checkValues();
 
-          if (!daySet)
+          if (daySet && !transitioningStart)
           {
-               switch (day)
-               {
-                    //DAY 1
-                    case 1:
-                         currentDay = new Day1();
-                         break;
-                    //DAY 2
-                    case 2:
-                         currentDay = new Day2();
-                         break;
-                    //DAY 3
-                    case 3:
-                         currentDay = new Day3();
-                         break;
-                    //DAY 4
-                    case 4:
-                         currentDay = new Day4();
-                         break;
-                    //DAY 5
-                    case 5:
-                         currentDay = new Day5();
-                         break;
-                    //DEBUG DAY
-                    case 31:
-                         currentDay = new Day31();
-                         break;
 
-               }
-
-               schedule = currentDay.getSchedule().ToList(); ;
-               conversations = currentDay.getDialogue();
-               newEvents = currentDay.getEvents();
-
-               //checkDebuffs();
-
-               daySet = true;
-               energyValue += 50;
-               scheduleIndex = 0;
-               dialogueIndex = 0;
-               eventIndex = 0;
-               locationIndex = 0;
-               dialogueSystem.setLocationIndex(0);
-               locationGrabbed = false;
-          }
-
-          else
-          {
-               string scheduleString = "";
-
-               foreach (string time in schedule)
-               {
-                    scheduleString += new string(" " + time);
-               }
-
-               Debug.Log(scheduleString);
 
                locationIndex = dialogueSystem.getLocationIndex();
                currentLocation.sprite = locations[locationIndex];
 
                if (!locationGrabbed)
                {
-                    //locationIndex = int.Parse(schedule[scheduleIndex].Substring(0, 1));
-                    //schedule[scheduleIndex] = schedule[scheduleIndex].Remove(0, 1);
                     locationGrabbed = true;
                }
 
@@ -208,7 +224,7 @@ public class CoreMechanic : MonoBehaviour
                else if (schedule[scheduleIndex] == "Dialogue")
                {
                     setButtonVisibility(0);
-                    dialogueSystem.getDialogue(conversations[dialogueIndex]);
+                    //dialogueSystem.getDialogue(conversations[dialogueIndex]);
                     dialogueSet = true;
                }
 
@@ -231,13 +247,12 @@ public class CoreMechanic : MonoBehaviour
                     progressDay();
                }
 
-               else if(schedule[scheduleIndex] == "Check")
+               else if (schedule[scheduleIndex] == "Check")
                {
                     schedule.Insert(scheduleIndex + 1, "Dialogue");
                     conversations.Insert(dialogueIndex, currentDay.getUniqueEvent(schedule.ToArray(), mentalHealthValue, moneyValue, academicsValue, energyValue).ToArray());
                     progressDay();
                }
-
           }
      }
 
@@ -456,6 +471,10 @@ public class CoreMechanic : MonoBehaviour
           option2.GetComponent<ButtonScript>().setValue(0, 0, 0, 0);
           option3.GetComponent<ButtonScript>().setValue(0, 0, 0, 0);
 
+          option1.gameObject.SetActive(false);
+          option2.gameObject.SetActive(false);
+          option3.gameObject.SetActive(false);
+
           buttonsSet = false;
      }
 
@@ -508,7 +527,10 @@ public class CoreMechanic : MonoBehaviour
      public void sleep()
      {
           daySet = false;
-          day++;
+          transitionTime = 0;
+          transitioningEnd = true;
+          transitionScreen.gameObject.SetActive(true);
+
      }
 
      public void setStartButton()
@@ -546,5 +568,10 @@ public class CoreMechanic : MonoBehaviour
                maxMentalHealth += 40;
                mentalHealthValue += 40;
           }
+     }
+
+     public string[] getDialogue()
+     {
+          return conversations[dialogueIndex];
      }
 }

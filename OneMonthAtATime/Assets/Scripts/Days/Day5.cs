@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class Day5 : Day
 {
-    List<string[]> dialogue;
-    List<Event> events;
+     List<string[]> dialogue;
+     List<Event> events;
 
-    string[] schedule;
-    int hours = 8;
-    public Day5()
-    {
-        dialogue = new List<string[]>();
-        events = new List<Event>();
-        schedule = new string[] { "Dialogue", "Freetime", "Dialogue", "End" };
+     string[] schedule;
+     int hours = 8;
 
-        dialogue.Add(new string[] {
+     List<int> choices;
+     int choiceOrder = 0;
+     public Day5()
+     {
+          dialogue = new List<string[]>();
+          events = new List<Event>();
+          choices = new List<int>();
+          schedule = new string[] { "Dialogue", "Freetime", "Dialogue", "End" };
+
+          dialogue.Add(new string[] {
             "0 6 00 00 00 0 *BZZT BZZT BZZT BZZT*",
             "0 6 00 00 00 0 nggghhh *click*",
             "7 6 00 00 00 0 Wa…..ffles? This isn’t a restaurant calling you know. ",
@@ -39,48 +43,48 @@ public class Day5 : Day
             "0 1 00 00 00 0 (Ok, what should I do today? It is my day off, so I could just make it a rest day. That being said, with the talk I just had with Mom I could take Ashley up on that offer. Lastly, I could get a nice head start on schoolwork for this week.)"
             });
 
-        events.Add(new Event(
-               new Option("Take a rest day", 20, 0, 0, 40, new string[] { 
-                   "0 2 00 00 00 0 I think I’ll use the day to check out more of the town. I still have to get my bearings around here. Oi Olivia, wanna join me?", 
-                   "3 2 30 00 00 0 Eh?", 
-                   "0 2 30 00 00 0 I’m gonna make a ruckus around town, you in?", 
+          events.Add(new Event(
+                 new Option("Take a rest day", 20, 0, 0, 40, new string[] {
+                   "0 2 00 00 00 0 I think I’ll use the day to check out more of the town. I still have to get my bearings around here. Oi Olivia, wanna join me?",
+                   "3 2 30 00 00 0 Eh?",
+                   "0 2 30 00 00 0 I’m gonna make a ruckus around town, you in?",
                    "3 2 30 00 00 0 Oh I’m in, as long as we don’t have to talk to too many peeps." }),
-               new Option("Pickup a shift at work", 3, new string[] { 
-                   "1 3 11 00 00 3 Nothing better to do, eh?", 
-                   "0 5 11 00 00 3 Nope, and I need the cash. I’ll be here till close. ", 
-                   "1 5 11 00 00 3 Awesome, we could use the extra hand. Dress yourself, woman." , 
+                 new Option("Pickup a shift at work", 3, new string[] {
+                   "1 3 11 00 00 3 Nothing better to do, eh?",
+                   "0 5 11 00 00 3 Nope, and I need the cash. I’ll be here till close. ",
+                   "1 5 11 00 00 3 Awesome, we could use the extra hand. Dress yourself, woman." ,
                    "0 2 11 00 00 3 Sounds good, chief" }),
-               new Option("Jumpstart on homework", 10, 0, 5, 0, new string[] { 
-                   "0 5 00 00 00 0 Time to bury myself in some books. This is going to be bo-ring. Hey O, you here for the day?", 
-                   "3 5 30 00 00 0 Yea, why what’s up?", 
-                   "0 3 30 00 00 0 Gonna be doing some studying today. You wanna join?", 
+                 new Option("Jumpstart on homework", 10, 0, 5, 0, new string[] {
+                   "0 5 00 00 00 0 Time to bury myself in some books. This is going to be bo-ring. Hey O, you here for the day?",
+                   "3 5 30 00 00 0 Yea, why what’s up?",
+                   "0 3 30 00 00 0 Gonna be doing some studying today. You wanna join?",
                    "3 3 30 00 00 0 Was planning to do some myself anyway, so that works for me." })));
 
-        dialogue.Add(new string[] {
+          dialogue.Add(new string[] {
             "0 3 30 00 00 0 Olivia, we actually survived the first week in this place. Let’s crack open some of those beers you bought to celebrate. I’ll pay you back. ",
             "3 3 30 00 00 0 No need, that lasagna was fucking delicious. Call it even. "
         });
-    }
+     }
 
-    public override List<string[]> getDialogue()
-    {
-        return dialogue;
-    }
+     public override List<string[]> getDialogue()
+     {
+          return dialogue;
+     }
 
-    public override string[] getSchedule()
-    {
-        return schedule;
-    }
+     public override string[] getSchedule()
+     {
+          return schedule;
+     }
 
-    public override List<Event> getEvents()
-    {
-        return events;
-    }
+     public override List<Event> getEvents()
+     {
+          return events;
+     }
 
-    public override int getHours()
-    {
-        return hours;
-    }
+     public override int getHours()
+     {
+          return hours;
+     }
 
      public override List<string> getUniqueEvent(string[] updatedSchedule, int mental, int money, int academic, int energy)
      {
@@ -89,6 +93,6 @@ public class Day5 : Day
 
      public override void addChoice(int choice)
      {
-          throw new System.NotImplementedException();
+          choices.Add(choice);
      }
 }

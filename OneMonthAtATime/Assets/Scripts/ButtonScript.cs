@@ -204,7 +204,7 @@ public class ButtonScript : MonoBehaviour
      public void onHoverEnter()
      {
           hovering = true;
-         
+
 
           if (Mathf.Sign(moneySign) == -1)
           {
@@ -267,13 +267,16 @@ public class ButtonScript : MonoBehaviour
 
      public void onHoverExit()
      {
-          coreMechanic.money.color = colorIcon;
-          coreMechanic.academicIcon.color = colorIcon;
-          coreMechanic.healthIcon.color = colorIcon;
-          coreMechanic.energyBar.color = colorEnergy;
-          hovering = false;
+          if (coreMechanic != null)
+          {
+               coreMechanic.money.color = colorIcon;
+               coreMechanic.academicIcon.color = colorIcon;
+               coreMechanic.healthIcon.color = colorIcon;
+               coreMechanic.energyBar.color = colorEnergy;
+               hovering = false;
 
-          flashTime = 0;
+               flashTime = 0;
+          }
      }
 
      public void setValue(int money, int health, float academic, float energy)

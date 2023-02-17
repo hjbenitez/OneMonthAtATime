@@ -6,8 +6,8 @@ using TMPro;
 
 public class DialogueSystem : MonoBehaviour
 {
-     //0 0 00 00 00 0
-     //Speaker Victoria NPC1 NPC2 NPC3 Location
+     //0 0 00 00 00 0 0
+     //Speaker Victoria NPC1 NPC2 NPC3 Location Transition
      //Character - Emotion
 
      /*Speaker Index
@@ -82,8 +82,13 @@ public class DialogueSystem : MonoBehaviour
           charactersNames.Add(7, "Mom");
           charactersNames.Add(8, "Customer");
 
+          dialogue = coreMechanic.getDialogue();
+          setCharacters(dialogue[index]);
+          setDialogue(dialogue[index]); 
+          index++;
+
           //Start dialogue
-          dialogueBox.text = "Press Space to start!";
+          //dialogueBox.text = "Press Space to start!";
      }
 
      // Update is called once per frame
@@ -96,10 +101,11 @@ public class DialogueSystem : MonoBehaviour
 
           if ((Input.GetKeyDown(KeyCode.Space) || coreMechanic.playerChose) && coreMechanic.getCurrentTime() == "Dialogue" && coreMechanic.dialogueSet)
           {
+               dialogue = coreMechanic.getDialogue();
+               setCharacters(dialogue[index]);
                setDialogue(dialogue[index]);
                index++;
                dialoguePrompt.gameObject.SetActive(true);
-
                //when dialogue is done
                if (index == dialogue.Length)
                {
@@ -118,8 +124,6 @@ public class DialogueSystem : MonoBehaviour
 
      void setDialogue(string text)
      {
-          setCharacters(text);
-
           if (text != null || text != "")
           {
                text = text.Remove(0, 15);
@@ -127,11 +131,6 @@ public class DialogueSystem : MonoBehaviour
 
 
           dialogueBox.text = text;
-     }
-
-     public void getDialogue(string[] chain)
-     {
-          dialogue = chain;
      }
 
      void setCharacters(string dialogue)
@@ -232,7 +231,6 @@ public class DialogueSystem : MonoBehaviour
                     }
                }
           }
-
      }
 
      public int getLocationIndex()
