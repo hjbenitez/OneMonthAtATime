@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     private static int moneyValue = 500;
     private static int energyValue = 100;
 
-    private static int day = 1;
+    public int day = 1;
 
     public Image mentalHealthIcon;
     public Image academicIcon;
