@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     private static int academicValue = 75;
     private static int moneyValue = 200;
     private static int energyValue = 100;
+    private static int endIndex = 0;
 
     public int day = 1;
 
@@ -56,6 +57,7 @@ public class GameManager : MonoBehaviour
     public int GetMoney() { return moneyValue; }
     public int GetEnergy() { return energyValue;}
     public int GetDay() { return day; }
+    public int GetEndIndex() { return endIndex; }
     //----------------------------------------------------
     public void NextDay() { day++; daySelector.SetIntegerVariable("day", day); }
     public void SetValues(int mentalHealh, int academics, int money, int energy)
@@ -69,5 +71,10 @@ public class GameManager : MonoBehaviour
     public void WorkPay(int hours, float multiplier)
     {
         moneyValue += (int)Mathf.Round(multiplier * 15.5f * hours);
+    }
+
+    public void SetEndIndex(int index)
+    {
+        endIndex = index;
     }
 }
