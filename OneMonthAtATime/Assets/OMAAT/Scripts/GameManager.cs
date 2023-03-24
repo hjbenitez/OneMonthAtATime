@@ -10,9 +10,9 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public Flowchart daySelector;
 
-    private static int mentalHealthValue = 80;
-    private static int academicValue = 80;
-    private static int moneyValue = 500;
+    private static int mentalHealthValue = 75;
+    private static int academicValue = 75;
+    private static int moneyValue = 200;
     private static int energyValue = 100;
 
     public int day = 1;
@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
             academicIcon.fillAmount = (float)academicValue / 100;
             energyBar.fillAmount = (float)energyValue / 100;
             moneyText.text = moneyValue.ToString();
+
+            daySelector.SetIntegerVariable("energy", energyValue);
         }
     }
 

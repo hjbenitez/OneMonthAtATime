@@ -11,10 +11,11 @@ public class WorkPay : Command
 {
     public int hours;
     public float multiplier;
+    public int energy;
     public override void OnEnter()
     {
         GameManager.instance.WorkPay(hours, multiplier);
-
+        GameManager.instance.SetValues(0, 0, 0, energy);
         Continue();
     }
 }
