@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour
     private static int endIndex = 0;
 
     public int day = 1;
-    int dim = 0;
 
     public Image mentalHealthIcon;
     public Image academicIcon;
@@ -41,7 +40,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //dim = daySelector.GetIntegerVariable("dim");
         DimVictoria();
 
         if (daySelector != null)
