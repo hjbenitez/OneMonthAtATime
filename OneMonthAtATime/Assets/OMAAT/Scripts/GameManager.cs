@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        dim = daySelector.GetIntegerVariable("dim");
+        //dim = daySelector.GetIntegerVariable("dim");
         DimVictoria();
 
         if (daySelector != null)
@@ -84,27 +84,33 @@ public class GameManager : MonoBehaviour
 
     public void DimVictoria()
     {
+        GameObject speaker = GameObject.Find("UniversalNameText");
         GameObject victoria = GameObject.Find("Victoria holder");
+
         GameObject emotion = null;
-
-        if (victoria != null)
+        if(speaker != null)
         {
-            for (int i = 0; i < victoria.transform.childCount; i++)
+            Text name = speaker.GetComponent<Text>();
+
+            if (victoria != null)
             {
-                if (victoria.transform.GetChild(i).gameObject.activeSelf)
+                for (int i = 0; i < victoria.transform.childCount; i++)
                 {
-                    emotion = victoria.transform.GetChild(i).gameObject;
+                    if (victoria.transform.GetChild(i).gameObject.activeSelf)
+                    {
+                        emotion = victoria.transform.GetChild(i).gameObject;
+                    }
                 }
-            }
+            
+                if (name.text == "Victoria")
+                {
+                    emotion.GetComponent<Image>().color = Color.white;
+                }
 
-            if (dim == 0)
-            {
-                emotion.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f);
-            }
-
-            if (dim == 1)
-            {
-                emotion.GetComponent<Image>().color = Color.white;
+                else
+                {
+                    emotion.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f);
+                }
             }
         }
     }

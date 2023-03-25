@@ -11557,6 +11557,7 @@ GameObject:
   - component: {fileID: 1473481603}
   - component: {fileID: 1473481601}
   - component: {fileID: 1473481600}
+  - component: {fileID: 1473481606}
   m_Layer: 0
   m_Name: Day1
   m_TagString: Untagged
@@ -11579,8 +11580,8 @@ MonoBehaviour:
   nodeRect:
     serializedVersion: 2
     x: 46.333958
-    y: 58.752872
-    width: 118
+    y: 58.89219
+    width: 112.35297
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -11615,11 +11616,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 719.0719, y: 545.6876}
+  scrollPos: {x: 313.0647, y: 107.23882}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 495
-  zoom: 0.25
+  zoom: 0.84999967
   scrollViewRect:
     serializedVersion: 2
     x: -343
@@ -11627,9 +11628,9 @@ MonoBehaviour:
     width: 1114
     height: 859
   selectedBlocks:
-  - {fileID: 1473481396}
+  - {fileID: 1473481434}
   selectedCommands:
-  - {fileID: 1473481399}
+  - {fileID: 1473481435}
   variables: []
   description: 
   stepPause: 0
@@ -11783,9 +11784,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 8
   indentLevel: 0
-  storyText: " ain\u2019t your friend, so stay outta my business and I\u2019ll stay
-    outta yours. Rent is $1500 per month, and payments will be due on the last day
-    of every month. "
+  storyText: "{m=Dim}I ain\u2019t your friend, so stay outta my business and I\u2019ll
+    stay outta yours. Rent is $1500 per month, and payments will be due on the last
+    day of every month. "
   description: 
   character: {fileID: 8818486060342142218}
   portrait: {fileID: 21300000, guid: f040c2658102af344874d476569f7318, type: 3}
@@ -11924,8 +11925,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 22
   indentLevel: 0
-  storyText: "{m=Neutral}I\u2019m okay, just glad you\u2019re here. Did you meet
-    our landlord already? \n"
+  storyText: "{m=Neutral}{m=Dim}I\u2019m okay, just glad you\u2019re here. Did you
+    meet our landlord already? \n"
   description: 
   character: {fileID: 421827009052907570}
   portrait: {fileID: 21300000, guid: da1637a9dbf51da47a3a1bec73c057b3, type: 3}
@@ -11952,9 +11953,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 21
   indentLevel: 0
-  storyText: "{m=Neutral}{i}(It\u2019s Olivia. I have known her for a couple years
-    now. When we first met she was really shy around me, but I stuck with her and
-    she eventually opened up to me.){/i}"
+  storyText: "{m=Neutral}{m=High}{i}(It\u2019s Olivia. I have known her for a couple
+    years now. When we first met she was really shy around me, but I stuck with her
+    and she eventually opened up to me.){/i}"
   description: 
   character: {fileID: 584984924363940469}
   portrait: {fileID: 21300000, guid: cf3cce82a60f43c409079cd631510390, type: 3}
@@ -12117,7 +12118,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 48.577503
     y: 145.69698
-    width: 86
+    width: 82.94119
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -12133,6 +12134,7 @@ MonoBehaviour:
   - {fileID: 1473481416}
   - {fileID: 1473481414}
   - {fileID: 1473481552}
+  - {fileID: 1473481606}
   - {fileID: 1473481422}
   - {fileID: 1473481431}
   - {fileID: 1473481430}
@@ -12226,7 +12228,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 26.228928
     y: 315.6776
-    width: 106
+    width: 99.41179
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -12346,9 +12348,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 223.00563
+    x: 220.6527
     y: 214.51144
-    width: 86
+    width: 80.58825
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -12376,9 +12378,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 41.170418
+    x: 43.801994
     y: 210.69325
-    width: 118
+    width: 108.82355
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -12406,9 +12408,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -134.03976
+    x: -140.20076
     y: 206.9035
-    width: 102
+    width: 94.7059
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -12436,8 +12438,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 43
   indentLevel: 0
-  storyText: "{m=Happy}Don\u2019t worry about it, I\u2019ll deal with him. He seems
-    to be more bark than bite. "
+  storyText: "{m=Happy{m=High}}Don\u2019t worry about it, I\u2019ll deal with him.
+    He seems to be more bark than bite. "
   description: 
   character: {fileID: 584984924363940469}
   portrait: {fileID: 21300000, guid: c8bb50d45892f2548a3af714af3d8e7c, type: 3}
@@ -12464,7 +12466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 42
   indentLevel: 0
-  storyText: 'Haha...he kinda scares me. '
+  storyText: '{m=Dim}Haha...he kinda scares me. '
   description: 
   character: {fileID: 421827009052907570}
   portrait: {fileID: 21300000, guid: da1637a9dbf51da47a3a1bec73c057b3, type: 3}
@@ -12561,8 +12563,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 47
   indentLevel: 0
-  storyText: "Don\u2019t worry about it, I\u2019ll deal with him. He seems to be
-    more bark than bite. "
+  storyText: "{m=High}Don\u2019t worry about it, I\u2019ll deal with him. He seems
+    to be more bark than bite. "
   description: 
   character: {fileID: 584984924363940469}
   portrait: {fileID: 21300000, guid: c8bb50d45892f2548a3af714af3d8e7c, type: 3}
@@ -12589,7 +12591,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 46
   indentLevel: 0
-  storyText: 'He kinda scares me. '
+  storyText: '{m=Dim}He kinda scares me. '
   description: 
   character: {fileID: 421827009052907570}
   portrait: {fileID: 21300000, guid: da1637a9dbf51da47a3a1bec73c057b3, type: 3}
@@ -12616,8 +12618,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 45
   indentLevel: 0
-  storyText: "{m=Happy}Don\u2019t worry about it, I\u2019ll deal with him. He seems
-    to be more bark than bite. "
+  storyText: "{m=Happy}{m=High}Don\u2019t worry about it, I\u2019ll deal with him.
+    He seems to be more bark than bite. "
   description: 
   character: {fileID: 584984924363940469}
   portrait: {fileID: 21300000, guid: c8bb50d45892f2548a3af714af3d8e7c, type: 3}
@@ -12644,7 +12646,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 44
   indentLevel: 0
-  storyText: 'He kinda scares me. '
+  storyText: '{m=Dim}He kinda scares me. '
   description: 
   character: {fileID: 421827009052907570}
   portrait: {fileID: 21300000, guid: da1637a9dbf51da47a3a1bec73c057b3, type: 3}
@@ -12890,7 +12892,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -149.6259
     y: 399.98047
-    width: 106
+    width: 102.94119
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -13009,7 +13011,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -25.246294
     y: 509.97202
-    width: 174
+    width: 161.76474
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -13176,7 +13178,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 205.00049
     y: 359.86774
-    width: 122
+    width: 115.88238
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -13204,7 +13206,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 2.1798577
     y: 418.14233
-    width: 134
+    width: 126.47062
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -13562,7 +13564,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 258.3071
     y: 522.03674
-    width: 130
+    width: 121.76473
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -13593,7 +13595,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 24.641106
     y: 577.73517
-    width: 82
+    width: 78.235306
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -13640,7 +13642,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -287.54245
     y: 533.5567
-    width: 158
+    width: 147.6471
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -14001,7 +14003,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 25.22188
     y: 898.3504
-    width: 106
+    width: 100.58826
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -14098,7 +14100,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 145.51141
     y: 586.4417
-    width: 142
+    width: 134.70592
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -14126,7 +14128,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -14.569518
     y: 649.57434
-    width: 170
+    width: 153.52945
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -14154,7 +14156,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -131.16702
     y: 590.0768
-    width: 114
+    width: 108.82355
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -14660,7 +14662,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 22.911472
     y: 1172.1558
-    width: 130
+    width: 121.76473
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -14738,7 +14740,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 187.07834
     y: 987.18445
-    width: 142
+    width: 134.70592
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -14805,7 +14807,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 11.110897
     y: 1009.2455
-    width: 154
+    width: 145.29416
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -14872,7 +14874,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -141.14719
     y: 995.26025
-    width: 126
+    width: 121.76473
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -16863,7 +16865,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 189.56479
     y: 1238.7932
-    width: 130
+    width: 121.76473
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -16894,7 +16896,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -95.73445
     y: 1232.3158
-    width: 86
+    width: 82.94119
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -16925,7 +16927,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 46.23735
     y: 1260.5405
-    width: 86
+    width: 82.94119
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -17569,6 +17571,158 @@ MonoBehaviour:
   hideThisOption:
     booleanRef: {fileID: 0}
     booleanVal: 0
+--- !u!114 &1473481606
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473481394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb77d0ce495044f6e9feb91b31798e8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 210
+  indentLevel: 0
+  anyVar:
+    variable: {fileID: 1303871814}
+    data:
+      animatorData:
+        animatorRef: {fileID: 0}
+        animatorVal: {fileID: 0}
+      audioSourceData:
+        audioSourceRef: {fileID: 0}
+        audioSourceVal: {fileID: 0}
+      booleanData:
+        booleanRef: {fileID: 0}
+        booleanVal: 0
+      collectionData:
+        collectionRef: {fileID: 0}
+        collectionVal: {fileID: 0}
+      collider2DData:
+        collider2DRef: {fileID: 0}
+        collider2DVal: {fileID: 0}
+      colliderData:
+        colliderRef: {fileID: 0}
+        colliderVal: {fileID: 0}
+      colorData:
+        colorRef: {fileID: 0}
+        colorVal: {r: 0, g: 0, b: 0, a: 0}
+      floatData:
+        floatRef: {fileID: 0}
+        floatVal: 0
+      gameObjectData:
+        gameObjectRef: {fileID: 0}
+        gameObjectVal: {fileID: 0}
+      integerData:
+        integerRef: {fileID: 0}
+        integerVal: 1
+      materialData:
+        materialRef: {fileID: 0}
+        materialVal: {fileID: 0}
+      matrix4x4Data:
+        matrix4x4Ref: {fileID: 0}
+        matrix4x4Val:
+          e00: 0
+          e01: 0
+          e02: 0
+          e03: 0
+          e10: 0
+          e11: 0
+          e12: 0
+          e13: 0
+          e20: 0
+          e21: 0
+          e22: 0
+          e23: 0
+          e30: 0
+          e31: 0
+          e32: 0
+          e33: 0
+      objectData:
+        objectRef: {fileID: 0}
+        objectVal: {fileID: 0}
+      quaternionData:
+        quaternionRef: {fileID: 0}
+        quaternionVal: {x: 0, y: 0, z: 0, w: 0}
+      rigidbody2DData:
+        rigidbody2DRef: {fileID: 0}
+        rigidbody2DVal: {fileID: 0}
+      rigidbodyData:
+        rigidbodyRef: {fileID: 0}
+        rigidbodyVal: {fileID: 0}
+      spriteData:
+        spriteRef: {fileID: 0}
+        spriteVal: {fileID: 0}
+      stringData:
+        stringRef: {fileID: 0}
+        stringVal: 
+      textureData:
+        textureRef: {fileID: 0}
+        textureVal: {fileID: 0}
+      transformData:
+        transformRef: {fileID: 0}
+        transformVal: {fileID: 0}
+      vector2Data:
+        vector2Ref: {fileID: 0}
+        vector2Val: {x: 0, y: 0}
+      vector3Data:
+        vector3Ref: {fileID: 0}
+        vector3Val: {x: 0, y: 0, z: 0}
+      vector4Data:
+        vector4Ref: {fileID: 0}
+        vector4Val: {x: 0, y: 0, z: 0, w: 0}
+  setOperator: 0
+  variable: {fileID: 0}
+  booleanData:
+    booleanRef: {fileID: 0}
+    booleanVal: 0
+  integerData:
+    integerRef: {fileID: 0}
+    integerVal: 0
+  floatData:
+    floatRef: {fileID: 0}
+    floatVal: 0
+  stringData:
+    stringRef: {fileID: 0}
+    stringVal: 
+  animatorData:
+    animatorRef: {fileID: 0}
+    animatorVal: {fileID: 0}
+  audioSourceData:
+    audioSourceRef: {fileID: 0}
+    audioSourceVal: {fileID: 0}
+  colorData:
+    colorRef: {fileID: 0}
+    colorVal: {r: 0, g: 0, b: 0, a: 0}
+  gameObjectData:
+    gameObjectRef: {fileID: 0}
+    gameObjectVal: {fileID: 0}
+  materialData:
+    materialRef: {fileID: 0}
+    materialVal: {fileID: 0}
+  objectData:
+    objectRef: {fileID: 0}
+    objectVal: {fileID: 0}
+  rigidbody2DData:
+    rigidbody2DRef: {fileID: 0}
+    rigidbody2DVal: {fileID: 0}
+  spriteData:
+    spriteRef: {fileID: 0}
+    spriteVal: {fileID: 0}
+  textureData:
+    textureRef: {fileID: 0}
+    textureVal: {fileID: 0}
+  transformData:
+    transformRef: {fileID: 0}
+    transformVal: {fileID: 0}
+  vector2Data:
+    vector2Ref: {fileID: 0}
+    vector2Val: {x: 0, y: 0}
+  vector3Data:
+    vector3Ref: {fileID: 0}
+    vector3Val: {x: 0, y: 0, z: 0}
 --- !u!1 &1706255072
 GameObject:
   m_ObjectHideFlags: 0
