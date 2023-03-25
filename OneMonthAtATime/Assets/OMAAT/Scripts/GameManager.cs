@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     private static int endIndex = 0;
 
     public int day = 1;
+    int dim = 0;
 
     public Image mentalHealthIcon;
     public Image academicIcon;
@@ -32,15 +33,18 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        if(daySelector != null)
+        if (daySelector != null)
         {
-            daySelector.SetIntegerVariable("day", day);      
+            daySelector.SetIntegerVariable("day", day);
         }
     }
     // Update is called once per frame
     void Update()
     {
-        if(daySelector != null)
+        dim = daySelector.GetIntegerVariable("dim");
+        DimVictoria();
+
+        if (daySelector != null)
         {
             mentalHealthIcon.fillAmount = (float)mentalHealthValue / 100;
             academicIcon.fillAmount = (float)academicValue / 100;
@@ -55,7 +59,7 @@ public class GameManager : MonoBehaviour
     public int GetMental() { return mentalHealthValue; }
     public int GetAcademic() { return academicValue; }
     public int GetMoney() { return moneyValue; }
-    public int GetEnergy() { return energyValue;}
+    public int GetEnergy() { return energyValue; }
     public int GetDay() { return day; }
     public int GetEndIndex() { return endIndex; }
     //----------------------------------------------------
@@ -76,5 +80,32 @@ public class GameManager : MonoBehaviour
     public void SetEndIndex(int index)
     {
         endIndex = index;
+    }
+
+    public void DimVictoria()
+    {
+        GameObject victoria = GameObject.Find("Victoria holder");
+        GameObject emotion = null;
+
+        if (victoria != null)
+        {
+            for (int i = 0; i < victoria.transform.childCount; i++)
+            {
+                if (victoria.transform.GetChild(i).gameObject.activeSelf)
+                {
+                    emotion = victoria.transform.GetChild(i).gameObject;
+                }
+            }
+
+            if (dim == 0)
+            {
+                emotion.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f);
+            }
+
+            if (dim == 1)
+            {
+                emotion.GetComponent<Image>().color = Color.white;
+            }
+        }
     }
 }
