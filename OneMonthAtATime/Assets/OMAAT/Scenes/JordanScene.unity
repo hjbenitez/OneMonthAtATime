@@ -1160,7 +1160,7 @@ SpriteRenderer:
   m_Size: {x: 19.2, y: 10.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &462308850
@@ -1544,7 +1544,7 @@ SpriteRenderer:
   m_Size: {x: 19.2, y: 10.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &751977170
@@ -2840,7 +2840,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61dddfdc5e0e44ca298d8f46f7f5a915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedFlowchart: {fileID: 1523418292}
+  selectedFlowchart: {fileID: 1303871742}
 --- !u!4 &1273557546
 Transform:
   m_ObjectHideFlags: 1
@@ -2976,8 +2976,7 @@ MonoBehaviour:
     y: -340
     width: 1114
     height: 859
-  selectedBlocks:
-  - {fileID: 1303871741}
+  selectedBlocks: []
   selectedCommands: []
   variables:
   - {fileID: 1303871744}
@@ -3824,6 +3823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   daySelector: {fileID: 1303871742}
+  day: 1
   mentalHealthIcon: {fileID: 6574858782546486081}
   academicIcon: {fileID: 6574858782315951830}
   energyBar: {fileID: 6574858781458437136}
@@ -7014,6 +7014,7 @@ MonoBehaviour:
   indentLevel: 0
   hours: 5
   multiplier: 1.4
+  energy: 0
 --- !u!114 &1473481524
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -7602,6 +7603,7 @@ MonoBehaviour:
   indentLevel: 0
   hours: 5
   multiplier: 1
+  energy: 0
 --- !u!114 &1473481550
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -7618,6 +7620,7 @@ MonoBehaviour:
   indentLevel: 0
   hours: 5
   multiplier: 1.2
+  energy: 0
 --- !u!114 &1473481551
 MonoBehaviour:
   m_ObjectHideFlags: 2
