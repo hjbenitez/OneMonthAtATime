@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
     public int GetEndIndex() { return endIndex; }
     //----------------------------------------------------
     public void NextDay() { day++; daySelector.SetIntegerVariable("day", day); }
+    public void SkipToDay5() { day += 5; daySelector.SetIntegerVariable("day", day); }
     public void SetValues(int mentalHealh, int academics, int money, int energy)
     {
         mentalHealthValue += mentalHealh;
