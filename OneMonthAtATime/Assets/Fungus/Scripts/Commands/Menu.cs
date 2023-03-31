@@ -4,6 +4,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 using System.Collections.Generic;
+using UnityEditor.Build.Content;
 
 namespace Fungus
 {
@@ -63,7 +64,6 @@ namespace Fungus
 
                     menuDialog.AddOption(displayText, interactable, hideOption, targetBlock);
                 }
-            
             Continue();
         }
 

@@ -10,13 +10,17 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public Flowchart daySelector;
 
+    public ButtonScript option1;
+    public ButtonScript option2;
+    public ButtonScript option3;
+
     private static int mentalHealthValue = 75;
     private static int academicValue = 75;
     private static int moneyValue = 200;
     private static int energyValue = 100;
     private static int endIndex = 0;
 
-    public static int day = 0;
+    public static int day = 01;
 
     public Image mentalHealthIcon;
     public Image academicIcon;
@@ -26,7 +30,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         instance = this;
     }
 
@@ -54,6 +57,9 @@ public class GameManager : MonoBehaviour
     }
 
     //GETTERS --------------------------------------------
+    public ButtonScript GetOption1() { return option1; }
+    public ButtonScript GetOption2() { return option2; }
+    public ButtonScript GetOption3() { return option3; }
     public int GetMental() { return mentalHealthValue; }
     public int GetAcademic() { return academicValue; }
     public int GetMoney() { return moneyValue; }
@@ -69,6 +75,17 @@ public class GameManager : MonoBehaviour
         academicValue += academics;
         moneyValue += money;
         energyValue += energy;
+    }
+
+    public void RemoveListeners()
+    {
+        option1.GetComponent<Button>().onClick.RemoveAllListeners();
+        option2.GetComponent<Button>().onClick.RemoveAllListeners();
+        option3.GetComponent<Button>().onClick.RemoveAllListeners();
+
+        option1.setValue(0, 0, 0, 0);
+        option2.setValue(0, 0, 0, 0);
+        option3.setValue(0, 0, 0, 0);
     }
 
     public void WorkPay(int hours, float multiplier)
@@ -87,7 +104,7 @@ public class GameManager : MonoBehaviour
         GameObject victoria = GameObject.Find("Victoria holder");
 
         GameObject emotion = null;
-        if(speaker != null)
+        if (speaker != null)
         {
             Text name = speaker.GetComponent<Text>();
 
@@ -100,7 +117,7 @@ public class GameManager : MonoBehaviour
                         emotion = victoria.transform.GetChild(i).gameObject;
                     }
                 }
-            
+
                 if (name.text == "Victoria")
                 {
                     emotion.GetComponent<Image>().color = Color.white;
