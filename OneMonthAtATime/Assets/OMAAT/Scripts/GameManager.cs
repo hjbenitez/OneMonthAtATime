@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     private static int endIndex = 0;
 
-    public static int day = 0;
+    public static int day = 1;
 
     public Image mentalHealthIcon;
     public Image academicIcon;
