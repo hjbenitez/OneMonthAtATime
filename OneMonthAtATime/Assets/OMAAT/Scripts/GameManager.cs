@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public Flowchart daySelector;
     public CameraManager cameraManager;
 
+    public NarrativeLog log;
 
     public ButtonScript option1;
     public ButtonScript option2;
@@ -38,9 +39,9 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        instance = this;
 
-        if(daySelector != null)
+        instance = this;
+        if (daySelector != null)
         {
             mentalHealthIcon.fillAmount = (float)mentalHealthValue / 100;
             academicIcon.fillAmount = (float)academicValue / 100;
@@ -60,23 +61,16 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        log = FindObjectOfType<NarrativeLog>();
+        cameraManager = FindObjectOfType<CameraManager>();
         //Clamp values
-        moneyValue = (int)Mathf.Clamp(moneyValue,-500, 999999);
+        moneyValue = (int)Mathf.Clamp(moneyValue, -500, 999999);
         mentalHealthValue = (int)Mathf.Clamp(mentalHealthValue, 0, 100);
         academicValue = (int)Mathf.Clamp(academicValue, 0, 100);
         energyValue = (int)Mathf.Clamp(energyValue, 0, 100);
 
-        //Gets the camera manager to get the screen fade alpha
-        if (cameraManager == null)
-        {
-            try
-            {
-                cameraManager = GameObject.Find("FungusManager").GetComponent<CameraManager>();
-            } catch{}
-        }
-
         //Continually sets the screen fade alpha 
-        else
+        if (cameraManager != null)
         {
             guiFade = cameraManager.fadeAlpha;
         }
@@ -86,7 +80,7 @@ public class GameManager : MonoBehaviour
         {
             daySelector.SetIntegerVariable("energy", energyValue);
 
-            if(guiFade > 0.99f)
+            if (guiFade > 0.99f)
             {
                 mentalHealthIcon.fillAmount = (float)mentalHealthValue / 100;
                 academicIcon.fillAmount = (float)academicValue / 100;
@@ -188,5 +182,10 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void OnDisable()
+    {
+        log.Clear();
     }
 }
