@@ -6,10 +6,10 @@ using UnityEngine;
 public class ButtonScript : MonoBehaviour
 {
     GameManager gameManager;
-    int moneySign = 0;
-    int academicSign = 0;
-    int mentalHealthSign = 0;
-    int energySign = 0;
+    public int moneySign = 0;
+    public int academicSign = 0;
+    public int mentalHealthSign = 0;
+    public int energySign = 0;
 
     float flashTime = 0;
 
@@ -17,14 +17,10 @@ public class ButtonScript : MonoBehaviour
     int maxResource = 20;
     int maxMoney = 200;
 
-
-    Color maxGreen;
-    Color maxRed;
-
     Color colorEnergy;
     Color colorIcon;
 
-    bool hovering;
+    private bool hovering;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,9 +30,6 @@ public class ButtonScript : MonoBehaviour
         //Setting colors
         colorEnergy = new Color(0.97f, 0.76f, 0.63f); //orangey colour
         colorIcon = Color.white;
-
-        maxGreen = new Color(0, 255, 0);
-        maxRed = new Color(255, 0, 0);
     }
 
     // Update is called once per frame
@@ -140,13 +133,21 @@ public class ButtonScript : MonoBehaviour
         energySign = energy;
     }
 
-    public void OnDisable()
+    public void ResetValues()
     {
-        OnHoverExit();
-
         moneySign = 0;
         energySign = 0;
         mentalHealthSign = 0;
         academicSign = 0;
+    }
+
+    public bool GetHovering()
+    {
+        return hovering;
+    }
+
+    public void OnDisable()
+    {
+        hovering = false;    
     }
 }

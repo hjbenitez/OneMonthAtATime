@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 using Fungus;
 
@@ -10,12 +11,29 @@ using Fungus;
 public class WorkPay : Command
 {
     public int hours;
-    public float multiplier;
-    public int energy;
+    public int workHardEnergy;
+    public int businessAsUsualEnergy;
+
     public override void OnEnter()
     {
-        GameManager.instance.WorkPay(hours, multiplier);
-        GameManager.instance.SetValues(0, 0, 0, energy);
+        //Work Hard
+        GameManager.instance.GetOption1().GetComponent<Button>().onClick.AddListener(() =>
+        {
+            GameManager.instance.SetValues((int)Mathf.Round(15.5f * hours * 1.4f), 0, 0, workHardEnergy);
+        });
+
+        //Business As Usual
+        GameManager.instance.GetOption2().GetComponent<Button>().onClick.AddListener(() =>
+        {
+            GameManager.instance.SetValues((int)Mathf.Round(15.5f * hours * 1.2f), 0, 0, workHardEnergy);
+        });
+
+        //Slack Off
+        GameManager.instance.GetOption3().GetComponent<Button>().onClick.AddListener(() =>
+        {
+            GameManager.instance.SetValues((int)Mathf.Round(15.5f * hours), 0, 0, workHardEnergy);
+        });
+
         Continue();
     }
 }

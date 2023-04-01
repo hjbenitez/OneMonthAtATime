@@ -9,18 +9,26 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public Flowchart daySelector;
+    public CameraManager cameraManager;
+
 
     public ButtonScript option1;
     public ButtonScript option2;
     public ButtonScript option3;
 
+    Color colorEnergy = new Color(0.97f, 0.76f, 0.63f); //orangey colour
+    Color colorIcon = Color.white;
+
     private static int mentalHealthValue = 75;
     private static int academicValue = 75;
     private static int moneyValue = 200;
     private static int energyValue = 100;
+
+    public float guiFade = 0;
+
     private static int endIndex = 0;
 
-    public static int day = 01;
+    public static int day = 0;
 
     public Image mentalHealthIcon;
     public Image academicIcon;
@@ -31,6 +39,14 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         instance = this;
+
+        if(daySelector != null)
+        {
+            mentalHealthIcon.fillAmount = (float)mentalHealthValue / 100;
+            academicIcon.fillAmount = (float)academicValue / 100;
+            energyBar.fillAmount = (float)energyValue / 100;
+            moneyText.text = moneyValue.ToString();
+        }
     }
 
     private void OnEnable()
@@ -40,20 +56,55 @@ public class GameManager : MonoBehaviour
             daySelector.SetIntegerVariable("day", day);
         }
     }
+
     // Update is called once per frame
     void Update()
     {
-        DimVictoria();
+        //Clamp values
+        moneyValue = (int)Mathf.Clamp(moneyValue,-500, 999999);
+        mentalHealthValue = (int)Mathf.Clamp(mentalHealthValue, 0, 100);
+        academicValue = (int)Mathf.Clamp(academicValue, 0, 100);
+        energyValue = (int)Mathf.Clamp(energyValue, 0, 100);
 
+        //Gets the camera manager to get the screen fade alpha
+        if (cameraManager == null)
+        {
+            try
+            {
+                cameraManager = GameObject.Find("FungusManager").GetComponent<CameraManager>();
+            } catch{}
+        }
+
+        //Continually sets the screen fade alpha 
+        else
+        {
+            guiFade = cameraManager.fadeAlpha;
+        }
+
+        //Main game screen loop
         if (daySelector != null)
         {
-            mentalHealthIcon.fillAmount = (float)mentalHealthValue / 100;
-            academicIcon.fillAmount = (float)academicValue / 100;
-            energyBar.fillAmount = (float)energyValue / 100;
-            moneyText.text = moneyValue.ToString();
-
             daySelector.SetIntegerVariable("energy", energyValue);
+
+            if(guiFade > 0.99f)
+            {
+                mentalHealthIcon.fillAmount = (float)mentalHealthValue / 100;
+                academicIcon.fillAmount = (float)academicValue / 100;
+                energyBar.fillAmount = (float)energyValue / 100;
+                moneyText.text = moneyValue.ToString();
+            }
+
+            if (!(option1.GetHovering() || option2.GetHovering() || option3.GetHovering()))
+            {
+                moneyText.color = colorIcon;
+                academicIcon.color = colorIcon;
+                mentalHealthIcon.color = colorIcon;
+                energyBar.color = colorEnergy;
+            }
         }
+
+
+        DimVictoria();
     }
 
     //GETTERS --------------------------------------------
@@ -69,7 +120,7 @@ public class GameManager : MonoBehaviour
     //----------------------------------------------------
     public void NextDay() { day++; daySelector.SetIntegerVariable("day", day); }
     public void SkipToDay5() { day += 5; daySelector.SetIntegerVariable("day", day); }
-    public void SetValues(int mentalHealh, int academics, int money, int energy)
+    public void SetValues(int money, int mentalHealh, int academics, int energy)
     {
         mentalHealthValue += mentalHealh;
         academicValue += academics;
@@ -79,13 +130,16 @@ public class GameManager : MonoBehaviour
 
     public void RemoveListeners()
     {
+        GameObject myEventSystem = GameObject.Find("EventSystem");
+        myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
+
         option1.GetComponent<Button>().onClick.RemoveAllListeners();
         option2.GetComponent<Button>().onClick.RemoveAllListeners();
         option3.GetComponent<Button>().onClick.RemoveAllListeners();
 
-        option1.setValue(0, 0, 0, 0);
-        option2.setValue(0, 0, 0, 0);
-        option3.setValue(0, 0, 0, 0);
+        option1.ResetValues();
+        option2.ResetValues();
+        option3.ResetValues();
     }
 
     public void WorkPay(int hours, float multiplier)
@@ -96,6 +150,11 @@ public class GameManager : MonoBehaviour
     public void SetEndIndex(int index)
     {
         endIndex = index;
+    }
+
+    public void SetGUIFade(float fade)
+    {
+        guiFade = fade;
     }
 
     public void DimVictoria()

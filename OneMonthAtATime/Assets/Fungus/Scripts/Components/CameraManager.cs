@@ -32,7 +32,7 @@ namespace Fungus
         [Tooltip("Camera to use when in swipe mode")]
         [SerializeField] protected Camera swipeCamera;
 
-        protected float fadeAlpha = 0f;
+        public float fadeAlpha = 0f;
         
         // Swipe panning control
         protected bool swipePanActive;
