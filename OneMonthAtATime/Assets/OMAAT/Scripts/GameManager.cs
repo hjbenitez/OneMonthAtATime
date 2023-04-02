@@ -9,9 +9,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public Flowchart daySelector;
-    public CameraManager cameraManager;
 
-    public NarrativeLog log;
+    public GameObject menu;
+
+    private CameraManager cameraManager;
+    private NarrativeLog log;
 
     public ButtonScript option1;
     public ButtonScript option2;
@@ -39,6 +41,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        menu.SetActive(true);
 
         instance = this;
         if (daySelector != null)
