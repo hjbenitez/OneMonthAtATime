@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/OMAAT/Scenes/DEMO.unity
+    path: Assets/OMAAT/Scenes/Game.unity
     guid: f7902695ea64efd43b9a956b13e90560
   - enabled: 1
     path: Assets/OMAAT/Scenes/DayEndScreen.unity

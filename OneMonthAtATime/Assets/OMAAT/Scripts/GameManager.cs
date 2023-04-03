@@ -19,9 +19,13 @@ public class GameManager : MonoBehaviour
     public ButtonScript option2;
     public ButtonScript option3;
 
-    Color colorEnergy = new Color(0.97f, 0.76f, 0.63f); //orangey colour
-    Color colorIcon = Color.white;
+    Color colorEnergy;
+    Color colorMentalHealth;
+    Color colorAcademic;
+    Color colorMoney;
 
+    float revertTimer = 0;
+    
     private static int mentalHealthValue = 75;
     private static int academicValue = 75;
     private static int moneyValue = 200;
@@ -41,6 +45,12 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //sets colors 
+        colorEnergy = energyBar.color;
+        colorMentalHealth = mentalHealthIcon.color;
+        colorAcademic = academicIcon.color;
+        colorMoney = moneyText.color;
+
         menu.SetActive(true);
 
         instance = this;
@@ -91,13 +101,22 @@ public class GameManager : MonoBehaviour
                 moneyText.text = moneyValue.ToString();
             }
 
+            
             if (!(option1.GetHovering() || option2.GetHovering() || option3.GetHovering()))
             {
-                moneyText.color = colorIcon;
-                academicIcon.color = colorIcon;
-                mentalHealthIcon.color = colorIcon;
-                energyBar.color = colorEnergy;
+                revertTimer += Time.deltaTime/10;
+
+                moneyText.color = Color.Lerp(moneyText.color, colorMoney, revertTimer); ;
+                academicIcon.color = Color.Lerp(academicIcon.color, colorAcademic, revertTimer); ;
+                mentalHealthIcon.color = Color.Lerp(mentalHealthIcon.color, colorMentalHealth, revertTimer);
+                energyBar.color = Color.Lerp(energyBar.color, colorEnergy, revertTimer); ;
             }
+
+            else
+            {
+                revertTimer = 0;
+            }
+            
         }
 
 
@@ -108,6 +127,10 @@ public class GameManager : MonoBehaviour
     public ButtonScript GetOption1() { return option1; }
     public ButtonScript GetOption2() { return option2; }
     public ButtonScript GetOption3() { return option3; }
+    public Color GetMoneyColor() { return moneyText.color; }
+    public Color GetMentalHealthColor() { return mentalHealthIcon.color; }
+    public Color GetAcademicColor() { return academicIcon.color; }
+    public Color GetEnergyColor() { return energyBar.color; }
     public int GetMental() { return mentalHealthValue; }
     public int GetAcademic() { return academicValue; }
     public int GetMoney() { return moneyValue; }
