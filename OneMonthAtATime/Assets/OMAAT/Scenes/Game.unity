@@ -23160,15 +23160,15 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1140332751}
   - {fileID: 1801566628}
+  - {fileID: 1140332751}
   m_Father: {fileID: 226879158}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 216, y: 0}
-  m_SizeDelta: {x: 1460, y: 335}
+  m_AnchoredPosition: {x: 198, y: 0}
+  m_SizeDelta: {x: 1520, y: 335}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &887685079
 MonoBehaviour:
@@ -23979,7 +23979,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 887685078}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -36949,6 +36949,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   daySelector: {fileID: 1303871742}
   menu: {fileID: 106651703}
+  dialogue: {fileID: 226879157}
+  test: {fileID: 0}
+  test2: {fileID: 0}
+  test3: {fileID: 0}
   option1: {fileID: 283501995}
   option2: {fileID: 2044220347}
   option3: {fileID: 606378554}
@@ -62957,7 +62961,7 @@ RectTransform:
   m_Children:
   - {fileID: 238592469}
   m_Father: {fileID: 887685078}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.78700006}

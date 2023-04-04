@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public Flowchart daySelector;
 
     public GameObject menu;
+    public GameObject dialogue;
 
     private CameraManager cameraManager;
     private NarrativeLog log;
@@ -25,7 +26,12 @@ public class GameManager : MonoBehaviour
     Color colorMoney;
 
     float revertTimer = 0;
-    
+
+    //Options
+    public static int textCrawlSpeed = 35;
+    public static int fontSize = 33;
+    public static int volume = 10;
+
     private static int mentalHealthValue = 75;
     private static int academicValue = 75;
     private static int moneyValue = 200;
@@ -44,18 +50,25 @@ public class GameManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-        //sets colors 
-        colorEnergy = energyBar.color;
-        colorMentalHealth = mentalHealthIcon.color;
-        colorAcademic = academicIcon.color;
-        colorMoney = moneyText.color;
-
-        menu.SetActive(true);
-
+    {           
         instance = this;
+
         if (daySelector != null)
         {
+            //setting options
+            
+            dialogue.GetComponentInChildren<Text>().fontSize = fontSize; ;
+            dialogue.GetComponent<WriterAudio>().volume = volume;
+            dialogue.GetComponent<Writer>().writingSpeed = textCrawlSpeed;
+            
+            //sets colors 
+            colorEnergy = energyBar.color;
+            colorMentalHealth = mentalHealthIcon.color;
+            colorAcademic = academicIcon.color;
+            colorMoney = moneyText.color;
+
+            menu.SetActive(true);
+
             mentalHealthIcon.fillAmount = (float)mentalHealthValue / 100;
             academicIcon.fillAmount = (float)academicValue / 100;
             energyBar.fillAmount = (float)energyValue / 100;
@@ -74,23 +87,24 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        log = FindObjectOfType<NarrativeLog>();
-        cameraManager = FindObjectOfType<CameraManager>();
-        //Clamp values
-        moneyValue = (int)Mathf.Clamp(moneyValue, -500, 999999);
-        mentalHealthValue = (int)Mathf.Clamp(mentalHealthValue, 0, 100);
-        academicValue = (int)Mathf.Clamp(academicValue, 0, 100);
-        energyValue = (int)Mathf.Clamp(energyValue, 0, 100);
-
-        //Continually sets the screen fade alpha 
-        if (cameraManager != null)
-        {
-            guiFade = cameraManager.fadeAlpha;
-        }
 
         //Main game screen loop
         if (daySelector != null)
         {
+            log = FindObjectOfType<NarrativeLog>();
+            cameraManager = FindObjectOfType<CameraManager>();
+            //Clamp values
+            moneyValue = (int)Mathf.Clamp(moneyValue, -500, 999999);
+            mentalHealthValue = (int)Mathf.Clamp(mentalHealthValue, 0, 100);
+            academicValue = (int)Mathf.Clamp(academicValue, 0, 100);
+            energyValue = (int)Mathf.Clamp(energyValue, 0, 100);
+
+            //Continually sets the screen fade alpha 
+            if (cameraManager != null)
+            {
+                guiFade = cameraManager.fadeAlpha;
+            }
+
             daySelector.SetIntegerVariable("energy", energyValue);
 
             if (guiFade > 0.99f)
@@ -101,10 +115,10 @@ public class GameManager : MonoBehaviour
                 moneyText.text = moneyValue.ToString();
             }
 
-            
+
             if (!(option1.GetHovering() || option2.GetHovering() || option3.GetHovering()))
             {
-                revertTimer += Time.deltaTime/10;
+                revertTimer += Time.deltaTime / 10;
 
                 moneyText.color = Color.Lerp(moneyText.color, colorMoney, revertTimer); ;
                 academicIcon.color = Color.Lerp(academicIcon.color, colorAcademic, revertTimer); ;
@@ -116,7 +130,7 @@ public class GameManager : MonoBehaviour
             {
                 revertTimer = 0;
             }
-            
+
         }
 
 
@@ -137,6 +151,9 @@ public class GameManager : MonoBehaviour
     public int GetEnergy() { return energyValue; }
     public int GetDay() { return day; }
     public int GetEndIndex() { return endIndex; }
+    public int GetFontSize() { return fontSize; }
+    public int GetWritingSpeed() { return textCrawlSpeed; }
+    public int GetVolume() { return volume; }
     //----------------------------------------------------
     public void NextDay() { day++; daySelector.SetIntegerVariable("day", day); }
     public void SkipToDay5() { day += 5; daySelector.SetIntegerVariable("day", day); }
@@ -162,11 +179,12 @@ public class GameManager : MonoBehaviour
         option3.ResetValues();
     }
 
-    public void WorkPay(int hours, float multiplier)
+    public void SetOptions(int textSize, int textSpeed, int textVolume)
     {
-        moneyValue += (int)Mathf.Round(multiplier * 15.5f * hours);
+        fontSize = textSize;
+        textCrawlSpeed = textSpeed;
+        volume = textVolume;
     }
-
     public void SetEndIndex(int index)
     {
         endIndex = index;
@@ -176,6 +194,7 @@ public class GameManager : MonoBehaviour
     {
         guiFade = fade;
     }
+
 
     public void DimVictoria()
     {
@@ -212,6 +231,9 @@ public class GameManager : MonoBehaviour
 
     private void OnDisable()
     {
-        log.Clear();
+        if (daySelector != null)
+        {
+            log.Clear();
+        }
     }
 }
