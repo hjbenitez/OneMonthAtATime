@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/OMAAT/Scenes/Main Menu.unity
+    guid: 7b00379cf87583a48b2af199f123b96a
+  - enabled: 1
     path: Assets/OMAAT/Scenes/Game.unity
     guid: f7902695ea64efd43b9a956b13e90560
   - enabled: 1

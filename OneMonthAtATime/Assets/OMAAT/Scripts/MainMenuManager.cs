@@ -79,8 +79,8 @@ public class MainMenuManager : MonoBehaviour
     public void Cancel()
     {
 
-        if (textSizeSlider.value + gameManager.GetFontSize() != textSize ||
-            (textSpeedSlider.value * 10) + gameManager.GetWritingSpeed() != textSpeed ||
+        if (textSizeSlider.value != textSize ||
+            textSpeedSlider.value != textSpeed ||
             textVolumeSlider.value != gameManager.GetVolume())
         {
             optionsConfirmation.SetActive(true);
@@ -95,8 +95,8 @@ public class MainMenuManager : MonoBehaviour
 
     public void ApplyChanges()
     {
-        gameManager.SetOptions((int)textSizeSlider.value + gameManager.GetFontSize(), 
-            ((int)textSpeedSlider.value * 10) + gameManager.GetWritingSpeed(), 
+        gameManager.SetOptions((int)textSizeSlider.value + gameManager.GetFontSize(),
+            ((int)textSpeedSlider.value * 10) + gameManager.GetWritingSpeed(),
             (int)textVolumeSlider.value);
 
         textSize = (int)textSizeSlider.value;
