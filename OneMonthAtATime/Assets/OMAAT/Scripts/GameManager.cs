@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     Color colorMoney;
 
     float revertTimer = 0;
+    float flowTimer = 0;
 
     //Options
     public static int textCrawlSpeed = 35;
@@ -87,7 +88,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         //Main game screen loop
         if (daySelector != null)
         {
@@ -115,24 +115,101 @@ public class GameManager : MonoBehaviour
                 moneyText.text = moneyValue.ToString();
             }
 
-
             if (!(option1.GetHovering() || option2.GetHovering() || option3.GetHovering()))
             {
                 revertTimer += Time.deltaTime / 10;
 
-                moneyText.color = Color.Lerp(moneyText.color, colorMoney, revertTimer); ;
-                academicIcon.color = Color.Lerp(academicIcon.color, colorAcademic, revertTimer); ;
+                moneyText.color = Color.Lerp(moneyText.color, colorMoney, revertTimer);
+                academicIcon.color = Color.Lerp(academicIcon.color, colorAcademic, revertTimer);
                 mentalHealthIcon.color = Color.Lerp(mentalHealthIcon.color, colorMentalHealth, revertTimer);
-                energyBar.color = Color.Lerp(energyBar.color, colorEnergy, revertTimer); ;
+                energyBar.color = Color.Lerp(energyBar.color, colorEnergy, revertTimer);
+
+                flowTimer = 0;
             }
 
             else
             {
                 revertTimer = 0;
+                if (option1.GetHovering() || option2.GetHovering() || option3.GetHovering())
+                {
+                    flowTimer += Time.deltaTime / 10;
+
+                    if (option1.GetHovering())
+                    {
+                        if (option1.energySign == 0)
+                        {
+                            energyBar.color = Color.Lerp(energyBar.color, colorEnergy, flowTimer);
+                        }
+
+                        if (option1.moneySign == 0)
+                        {
+                            moneyText.color = Color.Lerp(moneyText.color, colorMoney, flowTimer);
+                        }
+
+                        if (option1.academicSign == 0)
+                        {
+                            academicIcon.color = Color.Lerp(academicIcon.color, colorAcademic, flowTimer);
+                        }
+
+                        if (option1.mentalHealthSign == 0)
+                        {
+                            mentalHealthIcon.color = Color.Lerp(mentalHealthIcon.color, colorMentalHealth, flowTimer);
+                        }
+                    }
+
+                    else if (option2.GetHovering())
+                    {
+                        if (option2.energySign == 0)
+                        {
+                            energyBar.color = Color.Lerp(energyBar.color, colorEnergy, flowTimer);
+                        }
+
+                        if (option2.moneySign == 0)
+                        {
+                            moneyText.color = Color.Lerp(moneyText.color, colorMoney, flowTimer);
+                        }
+
+                        if (option2.academicSign == 0)
+                        {
+                            academicIcon.color = Color.Lerp(academicIcon.color, colorAcademic, flowTimer);
+                        }
+
+                        if (option2.mentalHealthSign == 0)
+                        {
+                            mentalHealthIcon.color = Color.Lerp(mentalHealthIcon.color, colorMentalHealth, flowTimer);
+                        }
+                    }
+
+                    else if (option3.GetHovering())
+                    {
+                        if (option3.energySign == 0)
+                        {
+                            energyBar.color = Color.Lerp(energyBar.color, colorEnergy, flowTimer);
+                        }
+
+                        if (option3.moneySign == 0)
+                        {
+                            moneyText.color = Color.Lerp(moneyText.color, colorMoney, flowTimer);
+                        }
+
+                        if (option3.academicSign == 0)
+                        {
+                            academicIcon.color = Color.Lerp(academicIcon.color, colorAcademic, flowTimer);
+                        }
+
+                        if (option3.mentalHealthSign == 0)
+                        {
+                            mentalHealthIcon.color = Color.Lerp(mentalHealthIcon.color, colorMentalHealth, flowTimer);
+                        }
+                    }
+                }
+
+                else
+                {
+                    flowTimer = 0;
+                }
             }
-
         }
-
 
         DimVictoria();
     }
