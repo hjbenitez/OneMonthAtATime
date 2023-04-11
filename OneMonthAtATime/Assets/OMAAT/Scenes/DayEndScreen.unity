@@ -206,7 +206,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &94204662
@@ -271,7 +271,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   daySelector: {fileID: 0}
-  day: 1
+  menu: {fileID: 0}
+  dialogue: {fileID: 0}
+  option1: {fileID: 0}
+  option2: {fileID: 0}
+  option3: {fileID: 0}
+  guiFade: 0
   mentalHealthIcon: {fileID: 0}
   academicIcon: {fileID: 0}
   energyBar: {fileID: 0}
@@ -331,7 +336,7 @@ MonoBehaviour:
   indentLevel: 0
   _sceneName:
     stringRef: {fileID: 0}
-    stringVal: DEMO
+    stringVal: Game
   loadingImage: {fileID: 0}
   sceneNameOLD: 
 --- !u!114 &672425651
@@ -350,7 +355,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 54.058823
     y: 147.64702
-    width: 131.17645
+    width: 127.17645
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -418,7 +423,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 67
     y: 70
-    width: 75.88235
+    width: 76.352936
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -457,7 +462,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 672425651}
   selectedCommands:
-  - {fileID: 672425658}
+  - {fileID: 672425650}
   variables: []
   description: 
   stepPause: 0
