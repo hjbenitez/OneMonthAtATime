@@ -44,7 +44,7 @@ public class MainMenuManager : MonoBehaviour
         if (menuFC.GetIntegerVariable("block") == 1)
         {
             textExample.fontSize = (int)textSizeSlider.value + gameManager.GetFontSize();
-            writerExample.writingSpeed = ((int)textSpeedSlider.value * 10) + gameManager.GetWritingSpeed(); ;
+            writerExample.writingSpeed = ((int)textSpeedSlider.value * 10) + gameManager.GetWritingSpeed(); 
             volumeExample.volume = (float)textVolumeSlider.value / 10f;
         }
     }

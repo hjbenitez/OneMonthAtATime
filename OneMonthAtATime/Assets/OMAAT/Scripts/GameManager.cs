@@ -300,7 +300,7 @@ public class GameManager : MonoBehaviour
 
                 else
                 {
-                    emotion.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f);
+                    emotion.GetComponent<Image>().color = new Color(0.5f, 0.5f,   0.5f);
                 }
             }
         }
