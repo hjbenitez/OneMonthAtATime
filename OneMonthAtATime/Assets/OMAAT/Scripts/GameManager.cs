@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Fungus;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     private CameraManager cameraManager;
     private NarrativeLog log;
+    public AudioSource music;
 
     public ButtonScript option1;
     public ButtonScript option2;
@@ -32,6 +34,7 @@ public class GameManager : MonoBehaviour
     public static int textCrawlSpeed = 35;
     public static int fontSize = 33;
     public static int volume = 10;
+    public static int musicVolume = 10;
 
     private static int mentalHealthValue = 75;
     private static int academicValue = 75;
@@ -42,7 +45,7 @@ public class GameManager : MonoBehaviour
 
     private static int endIndex = 0;
 
-    public static int day = 1;
+    public static int day = 0;
 
     public Image mentalHealthIcon;
     public Image academicIcon;
@@ -57,9 +60,8 @@ public class GameManager : MonoBehaviour
         if (daySelector != null)
         {
             //setting options
-            
             dialogue.GetComponentInChildren<Text>().fontSize = fontSize; ;
-            dialogue.GetComponent<WriterAudio>().volume = volume;
+            dialogue.GetComponent<WriterAudio>().volume = (float) volume/ 10f;
             dialogue.GetComponent<Writer>().writingSpeed = textCrawlSpeed;
             
             //sets colors 
@@ -68,7 +70,8 @@ public class GameManager : MonoBehaviour
             colorAcademic = academicIcon.color;
             colorMoney = moneyText.color;
 
-            menu.SetActive(true);
+            menu = GameObject.FindGameObjectWithTag("Menu");
+            menu.transform.GetChild(0).gameObject.SetActive(true);
 
             mentalHealthIcon.fillAmount = (float)mentalHealthValue / 100;
             academicIcon.fillAmount = (float)academicValue / 100;
@@ -92,7 +95,12 @@ public class GameManager : MonoBehaviour
         if (daySelector != null)
         {
             log = FindObjectOfType<NarrativeLog>();
+
             cameraManager = FindObjectOfType<CameraManager>();
+
+            music = GameObject.Find("FungusManager").GetComponent<AudioSource>();
+            music.volume = (float)musicVolume/10f;
+
             //Clamp values
             moneyValue = (int)Mathf.Clamp(moneyValue, -500, 999999);
             mentalHealthValue = (int)Mathf.Clamp(mentalHealthValue, 0, 100);
@@ -231,9 +239,10 @@ public class GameManager : MonoBehaviour
     public int GetFontSize() { return fontSize; }
     public int GetWritingSpeed() { return textCrawlSpeed; }
     public int GetVolume() { return volume; }
+    public int GetMusicVolume() { return musicVolume; }
     //----------------------------------------------------
     public void NextDay() { day++; daySelector.SetIntegerVariable("day", day); }
-    public void SkipToDay5() { day += 5; daySelector.SetIntegerVariable("day", day); }
+    public void SkipToDay7() { day += 7; daySelector.SetIntegerVariable("day", day); }
     public void SetValues(int money, int mentalHealh, int academics, int energy)
     {
         mentalHealthValue += mentalHealh;
@@ -256,11 +265,12 @@ public class GameManager : MonoBehaviour
         option3.ResetValues();
     }
 
-    public void SetOptions(int textSize, int textSpeed, int textVolume)
+    public void SetOptions(int textSize, int textSpeed, int textVolume, int musicVol)
     {
         fontSize = textSize;
         textCrawlSpeed = textSpeed;
         volume = textVolume;
+        musicVolume= musicVol;
     }
     public void SetEndIndex(int index)
     {
@@ -272,6 +282,16 @@ public class GameManager : MonoBehaviour
         guiFade = fade;
     }
 
+    public void ShowMenu()
+    {
+        menu.transform.GetChild(0).gameObject.SetActive(true);
+    }
+
+    public void HideMenu()
+    {
+        menu.transform.GetChild(0).gameObject.SetActive(false);
+        log.Clear();
+    }
 
     public void DimVictoria()
     {
@@ -303,14 +323,6 @@ public class GameManager : MonoBehaviour
                     emotion.GetComponent<Image>().color = new Color(0.5f, 0.5f,   0.5f);
                 }
             }
-        }
-    }
-
-    private void OnDisable()
-    {
-        if (daySelector != null)
-        {
-            log.Clear();
         }
     }
 }

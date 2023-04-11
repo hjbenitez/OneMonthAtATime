@@ -17,12 +17,16 @@ public class MainMenuManager : MonoBehaviour
     WriterAudio volumeExample;
     Writer writerExample;
 
+    public AudioSource musicExample;
+    bool startedMusic = false;
+
     int textSize;
     int textSpeed;
 
     public Slider textSizeSlider;
     public Slider textSpeedSlider;
     public Slider textVolumeSlider;
+    public Slider musicVolumeSlider;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +36,7 @@ public class MainMenuManager : MonoBehaviour
         textExample = dialogue.GetComponentInChildren<Text>();
         volumeExample = dialogue.GetComponent<WriterAudio>();
         writerExample = dialogue.GetComponent<Writer>();
+        musicExample = GetComponent<AudioSource>();
 
         textSize = (int)textSizeSlider.value;
         textSpeed = (int)textSpeedSlider.value;
@@ -40,13 +45,41 @@ public class MainMenuManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(menuFC.GetIntegerVariable("block"));
+        Debug.Log(musicExample.isPlaying);
+
         if (menuFC.GetIntegerVariable("block") == 1)
         {
+            if (!startedMusic)
+            {
+                musicExample.Play();
+                startedMusic = true;
+            }
+
             textExample.fontSize = (int)textSizeSlider.value + gameManager.GetFontSize();
-            writerExample.writingSpeed = ((int)textSpeedSlider.value * 10) + gameManager.GetWritingSpeed(); 
+            writerExample.writingSpeed = ((int)textSpeedSlider.value * 10) + gameManager.GetWritingSpeed();
             volumeExample.volume = (float)textVolumeSlider.value / 10f;
+            musicExample.volume = (float)musicVolumeSlider.value / 10f;
         }
+
+        else
+        {
+            musicExample.Stop();
+            startedMusic = false;
+        }
+    }
+
+    private void LateUpdate()
+    {
+        /*
+        if (musicExample == null)
+        {
+            try
+            {
+                musicExample = GameObject.Find("FungusManager").GetComponent<AudioSource>();
+            }
+            catch { Debug.Log("Could not find"); }
+        }
+        */
     }
 
     public void StartBlock()
@@ -81,7 +114,8 @@ public class MainMenuManager : MonoBehaviour
 
         if (textSizeSlider.value != textSize ||
             textSpeedSlider.value != textSpeed ||
-            textVolumeSlider.value != gameManager.GetVolume())
+            textVolumeSlider.value != gameManager.GetVolume() ||
+            musicVolumeSlider.value != gameManager.GetMusicVolume())
         {
             optionsConfirmation.SetActive(true);
             blocker.SetActive(true);
@@ -95,9 +129,11 @@ public class MainMenuManager : MonoBehaviour
 
     public void ApplyChanges()
     {
-        gameManager.SetOptions((int)textSizeSlider.value + gameManager.GetFontSize(),
+        gameManager.SetOptions(
+            (int)textSizeSlider.value + gameManager.GetFontSize(),
             ((int)textSpeedSlider.value * 10) + gameManager.GetWritingSpeed(),
-            (int)textVolumeSlider.value);
+            (int)textVolumeSlider.value,
+            (int)musicVolumeSlider.value);
 
         textSize = (int)textSizeSlider.value;
         textSpeed = (int)textSpeedSlider.value;
@@ -120,6 +156,7 @@ public class MainMenuManager : MonoBehaviour
         textSizeSlider.value = textSize;
         textSpeedSlider.value = textSpeed;
         textVolumeSlider.value = gameManager.GetVolume();
+        musicVolumeSlider.value = gameManager.GetMusicVolume();
     }
 
 }
